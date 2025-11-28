@@ -1,0 +1,33 @@
+import "res://dialogue/oval2.dialogue" as dialogue_oval2
+~ start
+if done:
+	=>< dialogue_oval2/after
+	=> END
+do ovalAnim.play("ovalanim/Oval1_OhHi!")
+Oval: Oh HI!, i didnt see you there...
+do ovalAnim.play("ovalanim/Oval1_idleSit")
+Oval: You the second experiment, right?
+- Yes
+	Oval: Oh...
+	Oval: I have the job just for you!
+	#TODO add explaination of the work
+	Oval: blablah
+	Oval: Thats about it
+	~ questions
+	Oval: Anymore questions?
+	- No
+		=>< dialogue_oval2/start
+	- Yes
+		Oval: what?
+		- I forgor 💀
+			Oval: stupid nig [next=0.3]
+			=> questions
+	- How much money will i make?
+		#TODO add here
+		Oval: ...
+		=> questions
+	- What are orbs?
+		# TODO add here
+		Oval: ...
+		=> questions
+=> END

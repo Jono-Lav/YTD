@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_14"
+type="Resource"
+uid="uid://bcw00cs66fekc"
+path="res://.godot/imported/oval2.dialogue-965ae77253961d4e233bdabd9c5b0127.tres"
+
+[deps]
+
+source_file="res://dialogue/oval2.dialogue"
+dest_files=["res://.godot/imported/oval2.dialogue-965ae77253961d4e233bdabd9c5b0127.tres"]
+
+[params]
+
+defaults=true

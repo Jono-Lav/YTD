@@ -1,0 +1,11 @@
+~ this_is_a_node_title
+Sand: [[Hi|Hello|Howdy]], this is some dialogue.
+Sand: Here are some choices.
+- bye bye => END
+- I love you sand
+	Sand: you are not alone buddy.
+- gyattttttt
+	Sand: 👅👅👅👅
+- Dementia => this_is_a_node_title
+Sand: Thanks for talking to me {{Global.player_name}} I guess.
+=> END

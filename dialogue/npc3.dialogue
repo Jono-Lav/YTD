@@ -1,0 +1,11 @@
+~ this_is_a_node_title
+do npc3dialoguecollision.disabled = true
+do npc3anim.play("Test/npc3_talk")
+npc3: Hey! I'm npc number 3!
+- End 
+- What happened to npc number 1 and 2?
+	npc3: We don't talk about them 😔
+do npc3anim.stop()
+do npc3anim.seek(0.5333, true)
+do npc3dialoguecollision.disabled = false
+=> END

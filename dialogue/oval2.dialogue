@@ -1,0 +1,16 @@
+~ start
+do ovalAnim.play("ovalanim/Oval1_talk2")
+Oval: Okay then.
+Oval: You just need to sign this paper right here
+do paper.visible = true
+do ovalCollision.disabled = true
+=> END
+~ after
+# this is after signing the paper
+do ovalAnim.play("ovalanim/Oval1_talk2")
+Oval: Okay great!
+Oval: Thats about it
+Oval: I'm sending you.. [next=0.7] 
+Oval: right.. [next=0.8]
+Oval: now [next=0.3]
+=> END

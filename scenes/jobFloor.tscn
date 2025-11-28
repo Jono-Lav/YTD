@@ -1,0 +1,225 @@
+[gd_scene load_steps=28 format=3 uid="uid://cyo2ohjqbakwf"]
+
+[ext_resource type="Script" uid="uid://b4icxih7ptxx3" path="res://scripts/job_floor.gd" id="1_fcvbf"]
+[ext_resource type="PackedScene" uid="uid://br3eycacuidx7" path="res://scenes/cube1.tscn" id="1_ssvyv"]
+[ext_resource type="PackedScene" uid="uid://52yhuvw6pq3x" path="res://scenes/player.tscn" id="2_cb0k8"]
+[ext_resource type="PackedScene" uid="uid://c01y3etcpyc1q" path="res://scenes/vhs_shader.tscn" id="3_y3f8h"]
+[ext_resource type="AudioStream" uid="uid://v8mm1adb0ru8" path="res://sounds/YTD OST 8 - Job Floor (mp3cut.net).mp3" id="4_m7pw6"]
+[ext_resource type="PackedScene" uid="uid://bh5t15mawqftl" path="res://ch/oval.gltf" id="5_3bdnl"]
+[ext_resource type="Script" uid="uid://guq4x37namoj" path="res://scripts/oval.gd" id="6_kr0ul"]
+[ext_resource type="Animation" uid="uid://bbnkkjx11ybcb" path="res://ch/Oval1_idleSit.res" id="6_qljbl"]
+[ext_resource type="Resource" uid="uid://8cxuhfgdwr15" path="res://dialogue/oval.dialogue" id="7_0fons"]
+[ext_resource type="Animation" uid="uid://cftkj1ri17dj7" path="res://ch/Oval1_OhHi!.res" id="9_ek82o"]
+[ext_resource type="Animation" uid="uid://dhhkl5p0rp31c" path="res://ch/Oval1_talk2.res" id="11_yen84"]
+[ext_resource type="PackedScene" uid="uid://dsni4rreggys" path="res://scenes/paper3d.tscn" id="13_7r7lf"]
+[ext_resource type="Material" uid="uid://4je282kb6mc0" path="res://mateirals/new_standard_material_3d.tres" id="13_e6qxa"]
+[ext_resource type="Script" uid="uid://stospr3d4w00" path="res://addons/Enemy/enemy.gd" id="15_5ns64"]
+[ext_resource type="PackedScene" uid="uid://dwcnblj4nopto" path="res://scenes/paper.tscn" id="15_qjs4n"]
+[ext_resource type="AudioStream" uid="uid://d101mcq1qrq4y" path="res://sounds/sci-fi-gun-shot-312659.mp3" id="16_cce0u"]
+[ext_resource type="Script" uid="uid://bolhubg557v6m" path="res://addons/Enemy/danger zone/danger_zone.gd" id="17_cce0u"]
+[ext_resource type="Script" uid="uid://dmb5bt2osg84n" path="res://addons/Enemy/shooting_point.gd" id="18_cmwdb"]
+
+[sub_resource type="Environment" id="Environment_5wjdu"]
+background_energy_multiplier = 0.0
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kr0ul"]
+_data = {
+&"Oval1_OhHi!": ExtResource("9_ek82o"),
+&"Oval1_idleSit": ExtResource("6_qljbl"),
+&"Oval1_talk2": ExtResource("11_yen84")
+}
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kr0ul"]
+size = Vector3(0.600586, 1.13867, 0.828979)
+
+[sub_resource type="BoxMesh" id="BoxMesh_3bdnl"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_qljbl"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3bdnl"]
+size = Vector3(0.667725, 0.678833, 0.675781)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qljbl"]
+size = Vector3(0.673767, 0.701172, 0.106628)
+
+[sub_resource type="BoxMesh" id="BoxMesh_cmwdb"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qjs4n"]
+
+[node name="level" type="Node3D"]
+script = ExtResource("1_fcvbf")
+
+[node name="player" parent="." instance=ExtResource("2_cb0k8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 2, 18)
+
+[node name="vhs_shader" parent="." instance=ExtResource("3_y3f8h")]
+
+[node name="wall2" parent="." instance=ExtResource("1_ssvyv")]
+transform = Transform3D(8, 0, 0, 0, 6, 0, 0, 0, 1, 1, 3, -7)
+
+[node name="wall3" parent="." instance=ExtResource("1_ssvyv")]
+transform = Transform3D(-3.49691e-07, 0, -1, 0, 6, 0, 8, 0, -4.37114e-08, -3.5, 3, -3.5)
+
+[node name="wall" parent="." instance=ExtResource("1_ssvyv")]
+transform = Transform3D(-3.49691e-07, 0, -1, 0, 6, 0, 8, 0, -4.37114e-08, 5.5, 3, -3.5)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-1, -6.46894e-08, 5.8805e-08, 0, 0.672651, 0.73996, -8.74228e-08, 0.73996, -0.672651, 2.125, 23.374, -63)
+
+[node name="DirectionalLight3D3" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-1.17225e-07, -0.73996, 0.672651, 8.88178e-16, 0.672651, 0.73996, -1, 8.67419e-08, -7.88516e-08, 63, 23.374, 0)
+
+[node name="DirectionalLight3D4" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0.73996, -0.672651, 1.77636e-15, 0.672651, 0.73996, 1, 3.23447e-08, -2.94025e-08, -63, 23.374, 0)
+
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.673013, 0.739631, 0, -0.739631, 0.673013, 2.125, 23.374, 63)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_5wjdu")
+
+[node name="ambiance" type="Node3D" parent="."]
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="ambiance"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 41.5556, 13, 0)
+stream = ExtResource("4_m7pw6")
+max_db = 6.0
+autoplay = true
+max_distance = 503.08
+parameters/looping = true
+
+[node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="ambiance"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48.1194, 12, 0)
+stream = ExtResource("4_m7pw6")
+autoplay = true
+max_distance = 503.08
+parameters/looping = true
+
+[node name="AudioStreamPlayer3D3" type="AudioStreamPlayer3D" parent="ambiance"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 14, 45.6506)
+stream = ExtResource("4_m7pw6")
+autoplay = true
+max_distance = 503.08
+parameters/looping = true
+
+[node name="AudioStreamPlayer3D4" type="AudioStreamPlayer3D" parent="ambiance"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11, -49.4509)
+stream = ExtResource("4_m7pw6")
+autoplay = true
+max_distance = 503.08
+parameters/looping = true
+
+[node name="oval" parent="." instance=ExtResource("5_3bdnl")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0.959332, 0.502588, -2.28997)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="oval"]
+script = ExtResource("6_kr0ul")
+dialogue = ExtResource("7_0fons")
+show_nametag = true
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="oval/StaticBody3D"]
+root_node = NodePath("../..")
+libraries = {
+&"ovalanim": SubResource("AnimationLibrary_kr0ul")
+}
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="oval/StaticBody3D"]
+transform = Transform3D(-0.754766, 0, 0, 0, 0.657647, 0, 0, 0, 0.657633, 0.034274, 0.964917, 0.171477)
+shape = SubResource("BoxShape3D_kr0ul")
+
+[node name="chair" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.80249, 1.22871, 2.50851)
+
+[node name="leg1" type="MeshInstance3D" parent="chair"]
+transform = Transform3D(0.131641, 0.00592191, 0, -0.00133034, 0.585991, 0, 0, 0, 0.138181, 2.51998, -0.409304, -5.20306)
+material_override = ExtResource("13_e6qxa")
+mesh = SubResource("BoxMesh_3bdnl")
+
+[node name="rest" type="MeshInstance3D" parent="chair"]
+transform = Transform3D(0.663714, 0, 0, 0, 0.0793642, 0, 0, 0, 0.679792, 2.78756, -0.0798661, -4.9309)
+material_override = ExtResource("13_e6qxa")
+mesh = SubResource("BoxMesh_qljbl")
+
+[node name="leg4" type="MeshInstance3D" parent="chair"]
+transform = Transform3D(0.131641, 0.00592191, 0, -0.00133034, 0.585991, 0, 0, 0, 0.138181, 3.04907, -0.409304, -5.20306)
+material_override = ExtResource("13_e6qxa")
+mesh = SubResource("BoxMesh_3bdnl")
+
+[node name="leg2" type="MeshInstance3D" parent="chair"]
+transform = Transform3D(0.131641, 0.00592191, 0, -0.00133034, 0.585991, 0, 0, 0, 0.138181, 2.51998, -0.409304, -4.66247)
+material_override = ExtResource("13_e6qxa")
+mesh = SubResource("BoxMesh_3bdnl")
+
+[node name="leg5" type="MeshInstance3D" parent="chair"]
+transform = Transform3D(0.131641, 0.00592191, 0, -0.00133034, 0.585991, 0, 0, 0, 0.138181, 3.04907, -0.409304, -4.66247)
+material_override = ExtResource("13_e6qxa")
+mesh = SubResource("BoxMesh_3bdnl")
+
+[node name="rest2" type="MeshInstance3D" parent="chair"]
+transform = Transform3D(0.663714, 0, 0, 0, -3.46912e-09, -0.679792, 0, 0.0793642, -2.97146e-08, 2.78756, 0.266336, -5.23395)
+material_override = ExtResource("13_e6qxa")
+mesh = SubResource("BoxMesh_qljbl")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="chair"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7842, -0.375914, -4.93244)
+shape = SubResource("BoxShape3D_3bdnl")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="chair"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.78118, 0.256324, -5.23503)
+shape = SubResource("BoxShape3D_qljbl")
+
+[node name="TABKE" type="Node3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -2.2591, 0, 0.137588)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="TABKE"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.33135, 0.929241, -3.25917)
+material_override = ExtResource("13_e6qxa")
+use_collision = true
+size = Vector3(0.777832, 0.816528, 2.33691)
+
+[node name="Paper" parent="." instance=ExtResource("13_7r7lf")]
+transform = Transform3D(1.3, 0, 0, 0, 1, 0, 0, 0, 1.3, 1.81132, 1.35641, -1.20634)
+visible = false
+
+[node name="paper" parent="." instance=ExtResource("15_qjs4n")]
+visible = false
+
+[node name="Enemy" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.4327, 2.64473, 0)
+script = ExtResource("15_5ns64")
+debug = true
+shooting = true
+danger_zone = true
+use_detection_area = true
+detection_radius = 10.0
+static_detection_area = true
+shooting_sound = ExtResource("16_cce0u")
+metadata/_custom_type_script = "uid://stospr3d4w00"
+
+[node name="Node3D" type="Node3D" parent="Enemy"]
+
+[node name="ENEMY" type="MeshInstance3D" parent="Enemy/Node3D"]
+mesh = SubResource("BoxMesh_cmwdb")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Enemy/Node3D/ENEMY"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Enemy/Node3D/ENEMY/StaticBody3D"]
+shape = SubResource("BoxShape3D_qjs4n")
+
+[node name="DetectionArea" type="Area3D" parent="Enemy/Node3D"]
+
+[node name="DangerZone_1" type="Node3D" parent="Enemy"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6.40635)
+script = ExtResource("17_cce0u")
+
+[node name="ShootingPoint_2" type="Node3D" parent="Enemy"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.4327, 2.64473, 0)
+top_level = true
+script = ExtResource("18_cmwdb")
+fire_rate = 1.0
+
+[node name="floor" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.144836, 0, -3.40863)
+use_collision = true
+size = Vector3(54.4386, 1, 50.7374)

@@ -1,0 +1,9 @@
+~ this_is_a_node_title
+do rotemInteractableCollision.disabled = true
+do rotem.play("rotem/talk1")
+RedReaper: He's supposed to be here...
+RedReaper: Somewhere..
+do rotem.stop("rotem/talk1")
+do rotemInteractableCollision.disabled = false
+do rotem.play("rotem/idle")
+=> END

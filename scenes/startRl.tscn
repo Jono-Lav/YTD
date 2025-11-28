@@ -1,0 +1,134 @@
+[gd_scene load_steps=27 format=3 uid="uid://uo0bwgga6bey"]
+
+[ext_resource type="PackedScene" uid="uid://br3eycacuidx7" path="res://scenes/cube1.tscn" id="1_qryf2"]
+[ext_resource type="PackedScene" uid="uid://dm8qcbbhr2ig7" path="res://scenes/text.tscn" id="3_vxqgp"]
+[ext_resource type="Script" uid="uid://e3sn0e3outqw" path="res://ch/se.gd" id="4_ckjd8"]
+[ext_resource type="PackedScene" uid="uid://f5157jx60ayl" path="res://ch/SE.gltf" id="4_hi7y3"]
+[ext_resource type="Animation" uid="uid://o2hp158dylnh" path="res://ch/head1.res" id="4_xeu0w"]
+[ext_resource type="Animation" uid="uid://bkqq7mqf2s0om" path="res://ch/pear.res" id="5_kfio0"]
+[ext_resource type="Script" uid="uid://c2vl2kcwfnktr" path="res://scenes/se_anim.gd" id="5_xeu0w"]
+[ext_resource type="PackedScene" uid="uid://cwixie5p37ngi" path="res://ch/SE1.gltf" id="8_ne05y"]
+[ext_resource type="PackedScene" uid="uid://baraotlf70ae6" path="res://ch/‏‏SE2.gltf" id="9_6s4mo"]
+[ext_resource type="Script" uid="uid://df56ikelwowph" path="res://ch/se_1.gd" id="9_knaag"]
+[ext_resource type="Script" uid="uid://bmb63n6fc6f28" path="res://scenes/se_1_anim.gd" id="10_jvtbv"]
+[ext_resource type="Animation" uid="uid://bsat7xaip31ds" path="res://ch/splitSE1.res" id="10_mpvr3"]
+[ext_resource type="Script" uid="uid://d17oqnm8sabe6" path="res://ch/‏‏se_2.gd" id="11_knaag"]
+[ext_resource type="Animation" uid="uid://cwh7gb8bqo622" path="res://ch/stareSE1.res" id="11_n8pmt"]
+[ext_resource type="Animation" uid="uid://dyjo5fkodf3j7" path="res://ch/drawnSE1.res" id="12_g8mq5"]
+[ext_resource type="Animation" uid="uid://1alhawtfyxke" path="res://ch/drawnSE2.res" id="16_1xibv"]
+[ext_resource type="Script" uid="uid://cv8xp7cco5ngu" path="res://scenes/se_2_anim.gd" id="16_n8pmt"]
+[ext_resource type="Animation" uid="uid://b2p7nkes1jp8e" path="res://ch/splitSE2.res" id="17_2seoy"]
+[ext_resource type="Animation" uid="uid://bpbeutfv4fwxx" path="res://ch/stepSE2.res" id="18_630pt"]
+
+[sub_resource type="Sky" id="Sky_wh2yq"]
+
+[sub_resource type="Environment" id="Environment_2d5p1"]
+background_mode = 2
+sky = SubResource("Sky_wh2yq")
+fog_enabled = true
+fog_light_color = Color(0.190782, 0.0482988, 0.329575, 1)
+fog_light_energy = 0.08
+
+[sub_resource type="Animation" id="Animation_xeu0w"]
+length = 0.001
+tracks/0/type = "rotation_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Node/all/head")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ckjd8"]
+_data = {
+&"RESET": SubResource("Animation_xeu0w")
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kfio0"]
+_data = {
+&"head1": ExtResource("4_xeu0w"),
+&"pear": ExtResource("5_kfio0")
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_anoo4"]
+_data = {
+&"drawnSE1": ExtResource("12_g8mq5"),
+&"splitSE1": ExtResource("10_mpvr3"),
+&"stareSE1": ExtResource("11_n8pmt")
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ggpvr"]
+_data = {
+&"drawnSE2": ExtResource("16_1xibv"),
+&"splitSE2": ExtResource("17_2seoy"),
+&"stepSE2": ExtResource("18_630pt")
+}
+
+[node name="Node3D" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_2d5p1")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.6957, 0.718333, 0, -0.718333, 0.6957, 0, 33.5931, 54.0653)
+light_color = Color(0.421233, 0.417277, 1, 1)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.8945, 7.6319, 6.22648)
+
+[node name="room" type="Node3D" parent="."]
+
+[node name="walls7" parent="room" instance=ExtResource("1_qryf2")]
+transform = Transform3D(15.5226, 0, 0, 0, 0.632863, 0, 0, 0, 10.0168, 11.0205, 5.75626, 4.20153)
+
+[node name="walls9" parent="room" instance=ExtResource("1_qryf2")]
+transform = Transform3D(34.1586, 0, 0, 0, 0.77384, 0, 0, 0, 28.12, 12.1436, -38.6674, 4.20153)
+
+[node name="walls8" parent="room" instance=ExtResource("1_qryf2")]
+transform = Transform3D(15.5226, 0, 0, 0, 0.632863, 0, 0, 0, 10.0168, 11.0205, 12.1559, 4.20153)
+
+[node name="walls12" parent="room" instance=ExtResource("1_qryf2")]
+transform = Transform3D(0.5, 0, 0, 0, 6.58263, 0, 0, 0, 10.0105, 18.3133, 9.30117, 4.09721)
+
+[node name="walls13" parent="room" instance=ExtResource("1_qryf2")]
+transform = Transform3D(0.5, 0, 0, 0, 6.72376, 0, 0, 0, 10.0105, 3.824, 9.30117, 4.09721)
+
+[node name="walls14" parent="room" instance=ExtResource("1_qryf2")]
+transform = Transform3D(-2.18717e-08, 0, -14.2067, 0, 6.51277, 0, 0.500365, 0, -6.20994e-07, 11.0133, 9.30117, 8.9173)
+
+[node name="walls15" parent="room" instance=ExtResource("1_qryf2")]
+transform = Transform3D(-2.18557e-08, 0, -14.1963, 0, 6.93548, 0, 0.5, 0, -6.20541e-07, 11.0133, 9.30117, -0.578485)
+
+[node name="Node3D" parent="." instance=ExtResource("3_vxqgp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.2902, 9.51953, -0.110216)
+
+[node name="SE" parent="." instance=ExtResource("4_hi7y3")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 10.9958, 6.05793, 0.492657)
+script = ExtResource("4_ckjd8")
+
+[node name="SE_anim" type="AnimationPlayer" parent="SE"]
+libraries = {
+&"": SubResource("AnimationLibrary_ckjd8"),
+&"SE": SubResource("AnimationLibrary_kfio0")
+}
+script = ExtResource("5_xeu0w")
+
+[node name="SE1" parent="." instance=ExtResource("8_ne05y")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 10.3065, 6.07383, 0.524884)
+script = ExtResource("9_knaag")
+
+[node name="SE1_anim" type="AnimationPlayer" parent="SE1"]
+libraries = {
+&"SE1": SubResource("AnimationLibrary_anoo4")
+}
+script = ExtResource("10_jvtbv")
+
+[node name="SE2" parent="." instance=ExtResource("9_6s4mo")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 11.6952, 6.08074, 0.558847)
+script = ExtResource("11_knaag")
+
+[node name="SE2_anim" type="AnimationPlayer" parent="SE2"]
+libraries = {
+&"SE2": SubResource("AnimationLibrary_ggpvr")
+}
+script = ExtResource("16_n8pmt")

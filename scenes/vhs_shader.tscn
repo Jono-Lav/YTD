@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://c01y3etcpyc1q"]
+
+[ext_resource type="Shader" uid="uid://d77qt176tr3l" path="res://vhs.gdshader" id="1_d2d8n"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mf7xq"]
+shader = ExtResource("1_d2d8n")
+shader_parameter/wiggle = 0.03
+shader_parameter/wiggle_speed = 25.0
+shader_parameter/smear = 1.0
+shader_parameter/blur_samples = 15
+
+[node name="vhs_shader" type="CanvasLayer"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_mf7xq")
+offset_right = 1152.0
+offset_bottom = 648.0
+size_flags_horizontal = 3

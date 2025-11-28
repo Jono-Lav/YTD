@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bwafvhrgxgj8j"]
+
+[ext_resource type="AudioStream" uid="uid://cefn0d13tonfr" path="res://sounds/harp-metal-97812.mp3" id="1_lm22q"]
+
+[node name="Control" type="AudioStreamPlayer"]
+stream = ExtResource("1_lm22q")

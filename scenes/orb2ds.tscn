@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://b7es1dcqmkqco"]
+
+[ext_resource type="Script" uid="uid://jmskpxmtlj57" path="res://scripts/orb_2_ds.gd" id="1_ocyy7"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8d3su"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_i33t3"]
+
+[node name="orb" type="Area2D"]
+script = ExtResource("1_ocyy7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_8d3su")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+position = Vector2(0, -0.218749)
+scale = Vector2(20.1477, 20.4375)
+mesh = SubResource("SphereMesh_i33t3")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -1,0 +1,92 @@
+[gd_scene load_steps=14 format=3 uid="uid://bswf6160331tr"]
+
+[ext_resource type="Shader" uid="uid://cic0ep00l0862" path="res://shaders/floor_1.gdshader" id="1_djdcr"]
+[ext_resource type="Material" uid="uid://4je282kb6mc0" path="res://mateirals/new_standard_material_3d.tres" id="2_bxcxf"]
+[ext_resource type="PackedScene" uid="uid://52yhuvw6pq3x" path="res://scenes/player.tscn" id="3_26cne"]
+[ext_resource type="PackedScene" uid="uid://dtvcgwlbhxehd" path="res://scenes/elevator.tscn" id="4_fsp6g"]
+[ext_resource type="Script" uid="uid://bi7dqcfvohnap" path="res://scripts/floor_1_trigger.gd" id="5_oskxv"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_h6qt2"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_12xan"]
+sky_material = SubResource("ProceduralSkyMaterial_h6qt2")
+
+[sub_resource type="Environment" id="Environment_m5abw"]
+background_mode = 2
+sky = SubResource("Sky_12xan")
+tonemap_mode = 2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ijlx1"]
+render_priority = 0
+shader = ExtResource("1_djdcr")
+shader_parameter/edge_color = Color(0, 0, 0, 1)
+shader_parameter/edge_threshold = 0.01
+shader_parameter/noise_frequency = 10.0
+shader_parameter/noise_offset_intensity = 0.002
+
+[sub_resource type="QuadMesh" id="QuadMesh_iicp5"]
+material = SubResource("ShaderMaterial_ijlx1")
+flip_faces = true
+size = Vector2(2, 2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ji73r"]
+material = ExtResource("2_bxcxf")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_om4bf"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_w14qe"]
+size = Vector3(429.699, 0.027832, 420.253)
+
+[node name="floor2" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_m5abw")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="floor" type="MeshInstance3D" parent="."]
+extra_cull_margin = 16384.0
+mesh = SubResource("QuadMesh_iicp5")
+
+[node name="Baseplate" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Baseplate"]
+transform = Transform3D(100, 0, 0, 0, 1, 0, 0, 0, 100, 0.0149255, -0.0892792, 0.0705733)
+material_override = ExtResource("2_bxcxf")
+mesh = SubResource("BoxMesh_ji73r")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Baseplate"]
+transform = Transform3D(100, 0, 0, 0, 1, 0, 0, 0, 100, 0, 0, 0)
+shape = SubResource("BoxShape3D_om4bf")
+
+[node name="player" parent="." instance=ExtResource("3_26cne")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+
+[node name="elevator" parent="." instance=ExtResource("4_fsp6g")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 15.6649, 0.423394, 0)
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.30832, 2.39464, 3.53951)
+use_collision = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.29352, 2.87471, 6.27921)
+calculate_tangents = false
+use_collision = true
+size = Vector3(3.58704, 1, 1)
+
+[node name="worldtrigger" type="Node3D" parent="."]
+script = ExtResource("5_oskxv")
+
+[node name="Area3D" type="Area3D" parent="worldtrigger"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="worldtrigger/Area3D"]
+transform = Transform3D(0.999406, 0, 0, 0, 0.999406, 0, 0, 0, 0.999406, 4.28784, -107.558, -9.07045)
+shape = SubResource("BoxShape3D_w14qe")
+
+[connection signal="body_entered" from="worldtrigger/Area3D" to="worldtrigger" method="_on_area_3d_body_entered"]

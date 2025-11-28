@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://d4l086r1emva7"]
+
+[ext_resource type="Script" uid="uid://bluq487uxlpes" path="res://scripts/tools/shooting_placer.gd" id="1_1s3li"]
+
+[node name="ShootingPlacer" type="Node3D"]
+script = ExtResource("1_1s3li")

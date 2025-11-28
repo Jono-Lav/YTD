@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_14"
+type="Resource"
+uid="uid://bh5nugolo1uwy"
+path="res://.godot/imported/sand.dialogue-f6fc0c332f1275aabedf815540ae5cc9.tres"
+
+[deps]
+
+source_file="res://dialogue/sand.dialogue"
+dest_files=["res://.godot/imported/sand.dialogue-f6fc0c332f1275aabedf815540ae5cc9.tres"]
+
+[params]
+
+defaults=true

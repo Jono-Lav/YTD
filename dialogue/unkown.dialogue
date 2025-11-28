@@ -1,0 +1,11 @@
+~ this_is_a_node_title
+do unkowndialoguecollision.disabled = true
+do unkownanim.play("test/un_lean_clap")
+Unknown: Good job for opening the door
+do unkownanim.stop("test/un_lean_clap")
+do unkownanim.play("test/un_lean_pointUP")
+Unknown: You can go up now if you want
+do unkowndialoguecollision.disabled = false
+do unkownanim.stop("test/un_lean_pointUP")
+do unkownanim.play("test/un_lean")
+=> END

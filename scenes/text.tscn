@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://dm8qcbbhr2ig7"]
+
+[ext_resource type="Script" uid="uid://dv7pmvxe64cfa" path="res://scenes/text.gd" id="1_wwb76"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_os5sa"]
+size = Vector3(0.248684, 1, 0.254333)
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_wwb76")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(28.809, 0, 0, 0, 2.33059, 0, 0, 0, 2.1581, -0.00490177, 1.11617, -0.194623)
+shape = SubResource("BoxShape3D_os5sa")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(0.976175, 0, 0, 0, 0.976175, 0, 0, 0, 0.976175, -2.54864, 0.626151, 0)
+font_size = 200
+
+[node name="Button" type="Button" parent="."]
+offset_left = 411.0
+offset_top = 249.0
+offset_right = 699.0
+offset_bottom = 404.0
+text = "press"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

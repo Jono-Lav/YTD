@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_14"
+type="Resource"
+uid="uid://5438nceh8xg5"
+path="res://.godot/imported/shaver.dialogue-be256c293b365368b7dd0059793176be.tres"
+
+[deps]
+
+source_file="res://dialogue/shaver.dialogue"
+dest_files=["res://.godot/imported/shaver.dialogue-be256c293b365368b7dd0059793176be.tres"]
+
+[params]
+
+defaults=true

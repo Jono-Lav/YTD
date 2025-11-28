@@ -1,0 +1,26 @@
+~ this_is_a_node_title
+do rotemInteractableCollision.disabled = true
+- Hey
+	do redReaperAnim.play("rotem/talk1")
+	RedReaper: I will draw you naked
+	- 🤨
+	RedReaper: I mean-[next=0.4]
+	RedReaper: I mean hi
+	do rotemInteractableCollision.disabled = false
+- Can I take the job?
+	do redReaperAnim.play("rotem/talk1")
+	RedReaper: Are you sure? [next=0.5]
+	RedReaper: All the people who tried to help me never came back.
+	- yes
+	RedReaper: Okay here is some context: [next=0.75]
+	RedReaper: So I have this monster who appears in my dreams..
+	RedReaper: and it really [next=0.6]
+	RedReaper: irritates me.
+	RedReaper: I want you to get rid of it
+	do rotemInteractableCollision.disabled = false
+	do Global.o6permission = true
+	- no 
+	RedReaper: then kill your self stupid nigge [next=0.1]
+do redReaperAnim.stop("rotem/talk1")
+do redReaperAnim.play("rotem/idle")
+=> END

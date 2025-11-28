@@ -1,0 +1,67 @@
+[gd_scene load_steps=9 format=3 uid="uid://dwcnblj4nopto"]
+
+[ext_resource type="Texture2D" uid="uid://bwakatj0o3gho" path="res://sprites/joao-vitor-duarte-k4Lt0CjUnb0-unsplash.jpg" id="1_ldlei"]
+[ext_resource type="Script" uid="uid://c8e5yq41iyokt" path="res://scripts/paper.gd" id="1_vas6c"]
+[ext_resource type="Texture2D" uid="uid://c1tx4uo0jdbs7" path="res://sprites/abstract-surface-textures-white-concrete-stone-wall_74190-8189.webp" id="2_jhmja"]
+[ext_resource type="Texture2D" uid="uid://b4j726mkehi4y" path="res://sprites/Trash-can-icon (1).png" id="4_g4oad"]
+[ext_resource type="FontFile" uid="uid://crve0pt52n54v" path="res://fonts/whatvr.ttf" id="5_7gra7"]
+[ext_resource type="Texture2D" uid="uid://d2e12f7xsinqi" path="res://sprites/image.png" id="5_pohdc"]
+[ext_resource type="AudioStream" uid="uid://cb4ujhex5og3s" path="res://sounds/pencil-29272.mp3" id="6_pohdc"]
+[ext_resource type="PackedScene" uid="uid://c01y3etcpyc1q" path="res://scenes/vhs_shader.tscn" id="8_7gra7"]
+
+[node name="paperSignature" type="Node2D"]
+script = ExtResource("1_vas6c")
+
+[node name="paper" type="Sprite2D" parent="."]
+position = Vector2(583.5, 312)
+scale = Vector2(0.0813492, 0.0949074)
+texture = ExtResource("1_ldlei")
+
+[node name="PaperTexture" type="Sprite2D" parent="."]
+position = Vector2(583, 523)
+scale = Vector2(0.407455, 0.262863)
+texture = ExtResource("2_jhmja")
+
+[node name="SignatureLines" type="Node2D" parent="."]
+
+[node name="WritingSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_pohdc")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 410.0
+offset_top = 35.0
+offset_right = 764.0
+offset_bottom = 449.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_7gra7")
+theme_override_font_sizes/font_size = 20
+text = "By signing this paper you agree that you
+(the experiment) will take apart in the 
+following events.
+And by thus you are herby agreeing that
+oval (the king) will now once go and 
+follow you no matter where you go
+something like stalking i guess, 
+Dont worry it's just to check you are 
+doing a good job, like a good expeiment
+(i swear i am not following you to 
+figure out where your secret money stash
+is)
+ALSO, by signing you agree that oval
+(the king) will be your master and you
+the slave
+
+"
+
+[node name="clear" type="Sprite2D" parent="."]
+position = Vector2(727, 524)
+texture = ExtResource("4_g4oad")
+
+[node name="send" type="Sprite2D" parent="."]
+position = Vector2(438, 523)
+rotation = 3.14159
+scale = Vector2(1.57692, 1.16667)
+texture = ExtResource("5_pohdc")
+
+[node name="vhs_shader" parent="." instance=ExtResource("8_7gra7")]
+visible = false

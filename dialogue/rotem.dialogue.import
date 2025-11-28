@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_14"
+type="Resource"
+uid="uid://bcoip308r0kk6"
+path="res://.godot/imported/rotem.dialogue-05ef42696eea77759ba81c8bb35e1138.tres"
+
+[deps]
+
+source_file="res://dialogue/rotem.dialogue"
+dest_files=["res://.godot/imported/rotem.dialogue-05ef42696eea77759ba81c8bb35e1138.tres"]
+
+[params]
+
+defaults=true

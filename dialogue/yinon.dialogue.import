@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_14"
+type="Resource"
+uid="uid://cd4dr6lxirx5o"
+path="res://.godot/imported/yinon.dialogue-d6f5940ac3a2faad283aa1e994dfd2b5.tres"
+
+[deps]
+
+source_file="res://dialogue/yinon.dialogue"
+dest_files=["res://.godot/imported/yinon.dialogue-d6f5940ac3a2faad283aa1e994dfd2b5.tres"]
+
+[params]
+
+defaults=true

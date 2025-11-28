@@ -1,0 +1,22 @@
+~ start
+do uncharted.play("uncharted/uncharted_talk2")
+uncharted: uid://dtucj844whinm
+- umm are you okay?
+	uncharted: bro [img=30x30]res://Adobe Express - file.png[/img] 
+	uncharted: no 
+do uncharted.play("uncharted/uncharted_defualt2")	
+- what is the job?
+	do uncharted.play("uncharted/uncharted_up")
+	uncharted: !
+	
+	uncharted: are u actually...[next=0.5]
+	uncharted: well the job..[next=0.5]
+	do uncharted.play("uncharted/uncharted_talk1")
+	uncharted: i have a birthday party you see..
+	uncharted: and i forgot my friends numbers
+	uncharted: and i just know it's somewhere in my memory..
+	uncharted: that's why i need you to get in my mind and help my find them phone numbers
+	do uncharted.play("uncharted/uncharted_defualt1")
+
+
+=> END

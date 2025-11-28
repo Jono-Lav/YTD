@@ -1,0 +1,236 @@
+[gd_scene load_steps=26 format=3 uid="uid://dwge5eqsgtbek"]
+
+[ext_resource type="Texture2D" uid="uid://umw3x4mjfmye" path="res://Assets/boomington/sprites/character/SE1/rightsydrom/ff1eb7dc-ecd5-4378-8e50-999b242724d8.png" id="1_abi6j"]
+[ext_resource type="Script" uid="uid://dgxavd71patgm" path="res://scripts/player_2d.gd" id="1_wkelb"]
+[ext_resource type="Texture2D" uid="uid://dsge40qck4bf4" path="res://Assets/boomington/sprites/character/SE1/downsydrom/4eff4042-ed63-471a-baff-d74b864baf8a.png" id="3_qeoa3"]
+[ext_resource type="Texture2D" uid="uid://bcv5g2qik05py" path="res://Assets/boomington/sprites/character/SE1/downsydrom/51dbb1bf-0d40-45b8-96b0-a644a68d2efc.png" id="4_nbm2p"]
+[ext_resource type="Texture2D" uid="uid://bkfnp40nfv7q7" path="res://Assets/boomington/sprites/character/SE1/downsydrom/1331ed97-8b90-4c14-ad26-ae1a9c72847f.png" id="5_36hfk"]
+[ext_resource type="Texture2D" uid="uid://gt74vmpgi1b4" path="res://Assets/boomington/sprites/character/SE1/downsydrom/f5efb19e-f805-4b22-bb39-7fa9229953c5.png" id="6_m68u4"]
+[ext_resource type="Texture2D" uid="uid://55oorg3u4qlc" path="res://Assets/boomington/sprites/character/SE1/left/7f207ef4-907b-45cc-b134-7b5fc441d451.png" id="7_n5s6q"]
+[ext_resource type="Texture2D" uid="uid://gpin7vrspjau" path="res://Assets/boomington/sprites/character/SE1/left/87895dd9-598a-4d53-bbc2-695f476ea618.png" id="8_2hnwf"]
+[ext_resource type="Texture2D" uid="uid://be6od647116iy" path="res://Assets/boomington/sprites/character/SE1/left/c878ffaf-7f96-4b0b-831f-da2ecc100c3b.png" id="9_248jo"]
+[ext_resource type="Texture2D" uid="uid://dpjocauloe34" path="res://Assets/boomington/sprites/character/SE1/left/febbec55-87eb-4353-964f-53e13dcdaad5.png" id="10_8s4fg"]
+[ext_resource type="Texture2D" uid="uid://dynm4xrp6fg6j" path="res://Assets/boomington/sprites/character/SE1/rightsydrom/2dbf21b7-5729-4908-8d4a-3e2399e2a7f6.png" id="11_4yxpe"]
+[ext_resource type="Texture2D" uid="uid://cvn2m4j77uyx4" path="res://Assets/boomington/sprites/character/SE1/rightsydrom/63f28e5f-f062-42f7-b01b-2cdc3f8d0a5c.png" id="12_cutwu"]
+[ext_resource type="Texture2D" uid="uid://vr6o4k8rq533" path="res://Assets/boomington/sprites/character/SE1/rightsydrom/ea541d89-263f-4406-849a-93d6b2bf55ea.png" id="13_4t3wj"]
+[ext_resource type="Texture2D" uid="uid://gi5sksy7wyx2" path="res://Assets/boomington/sprites/character/SE1/up/5672f324-34b6-4106-8934-1cae27b1d6e0.png" id="14_qkat8"]
+[ext_resource type="Texture2D" uid="uid://yh8c5l808tbm" path="res://Assets/boomington/sprites/character/SE1/up/25663d6f-d1d3-4c03-b83c-5bb087c87b0a.png" id="15_kokju"]
+[ext_resource type="Texture2D" uid="uid://bxdmgscb45njm" path="res://Assets/boomington/sprites/character/SE1/up/ccc437e9-dc70-4ae9-8d8b-818f67dc3d07.png" id="16_0xqv8"]
+[ext_resource type="Texture2D" uid="uid://bth4k64el2b51" path="res://Assets/boomington/sprites/character/SE1/up/eb0b425d-0ba1-4209-a0af-7746c811d082.png" id="17_md0ma"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bkktb"]
+size = Vector2(14, 13)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2ctsa"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_qeoa3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_nbm2p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_36hfk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_m68u4")
+}],
+"loop": true,
+"name": &"walk down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_n5s6q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_2hnwf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_248jo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_8s4fg")
+}],
+"loop": true,
+"name": &"walk left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_4yxpe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_cutwu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_4t3wj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_abi6j")
+}],
+"loop": true,
+"name": &"walk right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("14_qkat8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_kokju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_0xqv8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_md0ma")
+}],
+"loop": true,
+"name": &"walk up",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_ynr7w"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:sprite_frames")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("SpriteFrames_2ctsa")]
+}
+
+[sub_resource type="Animation" id="Animation_xwewj"]
+resource_name = "walk_down"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_r3frk"]
+resource_name = "walk_left"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_mn66s"]
+resource_name = "walk_right"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_sy4sv"]
+resource_name = "walk_up"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:sprite_frames")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 1,
+"values": []
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 3, 1, 2]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_juepv"]
+_data = {
+&"RESET": SubResource("Animation_ynr7w"),
+&"walk_down": SubResource("Animation_xwewj"),
+&"walk_left": SubResource("Animation_r3frk"),
+&"walk_right": SubResource("Animation_mn66s"),
+&"walk_up": SubResource("Animation_sy4sv")
+}
+
+[node name="PLAYER2D" type="CharacterBody2D"]
+script = ExtResource("1_wkelb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 17.5)
+shape = SubResource("RectangleShape2D_bkktb")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(312, 102)
+texture = ExtResource("1_abi6j")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_juepv")
+}
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-1, -7)
+sprite_frames = SubResource("SpriteFrames_2ctsa")
+animation = &"walk right"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(4, 4)
+
+[node name="Label" type="Label" parent="."]
+offset_left = -136.0
+offset_top = -71.0
+offset_right = -96.0
+offset_bottom = -48.0

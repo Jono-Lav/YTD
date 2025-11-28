@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_14"
+type="Resource"
+uid="uid://dsup1hncfcd1r"
+path="res://.godot/imported/shaverDeath.dialogue-c72762e4bae61b775a522576e8b01671.tres"
+
+[deps]
+
+source_file="res://dialogue/shaverDeath.dialogue"
+dest_files=["res://.godot/imported/shaverDeath.dialogue-c72762e4bae61b775a522576e8b01671.tres"]
+
+[params]
+
+defaults=true

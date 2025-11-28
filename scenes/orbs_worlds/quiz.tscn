@@ -1,0 +1,149 @@
+[gd_scene load_steps=15 format=3 uid="uid://bny00m1qb8ac"]
+
+[ext_resource type="Script" uid="uid://csqw0eecxd43b" path="res://scripts/quiz.gd" id="1_cdm1v"]
+[ext_resource type="AudioStream" uid="uid://bp28rluanheby" path="res://sounds/tuco-get-out.mp3" id="2_m7u77"]
+[ext_resource type="FontFile" uid="uid://ceh3e8fqbkgk6" path="res://fonts/FirstTimeWriting!.ttf" id="3_5gpsr"]
+[ext_resource type="AudioStream" uid="uid://w438u5xms4xy" path="res://sounds/wrong-answer-buzzer.mp3" id="4_hctq3"]
+[ext_resource type="Texture2D" uid="uid://bbhxpianlug0" path="res://sprites/2054-15socialcredit.png" id="5_jdlse"]
+[ext_resource type="Texture2D" uid="uid://r0rwufscjqbn" path="res://sprites/66b3e5760608f3f68cb0b04b_93.png" id="6_rli7l"]
+[ext_resource type="AudioStream" uid="uid://yej37kxe3rgv" path="res://sounds/correct-answer-new.mp3" id="7_1k1u7"]
+[ext_resource type="Texture2D" uid="uid://dcpniehc8qj5y" path="res://sprites/sand boomingtale.png" id="8_vml4j"]
+[ext_resource type="Texture2D" uid="uid://b5ptautb2pf2a" path="res://sprites/Oc 1 outline.png" id="9_w0xmb"]
+[ext_resource type="Texture2D" uid="uid://dctbexqwi7v0i" path="res://sprites/addtext_com_MTU0NTAzNDQ4OA.png" id="10_0ksbq"]
+
+[sub_resource type="Animation" id="Animation_oaefw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("correct:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("wrong2:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_bu3fx"]
+resource_name = "correct"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("correct:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.933333, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_owtlv"]
+resource_name = "wrong"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("wrong2:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.533333, 0.966667, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jyvc4"]
+_data = {
+&"RESET": SubResource("Animation_oaefw"),
+&"correct": SubResource("Animation_bu3fx"),
+&"wrong": SubResource("Animation_owtlv")
+}
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_cdm1v")
+
+[node name="TextEdit" type="TextEdit" parent="."]
+offset_left = 506.623
+offset_top = 197.0
+offset_right = 612.623
+offset_bottom = 238.0
+placeholder_text = "name"
+
+[node name="Button" type="Button" parent="."]
+offset_left = 452.623
+offset_top = 288.0
+offset_right = 674.623
+offset_bottom = 385.0
+theme_override_font_sizes/font_size = 40
+text = "enter"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_m7u77")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 368.623
+offset_top = 23.0
+offset_right = 683.623
+offset_bottom = 94.0
+theme_override_fonts/font = ExtResource("3_5gpsr")
+theme_override_font_sizes/font_size = 40
+
+[node name="wrong" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_hctq3")
+
+[node name="correct" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(532.623, 183)
+scale = Vector2(2.35417, 2.35417)
+texture = ExtResource("5_jdlse")
+
+[node name="wrong2" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(549.623, 233)
+scale = Vector2(0.679688, 0.621094)
+texture = ExtResource("6_rli7l")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_jyvc4")
+}
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_1k1u7")
+
+[node name="sand" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(562, 612)
+scale = Vector2(12.0859, 1)
+texture = ExtResource("8_vml4j")
+
+[node name="wate" type="Sprite2D" parent="."]
+position = Vector2(549, 538)
+scale = Vector2(0.4641, 0.0890834)
+texture = ExtResource("9_w0xmb")
+
+[node name="spon" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(582, 530)
+scale = Vector2(2.23895, 0.635175)
+texture = ExtResource("10_0ksbq")
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

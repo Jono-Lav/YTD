@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://ccu525bqmxomm"]
+
+[ext_resource type="AudioStream" uid="uid://dyjfnda36bcpa" path="res://sounds/select-sound-121244.mp3" id="1_j3x8j"]
+
+[node name="pickupsound" type="AudioStreamPlayer"]
+stream = ExtResource("1_j3x8j")
+volume_db = 14.606

@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_14"
+type="Resource"
+uid="uid://b4ijt6ecbmdv0"
+path="res://.godot/imported/ovalSIGNTHIS.dialogue-ead8aa03d0999c473f32d7e834e2dd00.tres"
+
+[deps]
+
+source_file="res://dialogue/ovalSIGNTHIS.dialogue"
+dest_files=["res://.godot/imported/ovalSIGNTHIS.dialogue-ead8aa03d0999c473f32d7e834e2dd00.tres"]
+
+[params]
+
+defaults=true

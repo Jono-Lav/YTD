@@ -1,0 +1,260 @@
+[gd_scene load_steps=22 format=3 uid="uid://52yhuvw6pq3x"]
+
+[ext_resource type="Script" uid="uid://2603fh8jgwhk" path="res://scripts/player.gd" id="1_col0x"]
+[ext_resource type="AudioStream" uid="uid://b33vqp6tuh0ti" path="res://sounds/walk1.mp3" id="2_ihtd4"]
+[ext_resource type="Script" uid="uid://dy42c0jctpxqx" path="res://scripts/head.gd" id="2_p6bp7"]
+[ext_resource type="AudioStream" uid="uid://b2qfqrcls4mdx" path="res://sounds/walk2.mp3" id="3_4tyio"]
+[ext_resource type="AudioStream" uid="uid://ghph2h1af4ux" path="res://sounds/walk3.mp3" id="4_jvwi0"]
+[ext_resource type="AudioStream" uid="uid://d3a8v48ot8uwm" path="res://sounds/walk4.mp3" id="5_f5liw"]
+[ext_resource type="AudioStream" uid="uid://q07s51wdtxif" path="res://sounds/walk5.mp3" id="6_ue8va"]
+[ext_resource type="AudioStream" uid="uid://bgxomorpnhosg" path="res://sounds/walk6.mp3" id="7_e5gfo"]
+[ext_resource type="Script" uid="uid://dupn5drnrjtci" path="res://scripts/ui.gd" id="9_1b6xg"]
+[ext_resource type="Script" uid="uid://j7vcoeeq24eo" path="res://scripts/interact_ray.gd" id="9_w5fe2"]
+[ext_resource type="Texture2D" uid="uid://dak0pm1qqet5g" path="res://sprites/icons8-crosshair-40.png" id="10_h1i57"]
+[ext_resource type="Script" uid="uid://dldl40w451cvr" path="res://scripts/classes/RichTextEffect.gd" id="10_u22hv"]
+[ext_resource type="Script" uid="uid://cddok44i8ymg1" path="res://scripts/prompt.gd" id="11_jej6c"]
+[ext_resource type="Shader" uid="uid://c7x6frq7c7ywq" path="res://shaders/crosshair.gdshader" id="14_f1ej7"]
+[ext_resource type="Script" uid="uid://crt3yarx757v0" path="res://scripts/color_rect.gd" id="15_oprun"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_ijijn"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4a0cy"]
+
+[sub_resource type="Animation" id="Animation_n1ow5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UIAnimations/ScoreUpdated:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("UIAnimations/Score:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("UIAnimations/Score:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(432, 328)]
+}
+
+[sub_resource type="Animation" id="Animation_qxo7q"]
+resource_name = "scoreUpdate"
+length = 2.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UIAnimations/ScoreUpdated:self_modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.533333, 2.03333, 2.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("UIAnimations/Score:self_modulate")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.03333, 1.3, 2.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("UIAnimations/Score:position")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.03333, 1.33333, 1.86667, 2.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(432, 328), Vector2(432, 200), Vector2(432, 200), Vector2(432, 248), Vector2(432, 328)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4el55"]
+_data = {
+&"RESET": SubResource("Animation_n1ow5"),
+&"scoreUpdate": SubResource("Animation_qxo7q")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oprun"]
+shader = ExtResource("14_f1ej7")
+shader_parameter/pixel_width = 2.0
+shader_parameter/arm_length_pixels = 20.0
+
+[node name="player" type="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.124003, -0.722572, 0.194375)
+script = ExtResource("1_col0x")
+walk_footsteps = Array[AudioStream]([ExtResource("2_ihtd4"), ExtResource("3_4tyio"), ExtResource("4_jvwi0"), ExtResource("5_f5liw"), ExtResource("6_ue8va"), ExtResource("7_e5gfo")])
+enable_flight = false
+min_height_for_pound = 2.5
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("CapsuleMesh_ijijn")
+
+[node name="DefaultCollision" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_4a0cy")
+
+[node name="CrouchCollision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.6, 0, 0, 0, 1, 0, -0.386671, 0)
+shape = SubResource("CapsuleShape3D_4a0cy")
+
+[node name="SlideCollision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.4, 0, 0, 0, 1, 0, -0.562239, 0)
+shape = SubResource("CapsuleShape3D_4a0cy")
+
+[node name="GroundRay" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 25, 0, 0, 0, 1, 0, -0.900584, 0)
+
+[node name="LeftWallRay" type="RayCast3D" parent="."]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="RightWallRay" type="RayCast3D" parent="."]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="FootStepSound" type="AudioStreamPlayer3D" parent="."]
+
+[node name="head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.62596, 0)
+script = ExtResource("2_p6bp7")
+
+[node name="Camera3D" type="Camera3D" parent="head"]
+
+[node name="interact_ray" type="RayCast3D" parent="head"]
+transform = Transform3D(-1, 3.49691e-07, 3.82137e-15, 0, -1.74846e-07, 1, 8.74228e-08, 4, 4.37114e-08, 0, 0, 0)
+script = ExtResource("9_w5fe2")
+
+[node name="prompt" type="RichTextLabel" parent="head/interact_ray"]
+offset_left = 505.0
+offset_top = 260.0
+offset_right = 920.0
+offset_bottom = 414.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 7
+theme_override_font_sizes/normal_font_size = 33
+theme_override_font_sizes/bold_font_size = 33
+bbcode_enabled = true
+custom_effects = [ExtResource("10_u22hv")]
+script = ExtResource("11_jej6c")
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("9_1b6xg")
+
+[node name="score" type="RichTextLabel" parent="UI"]
+layout_mode = 0
+offset_left = 18.0
+offset_top = 2.0
+offset_right = 397.0
+offset_bottom = 145.0
+theme_override_font_sizes/normal_font_size = 60
+theme_override_font_sizes/bold_font_size = 60
+bbcode_enabled = true
+
+[node name="UIAnimations" type="AnimationPlayer" parent="UI"]
+libraries = {
+&"": SubResource("AnimationLibrary_4el55")
+}
+
+[node name="ScoreUpdated" type="RichTextLabel" parent="UI/UIAnimations"]
+self_modulate = Color(1, 1, 1, 0)
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -245.0
+offset_top = 49.0
+offset_right = 376.0
+offset_bottom = 245.0
+grow_horizontal = 2
+theme_override_font_sizes/normal_font_size = 65
+bbcode_enabled = true
+text = "[wave]Orb Collected![/wave]"
+
+[node name="Score" type="RichTextLabel" parent="UI/UIAnimations"]
+self_modulate = Color(1, 1, 1, 0)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -144.0
+offset_top = 4.0
+offset_right = 146.0
+offset_bottom = 268.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/bold_font_size = 190
+bbcode_enabled = true
+text = "[shake][wave][b]+1[/b][/wave][/shake]"
+
+[node name="lockedMessage" type="RichTextLabel" parent="UI"]
+visible = false
+layout_mode = 0
+offset_left = 336.0
+offset_top = 185.0
+offset_right = 822.0
+offset_bottom = 291.0
+theme_override_font_sizes/normal_font_size = 30
+theme_override_font_sizes/bold_font_size = 40
+theme_override_font_sizes/bold_italics_font_size = 30
+theme_override_font_sizes/italics_font_size = 0
+theme_override_font_sizes/mono_font_size = 0
+bbcode_enabled = true
+text = "[shake][wave][b]NEED AT LEAST 10 ORB![/b][/wave][/shake]"
+
+[node name="CrossHair" type="Control" parent="UI"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="crosshair" type="TextureRect" parent="UI/CrossHair"]
+visible = false
+layout_mode = 0
+offset_left = 560.0
+offset_top = 304.0
+offset_right = 600.0
+offset_bottom = 344.0
+texture = ExtResource("10_h1i57")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="UI/CrossHair"]
+
+[node name="ColorRect" type="ColorRect" parent="UI/CrossHair/CanvasLayer"]
+material = SubResource("ShaderMaterial_oprun")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("15_oprun")

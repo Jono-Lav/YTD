@@ -1,0 +1,11 @@
+~ this_is_a_node_title
+do npc4oguecollision.disabled = true
+do npc4anim.play("n4/npc4_talk")
+npc4: How did you do that??
+npc4: How did you open the door??
+do npc4oguecollision.disabled = false
+do npc4anim.stop("n4/npc4_talk")
+do npc4anim.play("n4/Npc4_headtilit")
+do npc4anim.stop()
+do npc4anim.seek(0.0, true)
+=> END

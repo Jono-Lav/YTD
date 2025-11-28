@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://b0atooee86n2n"]
+
+[ext_resource type="Script" uid="uid://85fovkxmryw6" path="res://scripts/movie.gd" id="1_d6ln2"]
+[ext_resource type="VideoStream" uid="uid://b2owyevhmhi35" path="res://ads.ogv" id="2_u4lk5"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_d6ln2")
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
+offset_left = 40.0
+offset_top = 72.0
+offset_right = 628.0
+offset_bottom = 519.0
+stream = ExtResource("2_u4lk5")
+
+[node name="Button" type="Button" parent="."]
+visible = false
+offset_left = 483.0
+offset_top = 480.0
+offset_right = 669.0
+offset_bottom = 639.0
+text = "stop"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

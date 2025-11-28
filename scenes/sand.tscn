@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://mfdxx8lxg1rv"]
+
+[ext_resource type="Script" uid="uid://c457cp8qvjq1y" path="res://scripts/sand.gd" id="1_3t03s"]
+[ext_resource type="Texture2D" uid="uid://dcpniehc8qj5y" path="res://sprites/sand boomingtale.png" id="1_je60a"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ojs7s"]
+size = Vector3(0.248684, 1, 0.254333)
+
+[node name="sand" type="StaticBody3D"]
+script = ExtResource("1_3t03s")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 1.80761, -0.16153)
+billboard = 2
+texture = ExtResource("1_je60a")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -0.00490177, 1.89331, -0.194623)
+shape = SubResource("BoxShape3D_ojs7s")

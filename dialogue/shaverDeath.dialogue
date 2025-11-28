@@ -1,0 +1,5 @@
+~ this_is_a_node_title
+do Global.dialugefinishedo6 = true
+Ido The Shaver: stop please sto- [next=0.25]
+do shaveranim.play("shaver/death") 
+=> END
