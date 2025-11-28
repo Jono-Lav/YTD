@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://uo0bwgga6bey"]
+[gd_scene load_steps=28 format=3 uid="uid://uo0bwgga6bey"]
 
 [ext_resource type="PackedScene" uid="uid://br3eycacuidx7" path="res://scenes/cube1.tscn" id="1_qryf2"]
 [ext_resource type="PackedScene" uid="uid://dm8qcbbhr2ig7" path="res://scenes/text.tscn" id="3_vxqgp"]
@@ -19,6 +19,7 @@
 [ext_resource type="Script" uid="uid://cv8xp7cco5ngu" path="res://scenes/se_2_anim.gd" id="16_n8pmt"]
 [ext_resource type="Animation" uid="uid://b2p7nkes1jp8e" path="res://ch/splitSE2.res" id="17_2seoy"]
 [ext_resource type="Animation" uid="uid://bpbeutfv4fwxx" path="res://ch/stepSE2.res" id="18_630pt"]
+[ext_resource type="AudioStream" uid="uid://dtlwihcn2jtcw" path="res://sounds/YTD_OST_9_-_Second_Experiment_12_KLICKAUD.mp3" id="20_2seoy"]
 
 [sub_resource type="Sky" id="Sky_wh2yq"]
 
@@ -132,3 +133,7 @@ libraries = {
 &"SE2": SubResource("AnimationLibrary_ggpvr")
 }
 script = ExtResource("16_n8pmt")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("20_2seoy")
+autoplay = true

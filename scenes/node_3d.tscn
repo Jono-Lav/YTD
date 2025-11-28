@@ -977,7 +977,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.12792, 0)
 mesh = SubResource("BoxMesh_k5blj")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="boxanimationtestforytonayancoliide"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.14625, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 63.2374, -1.14625, -140.33296)
 shape = SubResource("BoxShape3D_xs7gn")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="boxanimationtestforytonayancoliide"]
@@ -1087,7 +1087,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.28784, -107.558, -74.4596)
 shape = SubResource("BoxShape3D_fgrag")
 
 [node name="roof_extended2" parent="." instance=ExtResource("33_5obp6")]
-transform = Transform3D(-4.573958, -2.6603217, -3.601838, 2.8693724, -9.190182, -1.6242683, -2.6164076, -5.427996, 4.5153623, 45.8649, 57.6027, -22.3387)
+transform = Transform3D(-4.573958, -2.6603217, -3.601838, 2.8693721, -9.190182, -1.6242683, -2.6164074, -5.427996, 4.5153623, 45.8649, 57.6027, -22.3387)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="roof_extended2"]
 libraries = {
@@ -1103,16 +1103,16 @@ transform = Transform3D(0.154604, 0, 2.99601, 0, 3, 0, -2.99601, 0, 0.154604, -1
 [node name="Node" type="Node" parent="Walls"]
 
 [node name="walls22" parent="Walls/Node" instance=ExtResource("20_mgc6r")]
-transform = Transform3D(2.1766224, -0.82731503, -3.9867778, 8.41247, 0.4136618, -0.21620399, 2.3436475, -0.7164753, 4.4787116, -16.102, 11.8279, -17.8575)
+transform = Transform3D(2.1766224, -0.82731515, -3.9867778, 8.41247, 0.41366187, -0.21620399, 2.3436475, -0.71647537, 4.4787116, -16.102, 11.8279, -17.8575)
 
 [node name="walls20" parent="Walls/Node" instance=ExtResource("20_mgc6r")]
 transform = Transform3D(0.2833908, -4.81621, -3.1484826, 0.9506051, 1.8443171, 0.25902134, 0.12664731, -3.0663722, 5.1009684, -13.1848, 16.0928, -15.0764)
 
 [node name="walls23" parent="Walls/Node" instance=ExtResource("20_mgc6r")]
-transform = Transform3D(-0.6644652, -4.24263, -2.176599, -0.036033392, 2.1213236, -8.412478, 0.74644995, -3.6742475, -2.3436327, -12.7329, 11.0644, -18.2445)
+transform = Transform3D(-0.6644652, -4.24263, -2.1765988, -0.036033392, 2.1213236, -8.4124775, 0.74644995, -3.6742475, -2.3436325, -12.7329, 11.0644, -18.2445)
 
 [node name="walls21" parent="Walls/Node" instance=ExtResource("20_mgc6r")]
-transform = Transform3D(0.24184714, -4.242634, -3.9867778, 0.9347189, 2.121339, -0.21620218, 0.26040503, -3.6742265, 4.4787116, -15.6032, 6.30081, -17.6804)
+transform = Transform3D(0.24184714, -4.242634, -3.9867775, 0.9347189, 2.121339, -0.21620217, 0.26040503, -3.6742265, 4.478711, -15.6032, 6.30081, -17.6804)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Walls/Node"]
 libraries = {
@@ -1200,9 +1200,9 @@ libraries = {
 autoplay = "new_animation"
 
 [node name="Stairs" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.80982, 4.05414, -16.7353)
+transform = Transform3D(0.95647806, 0, -0.29180416, 0, 1, 0, 0.29180416, 0, 0.95647806, -48.50199, 4.05414, -119.93285)
 script = ExtResource("35_dl4ih")
-size = Vector3(2.61964, 6.98773, 30.8407)
+size = Vector3(2.61964, 6.98773, 34.236267)
 step_count = 50
 metadata/_custom_type_script = "uid://m2fvd5j6jd46"
 

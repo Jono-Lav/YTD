@@ -10,8 +10,8 @@ config_version=5
 
 [application]
 
-config/name="YTD6.0 (4.4)"
-run/main_scene="res://scenes/start.tscn"
+config/name="YTD (latest)"
+run/main_scene="uid://dlk533y3qlnge"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
 

@@ -17,12 +17,3 @@ shape = SubResource("BoxShape3D_os5sa")
 [node name="Label3D" type="Label3D" parent="."]
 transform = Transform3D(0.976175, 0, 0, 0, 0.976175, 0, 0, 0, 0.976175, -2.54864, 0.626151, 0)
 font_size = 200
-
-[node name="Button" type="Button" parent="."]
-offset_left = 411.0
-offset_top = 249.0
-offset_right = 699.0
-offset_bottom = 404.0
-text = "press"
-
-[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

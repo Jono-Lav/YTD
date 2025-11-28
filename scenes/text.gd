@@ -3,12 +3,7 @@ extends Node3D
 @onready var button1= $Button
 
 func _ready() -> void:
-	pass
-
-
-func _on_button_pressed() -> void:
-	button1.queue_free()
-	await get_tree().create_timer(3.5).timeout
+	await get_tree().create_timer(5.5).timeout
 	text1.text="Hey.."
 	await get_tree().create_timer(0.5).timeout
 	Global.StartTextAnim=true
@@ -75,5 +70,7 @@ func _on_button_pressed() -> void:
 	Global.canStep=true
 	await get_tree().create_timer(1).timeout
 	text1.text="Okaybyebye ;D"
+	await get_tree().create_timer(1).timeout
+	get_tree().change_scene_to_file("res://scenes/jobFloor.tscn")
 	Global.canDrawn=true
 	
