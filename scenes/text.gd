@@ -1,6 +1,7 @@
 extends Node3D
 @onready var text1 = $Label3D
 @onready var button1= $Button
+@onready var animation: AnimationPlayer = $"../fade in"
 
 func _ready() -> void:
 
@@ -70,8 +71,10 @@ func _ready() -> void:
 	await get_tree().create_timer(2).timeout
 	Global.canStep=true
 	await get_tree().create_timer(0.7).timeout
-	text1.text="Okaybyebye ;D"
-	await get_tree().create_timer(0.3).timeout
+	text1.text="I will see you in Agartha"
+	await get_tree().create_timer(0.4).timeout
+	animation.play("fadein")
+	await get_tree().create_timer(3.5).timeout
 	get_tree().change_scene_to_file("res://scenes/jobFloor.tscn")
 	Global.canDrawn=true
 	

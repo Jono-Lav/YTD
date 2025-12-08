@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://cyo2ohjqbakwf"]
+[gd_scene load_steps=31 format=3 uid="uid://cyo2ohjqbakwf"]
 
 [ext_resource type="Script" uid="uid://b4icxih7ptxx3" path="res://scripts/job_floor.gd" id="1_fcvbf"]
 [ext_resource type="PackedScene" uid="uid://br3eycacuidx7" path="res://scenes/cube1.tscn" id="1_ssvyv"]
@@ -45,6 +45,43 @@ size = Vector3(0.673767, 0.701172, 0.106628)
 [sub_resource type="BoxMesh" id="BoxMesh_cmwdb"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qjs4n"]
+
+[sub_resource type="Animation" id="Animation_cmwdb"]
+resource_name = "fadeout"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("fade out/ColorRect:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_r3h00"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("fade out/ColorRect:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_a3ixq"]
+_data = {
+&"RESET": SubResource("Animation_r3h00"),
+&"fadeout": SubResource("Animation_cmwdb")
+}
 
 [node name="level" type="Node3D"]
 script = ExtResource("1_fcvbf")
@@ -223,3 +260,15 @@ fire_rate = 1.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.144836, 0, -3.40863)
 use_collision = true
 size = Vector3(54.4386, 1, 50.7374)
+
+[node name="fade out" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_a3ixq")
+}
+
+[node name="ColorRect" type="ColorRect" parent="fade out"]
+offset_left = -2502.0
+offset_top = -1021.0
+offset_right = 5903.0
+offset_bottom = 3977.0
+color = Color(0, 0, 0, 1)

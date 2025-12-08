@@ -17,7 +17,7 @@ do uncharted.play("uncharted/uncharted_defualt2")
 	uncharted: i have a birthday party you see..
 	uncharted: and i forgot my friends numbers
 	uncharted: and i just know it's somewhere in my memory..
-	uncharted: that's why i need you to get in my mind and help my find them phone numbers
+	uncharted: that's why i need you to get in my mind and help me find them phone numbers
 	do Global.unchartedAfter = true
 	do uncharted.play("uncharted/uncharted_defualt1")
 => END

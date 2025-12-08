@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://uo0bwgga6bey"]
+[gd_scene load_steps=32 format=3 uid="uid://uo0bwgga6bey"]
 
 [ext_resource type="PackedScene" uid="uid://br3eycacuidx7" path="res://scenes/cube1.tscn" id="1_qryf2"]
 [ext_resource type="PackedScene" uid="uid://dm8qcbbhr2ig7" path="res://scenes/text.tscn" id="3_vxqgp"]
@@ -20,6 +20,7 @@
 [ext_resource type="Animation" uid="uid://b2p7nkes1jp8e" path="res://ch/splitSE2.res" id="17_2seoy"]
 [ext_resource type="Animation" uid="uid://bpbeutfv4fwxx" path="res://ch/stepSE2.res" id="18_630pt"]
 [ext_resource type="AudioStream" uid="uid://dtlwihcn2jtcw" path="res://sounds/YTD_OST_9_-_Second_Experiment_12_KLICKAUD.mp3" id="20_2seoy"]
+[ext_resource type="PackedScene" uid="uid://c01y3etcpyc1q" path="res://scenes/vhs_shader.tscn" id="21_630pt"]
 
 [sub_resource type="Sky" id="Sky_wh2yq"]
 
@@ -63,6 +64,43 @@ _data = {
 &"drawnSE2": ExtResource("16_1xibv"),
 &"splitSE2": ExtResource("17_2seoy"),
 &"stepSE2": ExtResource("18_630pt")
+}
+
+[sub_resource type="Animation" id="Animation_2seoy"]
+resource_name = "fadein"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("fade in/ColorRect:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_630pt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("fade in/ColorRect:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pxnsq"]
+_data = {
+&"RESET": SubResource("Animation_630pt"),
+&"fadein": SubResource("Animation_2seoy")
 }
 
 [node name="Node3D" type="Node3D"]
@@ -138,3 +176,18 @@ script = ExtResource("16_n8pmt")
 stream = ExtResource("20_2seoy")
 volume_db = -5.0
 autoplay = true
+
+[node name="fade in" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_pxnsq")
+}
+
+[node name="ColorRect" type="ColorRect" parent="fade in"]
+self_modulate = Color(1, 1, 1, 0)
+offset_left = -1309.0
+offset_top = -626.0
+offset_right = 6306.0
+offset_bottom = 3663.0
+color = Color(0, 0, 0, 1)
+
+[node name="vhs_shader" parent="." instance=ExtResource("21_630pt")]
