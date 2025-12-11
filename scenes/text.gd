@@ -56,7 +56,7 @@ func _ready() -> void:
 	text1.text="happened last time"
 	await get_tree().create_timer(2.5).timeout
 	text1.text=""
-	await get_tree().create_timer(3).timeout
+	await get_tree().create_timer(2.6).timeout
 	text1.text="Welcome to.."
 	await get_tree().create_timer(2).timeout
 	text1.text="Your True Dream"
@@ -72,9 +72,9 @@ func _ready() -> void:
 	Global.canStep=true
 	await get_tree().create_timer(0.7).timeout
 	text1.text="I will see you in Agartha"
-	await get_tree().create_timer(0.4).timeout
+	await get_tree().create_timer(0.1).timeout
 	animation.play("fadein")
-	await get_tree().create_timer(3.5).timeout
+	await get_tree().create_timer(12).timeout
 	get_tree().change_scene_to_file("res://scenes/jobFloor.tscn")
 	Global.canDrawn=true
 	
