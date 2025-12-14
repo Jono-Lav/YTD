@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://dsrlc6ahj5y64"]
+[gd_scene load_steps=34 format=3 uid="uid://dsrlc6ahj5y64"]
 
 [ext_resource type="Script" uid="uid://kwls3tm2km6y" path="res://scripts/floor_minus_1.gd" id="1_4ksma"]
 [ext_resource type="PackedScene" uid="uid://52yhuvw6pq3x" path="res://scenes/player.tscn" id="1_kd1f8"]
@@ -9,7 +9,6 @@
 [ext_resource type="Script" uid="uid://bi7dqcfvohnap" path="res://scripts/floor_1_trigger.gd" id="4_ca3hh"]
 [ext_resource type="PackedScene" uid="uid://dtvcgwlbhxehd" path="res://scenes/elevator.tscn" id="4_hkc4b"]
 [ext_resource type="PackedScene" uid="uid://c01y3etcpyc1q" path="res://scenes/vhs_shader.tscn" id="4_nm3ur"]
-[ext_resource type="Script" uid="uid://cd31klxbjvr1t" path="res://npctest.gd" id="5_m4s7b"]
 [ext_resource type="PackedScene" uid="uid://c25mbm1tcg6et" path="res://ch/uncharted.gltf" id="7_m00pi"]
 [ext_resource type="Script" uid="uid://blf4emuy6d276" path="res://scripts/uncharted.gd" id="8_f8dqf"]
 [ext_resource type="Resource" uid="uid://bmwdh07hhxxt8" path="res://dialogue/uncharted1.dialogue" id="9_436mn"]
@@ -20,6 +19,7 @@
 [ext_resource type="Animation" uid="uid://b4qs6dh3f3s5x" path="res://ch/uncharted_talk2.res" id="14_5ntoq"]
 [ext_resource type="Animation" uid="uid://b6rpg0eorownq" path="res://ch/uncharted_talk.res" id="15_355x1"]
 [ext_resource type="Animation" uid="uid://dvc866ytvafph" path="res://ch/uncharted_up.res" id="16_xoreq"]
+[ext_resource type="AudioStream" uid="uid://dqpdkbvh5jvft" path="res://sounds/calming-rain-257596.mp3" id="21_355x1"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_1isue"]
 material = ExtResource("3_2i47q")
@@ -38,8 +38,405 @@ fog_enabled = true
 fog_light_color = Color(0.190782, 0.0482988, 0.329575, 1)
 fog_light_energy = 0.08
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_fxr7e"]
-size = Vector3(1, 1, 1.42944)
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_5ntoq"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_355x1"]
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.18782684, 2.807, 2.7979162, 1)
+albedo_texture = SubResource("CurveXYZTexture_5ntoq")
+billboard_keep_scale = true
+
+[sub_resource type="Shader" id="Shader_5ntoq"]
+code = "// NOTE: Shader automatically converted from Godot Engine 4.5.1.stable's ParticleProcessMaterial.
+
+shader_type particles;
+render_mode disable_velocity;
+
+uniform vec3 direction;
+uniform float spread;
+uniform float flatness;
+uniform float inherit_emitter_velocity_ratio = 0.0;
+uniform float initial_linear_velocity_min;
+uniform float initial_linear_velocity_max;
+uniform float directional_velocity_min;
+uniform float directional_velocity_max;
+uniform float angular_velocity_min;
+uniform float angular_velocity_max;
+uniform float orbit_velocity_min;
+uniform float orbit_velocity_max;
+uniform float radial_velocity_min;
+uniform float radial_velocity_max;
+uniform float linear_accel_min;
+uniform float linear_accel_max;
+uniform float radial_accel_min;
+uniform float radial_accel_max;
+uniform float tangent_accel_min;
+uniform float tangent_accel_max;
+uniform float damping_min;
+uniform float damping_max;
+uniform float initial_angle_min;
+uniform float initial_angle_max;
+uniform float scale_min;
+uniform float scale_max;
+uniform float hue_variation_min;
+uniform float hue_variation_max;
+uniform float anim_speed_min;
+uniform float anim_speed_max;
+uniform float anim_offset_min;
+uniform float anim_offset_max;
+uniform float lifetime_randomness;
+uniform vec3 emission_shape_offset = vec3(0.0);
+uniform vec3 emission_shape_scale = vec3(1.0);
+uniform vec3 velocity_pivot = vec3(0.0);
+uniform vec3 emission_box_extents;
+uniform vec4 color_value : source_color;
+uniform vec3 gravity;
+
+vec4 rotate_hue(vec4 current_color, float hue_rot_angle) {
+	float hue_rot_c = cos(hue_rot_angle);
+	float hue_rot_s = sin(hue_rot_angle);
+	mat4 hue_rot_mat =
+			mat4(vec4(0.299, 0.587, 0.114, 0.0),
+					vec4(0.299, 0.587, 0.114, 0.0),
+					vec4(0.299, 0.587, 0.114, 0.0),
+					vec4(0.000, 0.000, 0.000, 1.0)) +
+			mat4(vec4(0.701, -0.587, -0.114, 0.0),
+					vec4(-0.299, 0.413, -0.114, 0.0),
+					vec4(-0.300, -0.588, 0.886, 0.0),
+					vec4(0.000, 0.000, 0.000, 0.0)) *
+					hue_rot_c +
+			mat4(vec4(0.168, 0.330, -0.497, 0.0),
+					vec4(-0.328, 0.035, 0.292, 0.0),
+					vec4(1.250, -1.050, -0.203, 0.0),
+					vec4(0.000, 0.000, 0.000, 0.0)) *
+					hue_rot_s;
+	return hue_rot_mat * current_color;
+}
+
+float rand_from_seed(inout uint seed) {
+	int k;
+	int s = int(seed);
+	if (s == 0) {
+		s = 305420679;
+	}
+	k = s / 127773;
+	s = 16807 * (s - k * 127773) - 2836 * k;
+	if (s < 0) {
+		s += 2147483647;
+	}
+	seed = uint(s);
+	return float(seed % uint(65536)) / 65535.0;
+}
+
+float rand_from_seed_m1_p1(inout uint seed) {
+	return rand_from_seed(seed) * 2.0 - 1.0;
+}
+
+uint hash(uint x) {
+	x = ((x >> uint(16)) ^ x) * uint(73244475);
+	x = ((x >> uint(16)) ^ x) * uint(73244475);
+	x = (x >> uint(16)) ^ x;
+	return x;
+}
+
+struct DisplayParameters {
+	vec3 scale;
+	float hue_rotation;
+	float animation_speed;
+	float animation_offset;
+	float lifetime;
+	vec4 color;
+	float emission_texture_position;
+};
+
+struct DynamicsParameters {
+	float angle;
+	float angular_velocity;
+	float initial_velocity_multiplier;
+	float directional_velocity;
+	float radial_velocity;
+	float orbit_velocity;
+};
+
+struct PhysicalParameters {
+	float linear_accel;
+	float radial_accel;
+	float tangent_accel;
+	float damping;
+};
+
+void calculate_initial_physical_params(inout PhysicalParameters params, inout uint alt_seed) {
+	params.linear_accel = mix(linear_accel_min, linear_accel_max, rand_from_seed(alt_seed));
+	params.radial_accel = mix(radial_accel_min, radial_accel_max, rand_from_seed(alt_seed));
+	params.tangent_accel = mix(tangent_accel_min, tangent_accel_max, rand_from_seed(alt_seed));
+	params.damping = mix(damping_min, damping_max, rand_from_seed(alt_seed));
+}
+
+void calculate_initial_dynamics_params(inout DynamicsParameters params, inout uint alt_seed) {
+	// -------------------- DO NOT REORDER OPERATIONS, IT BREAKS VISUAL COMPATIBILITY
+	// -------------------- ADD NEW OPERATIONS AT THE BOTTOM
+	params.angle = mix(initial_angle_min, initial_angle_max, rand_from_seed(alt_seed));
+	params.angular_velocity = mix(angular_velocity_min, angular_velocity_max, rand_from_seed(alt_seed));
+	params.initial_velocity_multiplier = mix(initial_linear_velocity_min, initial_linear_velocity_max, rand_from_seed(alt_seed));
+	params.directional_velocity = mix(directional_velocity_min, directional_velocity_max, rand_from_seed(alt_seed));
+	params.radial_velocity = mix(radial_velocity_min, radial_velocity_max, rand_from_seed(alt_seed));
+	params.orbit_velocity = mix(orbit_velocity_min, orbit_velocity_max, rand_from_seed(alt_seed));
+}
+
+void calculate_initial_display_params(inout DisplayParameters params, inout uint alt_seed) {
+	// -------------------- DO NOT REORDER OPERATIONS, IT BREAKS VISUAL COMPATIBILITY
+	// -------------------- ADD NEW OPERATIONS AT THE BOTTOM
+	float pi = 3.14159;
+	params.scale = vec3(mix(scale_min, scale_max, rand_from_seed(alt_seed)));
+	params.scale = sign(params.scale) * max(abs(params.scale), 0.001);
+	params.hue_rotation = pi * 2.0 * mix(hue_variation_min, hue_variation_max, rand_from_seed(alt_seed));
+	params.animation_speed = mix(anim_speed_min, anim_speed_max, rand_from_seed(alt_seed));
+	params.animation_offset = mix(anim_offset_min, anim_offset_max, rand_from_seed(alt_seed));
+	params.lifetime = (1.0 - lifetime_randomness * rand_from_seed(alt_seed));
+	params.color = color_value;
+}
+
+void process_display_param(inout DisplayParameters parameters, float lifetime) {
+	// Compile-time add textures.
+	parameters.color = rotate_hue(parameters.color, parameters.hue_rotation);
+}
+
+vec3 calculate_initial_position(inout DisplayParameters params, inout uint alt_seed) {
+	float pi = 3.14159;
+	vec3 pos = vec3(0.0);
+	{ // Emission shape.
+		pos = vec3(rand_from_seed(alt_seed) * 2.0 - 1.0, rand_from_seed(alt_seed) * 2.0 - 1.0, rand_from_seed(alt_seed) * 2.0 - 1.0) * emission_box_extents;
+	}
+	return pos * emission_shape_scale + emission_shape_offset;
+}
+
+vec3 get_random_direction_from_spread(inout uint alt_seed, float spread_angle) {
+	float pi = 3.14159;
+	float degree_to_rad = pi / 180.0;
+	float spread_rad = spread_angle * degree_to_rad;
+	float angle1_rad = rand_from_seed_m1_p1(alt_seed) * spread_rad;
+	float angle2_rad = rand_from_seed_m1_p1(alt_seed) * spread_rad * (1.0 - flatness);
+	vec3 direction_xz = vec3(sin(angle1_rad), 0.0, cos(angle1_rad));
+	vec3 direction_yz = vec3(0.0, sin(angle2_rad), cos(angle2_rad));
+	direction_yz.z = direction_yz.z / max(0.0001, sqrt(abs(direction_yz.z))); // Better uniform distribution.
+	vec3 spread_direction = vec3(direction_xz.x * direction_yz.z, direction_yz.y, direction_xz.z * direction_yz.z);
+	vec3 direction_nrm = length(direction) > 0.0 ? normalize(direction) : vec3(0.0, 0.0, 1.0);
+	// Rotate spread to direction.
+	vec3 binormal = cross(vec3(0.0, 1.0, 0.0), direction_nrm);
+	if (length(binormal) < 0.0001) {
+		// Direction is parallel to Y. Choose Z as the binormal.
+		binormal = vec3(0.0, 0.0, 1.0);
+	}
+	binormal = normalize(binormal);
+	vec3 normal = cross(binormal, direction_nrm);
+	spread_direction = binormal * spread_direction.x + normal * spread_direction.y + direction_nrm * spread_direction.z;
+	return normalize(spread_direction);
+}
+
+vec3 process_radial_displacement(DynamicsParameters param, float lifetime, inout uint alt_seed, mat4 transform, mat4 emission_transform, float delta) {
+	vec3 radial_displacement = vec3(0.0);
+	if (delta < 0.001) {
+		return radial_displacement;
+	}
+	float radial_displacement_multiplier = 1.0;
+	vec3 global_pivot = (emission_transform * vec4(velocity_pivot, 1.0)).xyz;
+	if (length(transform[3].xyz - global_pivot) > 0.01) {
+		radial_displacement = normalize(transform[3].xyz - global_pivot) * radial_displacement_multiplier * param.radial_velocity;
+	} else {
+		radial_displacement = get_random_direction_from_spread(alt_seed, 360.0) * param.radial_velocity;
+	}
+	if (radial_displacement_multiplier * param.radial_velocity < 0.0) {
+		// Prevent inwards velocity to flicker once the point is reached.
+		radial_displacement = normalize(radial_displacement) * min(abs(radial_displacement_multiplier * param.radial_velocity), length(transform[3].xyz - global_pivot) / delta);
+	}
+	return radial_displacement;
+}
+
+void process_physical_parameters(inout PhysicalParameters params, float lifetime_percent) {
+}
+
+void start() {
+	uint base_number = NUMBER;
+	uint alt_seed = hash(base_number + uint(1) + RANDOM_SEED);
+	DisplayParameters params;
+	calculate_initial_display_params(params, alt_seed);
+	// Reset alt seed?
+	//alt_seed = hash(base_number + uint(1) + RANDOM_SEED);
+	DynamicsParameters dynamic_params;
+	calculate_initial_dynamics_params(dynamic_params, alt_seed);
+	PhysicalParameters physics_params;
+	calculate_initial_physical_params(physics_params, alt_seed);
+	process_display_param(params, 0.0);
+	if (rand_from_seed(alt_seed) > AMOUNT_RATIO) {
+		ACTIVE = false;
+	}
+
+	if (RESTART_CUSTOM) {
+		CUSTOM = vec4(0.0);
+		CUSTOM.w = params.lifetime;
+		CUSTOM.x = dynamic_params.angle;
+	}
+	if (RESTART_COLOR) {
+		COLOR = params.color;
+	}
+	if (RESTART_ROT_SCALE) {
+		TRANSFORM[0].xyz = vec3(1.0, 0.0, 0.0);
+		TRANSFORM[1].xyz = vec3(0.0, 1.0, 0.0);
+		TRANSFORM[2].xyz = vec3(0.0, 0.0, 1.0);
+	}
+	if (RESTART_POSITION) {
+		TRANSFORM[3].xyz = calculate_initial_position(params, alt_seed);
+		TRANSFORM = EMISSION_TRANSFORM * TRANSFORM;
+	}
+	if (RESTART_VELOCITY) {
+		VELOCITY = get_random_direction_from_spread(alt_seed, spread) * dynamic_params.initial_velocity_multiplier;
+	}
+
+	process_display_param(params, 0.0);
+
+	VELOCITY = (EMISSION_TRANSFORM * vec4(VELOCITY, 0.0)).xyz;
+	VELOCITY += EMITTER_VELOCITY * inherit_emitter_velocity_ratio;
+}
+
+void process() {
+	uint base_number = NUMBER;
+	//if (repeatable) {
+	//	base_number = INDEX;
+	//}
+	uint alt_seed = hash(base_number + uint(1) + RANDOM_SEED);
+	DisplayParameters params;
+	calculate_initial_display_params(params, alt_seed);
+	DynamicsParameters dynamic_params;
+	calculate_initial_dynamics_params(dynamic_params, alt_seed);
+	PhysicalParameters physics_params;
+	calculate_initial_physical_params(physics_params, alt_seed);
+
+	float pi = 3.14159;
+	float degree_to_rad = pi / 180.0;
+
+	CUSTOM.y += DELTA / LIFETIME;
+	CUSTOM.y = mix(CUSTOM.y, 1.0, INTERPOLATE_TO_END);
+	float lifetime_percent = CUSTOM.y / params.lifetime;
+	if (CUSTOM.y > CUSTOM.w) {
+		ACTIVE = false;
+	}
+
+	// Calculate all velocity.
+	vec3 controlled_displacement = vec3(0.0);
+	controlled_displacement += process_radial_displacement(dynamic_params, lifetime_percent, alt_seed, TRANSFORM, EMISSION_TRANSFORM, DELTA);
+
+	process_physical_parameters(physics_params, lifetime_percent);
+	vec3 force;
+	{
+		// Copied from previous version.
+		vec3 pos = TRANSFORM[3].xyz;
+		force = gravity;
+		// Apply linear acceleration.
+		force += length(VELOCITY) > 0.0 ? normalize(VELOCITY) * physics_params.linear_accel : vec3(0.0);
+		// Apply radial acceleration.
+		vec3 org = EMISSION_TRANSFORM[3].xyz;
+		vec3 diff = pos - org;
+		force += length(diff) > 0.0 ? normalize(diff) * physics_params.radial_accel : vec3(0.0);
+		// Apply tangential acceleration.
+		float tangent_accel_val = physics_params.tangent_accel;
+		vec3 crossDiff = cross(normalize(diff), normalize(gravity));
+		force += length(crossDiff) > 0.0 ? normalize(crossDiff) * tangent_accel_val : vec3(0.0);
+		force += ATTRACTOR_FORCE;
+		// Apply attractor forces.
+		VELOCITY += force * DELTA;
+	}
+	{
+		// Copied from previous version.
+		if (physics_params.damping > 0.0) {
+			float v = length(VELOCITY);
+			v -= physics_params.damping * DELTA;
+			if (v < 0.0) {
+				VELOCITY = vec3(0.0);
+			} else {
+				VELOCITY = normalize(VELOCITY) * v;
+			}
+		}
+	}
+
+	if (COLLIDED) {
+		ACTIVE = false;
+	}
+
+	// Turbulence before limiting.
+	vec3 final_velocity = controlled_displacement + VELOCITY;
+
+	TRANSFORM[3].xyz += final_velocity * DELTA;
+
+	process_display_param(params, lifetime_percent);
+
+	float base_angle = dynamic_params.angle;
+	base_angle += CUSTOM.y * LIFETIME * dynamic_params.angular_velocity;
+	CUSTOM.x = base_angle * degree_to_rad;
+	COLOR = params.color;
+
+	TRANSFORM[0].xyz = normalize(TRANSFORM[0].xyz);
+	TRANSFORM[1].xyz = normalize(TRANSFORM[1].xyz);
+	TRANSFORM[2].xyz = normalize(TRANSFORM[2].xyz);
+	float scale_sign_x = params.scale.x < 0.0 ? -1.0 : 1.0;
+	float scale_sign_y = params.scale.y < 0.0 ? -1.0 : 1.0;
+	float scale_sign_z = params.scale.z < 0.0 ? -1.0 : 1.0;
+	float scale_minimum = 0.001;
+	TRANSFORM[0].xyz *= scale_sign_x * max(abs(params.scale.x), scale_minimum);
+	TRANSFORM[1].xyz *= scale_sign_y * max(abs(params.scale.y), scale_minimum);
+	TRANSFORM[2].xyz *= scale_sign_z * max(abs(params.scale.z), scale_minimum);
+
+	CUSTOM.z = params.animation_offset + lifetime_percent * params.animation_speed;
+
+	if (CUSTOM.y > CUSTOM.w) {
+		ACTIVE = false;
+	}
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_355x1"]
+shader = SubResource("Shader_5ntoq")
+shader_parameter/direction = Vector3(1, -1, 0)
+shader_parameter/spread = 10.0
+shader_parameter/flatness = 0.0
+shader_parameter/inherit_emitter_velocity_ratio = 0.0
+shader_parameter/initial_linear_velocity_min = 5.0
+shader_parameter/initial_linear_velocity_max = 5.0
+shader_parameter/directional_velocity_min = 1.0
+shader_parameter/directional_velocity_max = 1.0
+shader_parameter/angular_velocity_min = 0.0
+shader_parameter/angular_velocity_max = 0.0
+shader_parameter/orbit_velocity_min = 0.0
+shader_parameter/orbit_velocity_max = 0.0
+shader_parameter/radial_velocity_min = 0.0
+shader_parameter/radial_velocity_max = 0.0
+shader_parameter/linear_accel_min = 0.0
+shader_parameter/linear_accel_max = 0.0
+shader_parameter/radial_accel_min = 0.0
+shader_parameter/radial_accel_max = 0.0
+shader_parameter/tangent_accel_min = 0.0
+shader_parameter/tangent_accel_max = 0.0
+shader_parameter/damping_min = 0.0
+shader_parameter/damping_max = 0.0
+shader_parameter/initial_angle_min = 0.0
+shader_parameter/initial_angle_max = 0.0
+shader_parameter/scale_min = 1.0
+shader_parameter/scale_max = 1.0
+shader_parameter/hue_variation_min = -0.27
+shader_parameter/hue_variation_max = -0.25000003
+shader_parameter/anim_speed_min = 0.0
+shader_parameter/anim_speed_max = 0.0
+shader_parameter/anim_offset_min = 0.0
+shader_parameter/anim_offset_max = 0.0
+shader_parameter/lifetime_randomness = 0.0
+shader_parameter/emission_shape_offset = Vector3(0, 0, 0)
+shader_parameter/emission_shape_scale = Vector3(1, 1, 1)
+shader_parameter/velocity_pivot = Vector3(0, 0, 0)
+shader_parameter/emission_box_extents = Vector3(20, 10, 20)
+shader_parameter/color_value = Color(0.29803923, 1, 1, 1)
+shader_parameter/gravity = Vector3(0, -9.8, 0)
+
+[sub_resource type="QuadMesh" id="QuadMesh_u1r2e"]
+size = Vector2(0.05, 0.5)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_436mn"]
 size = Vector3(1, 1.85632, 0.477539)
@@ -388,18 +785,22 @@ environment = SubResource("Environment_bxtjx")
 [node name="elevator" parent="." instance=ExtResource("4_hkc4b")]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0.39999998, 0)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.0117197, 1.98562, -7.057019)
-
-[node name="npc" type="StaticBody3D" parent="CSGBox3D"]
-script = ExtResource("5_m4s7b")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="CSGBox3D/npc"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0628662)
-shape = SubResource("BoxShape3D_fxr7e")
-
 [node name="player" parent="." instance=ExtResource("1_kd1f8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.9302, 1.60835, 0)
+
+[node name="rain" type="GPUParticles3D" parent="player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.9302, 15.00549, 0.8509722)
+material_override = SubResource("StandardMaterial3D_355x1")
+cast_shadow = 0
+amount = 8000
+lifetime = 1.3
+preprocess = 5.0
+collision_base_size = 0.0
+visibility_aabb = AABB(-25, -50, -25, 50, 50, 50)
+trail_enabled = true
+trail_lifetime = 0.01
+process_material = SubResource("ShaderMaterial_355x1")
+draw_pass_1 = SubResource("QuadMesh_u1r2e")
 
 [node name="uncharted" parent="." instance=ExtResource("7_m00pi")]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -6.9455876, 0.4149232, -0.77427036)
@@ -421,5 +822,1407 @@ libraries = {
 &"uncharted": SubResource("AnimationLibrary_u1r2e")
 }
 autoplay = "uncharted/uncharted_defualt2"
+
+[node name="rain collision" type="Node" parent="."]
+
+[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="rain collision"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.467804, 5.3507633, -38.85286)
+size = Vector3(14.726351, 5.2752037, 14.6687975)
+
+[node name="GPUParticlesCollisionBox3D2" type="GPUParticlesCollisionBox3D" parent="rain collision"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.52285767, 7.807584, -22.744368)
+size = Vector3(16.608948, 3.9106445, 14.608948)
+
+[node name="GPUParticlesCollisionBox3D3" type="GPUParticlesCollisionBox3D" parent="rain collision"]
+transform = Transform3D(0.9396926, 0, 0.34202012, 0, 1, 0, -0.34202012, 0, 0.9396926, 22.124119, 6.955991, -8.161451)
+size = Vector3(17.086609, 2.6984253, 12.739288)
+
+[node name="GPUParticlesCollisionBox3D4" type="GPUParticlesCollisionBox3D" parent="rain collision"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.241081, 28.96474, 32.242004)
+size = Vector3(13.693909, 14.3515625, 16.813263)
+
+[node name="GPUParticlesCollisionBox3D5" type="GPUParticlesCollisionBox3D" parent="rain collision"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.894114, 22.687214, 30.930916)
+size = Vector3(69.51965, 14.3515625, 19.43544)
+
+[node name="GPUParticlesCollisionBox3D6" type="GPUParticlesCollisionBox3D" parent="rain collision"]
+transform = Transform3D(-4.2658677e-08, -9.535344e-09, 1, -0.21814324, 0.97591674, 0, -0.97591674, -0.21814324, -4.371139e-08, 42.142143, 13.665686, 10.579707)
+size = Vector3(49.437775, 14.3515625, 19.43544)
+
+[node name="GPUParticlesCollisionBox3D7" type="GPUParticlesCollisionBox3D" parent="rain collision"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.49697, 8.768703, -7.8383217)
+size = Vector3(11.310802, 3.1649323, 8.832336)
+
+[node name="GPUParticlesCollisionBox3D8" type="GPUParticlesCollisionBox3D" parent="rain collision"]
+transform = Transform3D(0.8660254, 0, -0.5, 0, 1, 0, 0.5, 0, 0.8660254, 37.461605, 8.768703, -11.221354)
+size = Vector3(11.310802, 3.1649323, 8.832336)
+
+[node name="GPUParticlesCollisionBox3D9" type="GPUParticlesCollisionBox3D" parent="rain collision"]
+transform = Transform3D(0.96011335, 0, 0.2796112, 0, 1, 0, -0.2796112, 0, 0.96011335, 42.587955, 7.749184, -14.1806135)
+size = Vector3(14.287243, 2.9033813, 7.653885)
+
+[node name="GPUParticlesCollisionBox3D10" type="GPUParticlesCollisionBox3D" parent="rain collision"]
+transform = Transform3D(-0.86719245, 0, 0.49797302, 0, 1, 0, -0.49797302, 0, -0.86719245, 45.05984, 7.749184, -19.91102)
+size = Vector3(15.70722, 2.9033813, 20.054482)
+
+[node name="GPUParticlesCollisionBox3D11" type="GPUParticlesCollisionBox3D" parent="rain collision"]
+transform = Transform3D(-0.86719245, 0, 0.49797302, 0, 1, 0, -0.49797302, 0, -0.86719245, 29.951363, 7.749184, -32.66746)
+size = Vector3(16.252895, 2.9033813, 38.822666)
+
+[node name="GPUParticlesCollisionBox3D12" type="GPUParticlesCollisionBox3D" parent="rain collision"]
+transform = Transform3D(-0.86719245, 0, 0.49797302, 0, 1, 0, -0.49797302, 0, -0.86719245, 16.816235, 7.749184, -36.348232)
+size = Vector3(8.882307, 2.9033813, 26.101274)
+
+[node name="GPUParticlesCollisionBox3D13" type="GPUParticlesCollisionBox3D" parent="rain collision"]
+transform = Transform3D(-0.49844214, 0, -0.8669229, 0, 1, 0, 0.8669229, 0, -0.49844214, 11.152021, 7.749184, -40.361423)
+size = Vector3(12.743065, 2.9033813, 27.064198)
+
+[node name="GPUParticlesCollisionBox3D14" type="GPUParticlesCollisionBox3D" parent="rain collision"]
+transform = Transform3D(-0.49844214, 0, -0.8669229, 0, 1, 0, 0.8669229, 0, -0.49844214, 19.574303, 7.749184, -25.676596)
+size = Vector3(11.341598, 2.9033813, 16.834833)
+
+[node name="GPUParticlesCollisionBox3D15" type="GPUParticlesCollisionBox3D" parent="rain collision"]
+transform = Transform3D(0.01623106, 0, -0.9998683, 0, 1, 0, 0.9998683, 0, 0.01623106, 4.2585835, 7.749184, -43.847664)
+size = Vector3(7.004295, 2.9033813, 68.04442)
+
+[node name="GPUParticlesCollisionBox3D16" type="GPUParticlesCollisionBox3D" parent="rain collision"]
+transform = Transform3D(0.4621676, 0.4233215, -0.7792299, -0.11210569, 0.8995473, 0.4221933, 0.8796782, -0.107767746, 0.46319848, -34.93661, 17.957756, -19.973589)
+size = Vector3(7.601757, 11.573929, 43.891586)
+
+[node name="GPUParticlesCollisionBox3D17" type="GPUParticlesCollisionBox3D" parent="rain collision"]
+transform = Transform3D(0.4621676, 0.4233215, -0.7792299, -0.11210569, 0.8995473, 0.4221933, 0.8796782, -0.107767746, 0.46319848, -31.291473, 20.468016, -26.34127)
+size = Vector3(7.004295, 2.9033813, 50.556572)
+
+[node name="GPUParticlesCollisionBox3D18" type="GPUParticlesCollisionBox3D" parent="rain collision"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.038819075, 3.828762, -0.010311604)
+size = Vector3(3.6339688, 1.8562012, 3.857646)
+
+[node name="GPUParticlesCollisionBox3D19" type="GPUParticlesCollisionBox3D" parent="rain collision"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.43541, 12.607587, -39.23599)
+size = Vector3(14.798085, 12.701897, 15.430979)
+
+[node name="GPUParticlesCollisionBox3D20" type="GPUParticlesCollisionBox3D" parent="rain collision"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.606937, 18.284452, -39.06788)
+size = Vector3(14.696756, 7.3457184, 15.445928)
+
+[node name="GPUParticlesCollisionBox3D21" type="GPUParticlesCollisionBox3D" parent="rain collision"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.44757, 25.535751, -37.620888)
+size = Vector3(14.671742, 4.405754, 12.080419)
+
+[node name="Node" type="Node" parent="rain collision"]
+
+[node name="GPUParticlesCollisionBox3D16" type="GPUParticlesCollisionBox3D" parent="rain collision/Node"]
+transform = Transform3D(0.4621676, 0.4233215, -0.7792299, -0.11210569, 0.8995473, 0.4221933, 0.8796782, -0.107767746, 0.46319848, -10.134781, 6.0272207, -37.488068)
+size = Vector3(6.023657, 4.8553963, 14.57666)
+
+[node name="GPUParticlesCollisionBox3D17" type="GPUParticlesCollisionBox3D" parent="rain collision/Node"]
+transform = Transform3D(0.4621676, 0.4233215, -0.7792299, -0.11210569, 0.8995473, 0.4221933, 0.8796782, -0.107767746, 0.46319848, -10.210633, 7.78426, -37.632442)
+size = Vector3(5.69541, 4.8553963, 14.57666)
+
+[node name="GPUParticlesCollisionBox3D21" type="GPUParticlesCollisionBox3D" parent="rain collision/Node"]
+transform = Transform3D(0.7541941, 0, 0.6566516, 0, 1, 0, -0.6566516, 0, 0.7541941, -7.7047606, 3.5878997, -36.460556)
+size = Vector3(18.512905, 6.239132, 2.5976803)
+
+[node name="GPUParticlesCollisionBox3D22" type="GPUParticlesCollisionBox3D" parent="rain collision/Node"]
+transform = Transform3D(0.7541941, 0, 0.6566516, 0, 1, 0, -0.6566516, 0, 0.7541941, -20.642464, 3.5878997, -24.741169)
+size = Vector3(12.909206, 6.239132, 5.2624235)
+
+[node name="GPUParticlesCollisionBox3D11" type="GPUParticlesCollisionBox3D" parent="rain collision/Node"]
+transform = Transform3D(-0.4892452, 0, -0.8721462, 0, 1, 0, 0.8721462, 0, -0.4892452, 17.804825, 4.7466435, -37.129284)
+size = Vector3(13.700636, 8.908463, 30.79906)
+
+[node name="GPUParticlesCollisionBox3D12" type="GPUParticlesCollisionBox3D" parent="rain collision/Node"]
+transform = Transform3D(0.03655675, 0, -0.99933153, 0, 1, 0, 0.99933153, 0, 0.03655675, -0.7044295, 5.454098, -43.327957)
+size = Vector3(9.127376, 10.323372, 20.962814)
+
+[node name="GPUParticlesCollisionBox3D13" type="GPUParticlesCollisionBox3D" parent="rain collision/Node"]
+transform = Transform3D(0.44344687, 0, -0.8963006, 0, 1, 0, 0.8963006, 0, 0.44344687, -1.6340755, 4.7466435, -42.10419)
+size = Vector3(7.1070986, 8.908463, 13.714536)
+
+[node name="GPUParticlesCollisionBox3D14" type="GPUParticlesCollisionBox3D" parent="rain collision/Node"]
+transform = Transform3D(0.6323135, 0, -0.77471256, 0, 1, 0, 0.77471256, 0, 0.6323135, -3.3925877, 5.407516, -38.376812)
+size = Vector3(1.4101217, 10.416536, 27.363089)
+
+[node name="GPUParticlesCollisionBox3D15" type="GPUParticlesCollisionBox3D" parent="rain collision/Node"]
+transform = Transform3D(0.6323135, 0, -0.77471256, 0, 1, 0, 0.77471256, 0, 0.6323135, -9.526717, 5.407516, -31.677612)
+size = Vector3(4.032645, 10.416536, 9.386725)
+
+[node name="GPUParticlesCollisionBox3D18" type="GPUParticlesCollisionBox3D" parent="rain collision/Node"]
+transform = Transform3D(0.6323135, 0, -0.77471256, 0, 1, 0, 0.77471256, 0, 0.6323135, -21.803984, 4.6945114, -21.983307)
+size = Vector3(7.201277, 11.8425455, 9.386725)
+
+[node name="GPUParticlesCollisionBox3D19" type="GPUParticlesCollisionBox3D" parent="rain collision/Node"]
+transform = Transform3D(0.6323135, 0, -0.77471256, 0, 1, 0, 0.77471256, 0, 0.6323135, -21.038795, 10.228509, -24.124414)
+size = Vector3(4.8514667, 11.8425455, 13.280031)
+
+[node name="rainsound" type="Node" parent="."]
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="rainsound"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.880178, 0)
+stream = ExtResource("21_355x1")
+autoplay = true
+max_distance = 24.0
+
+[node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="rainsound"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.9335003, -34.300354)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 7.0
+
+[node name="AudioStreamPlayer3D3" type="AudioStreamPlayer3D" parent="rainsound"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.4046288, -8.769304)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 7.0
+
+[node name="AudioStreamPlayer3D4" type="AudioStreamPlayer3D" parent="rainsound"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.149741, 9.730618)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 7.0
+
+[node name="AudioStreamPlayer3D5" type="AudioStreamPlayer3D" parent="rainsound"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.395366, 7.203638, -0.021587372)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 7.0
+
+[node name="AudioStreamPlayer3D6" type="AudioStreamPlayer3D" parent="rainsound"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.858086, 7.2151585, -0.09836006)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 7.0
+
+[node name="AudioStreamPlayer3D7" type="AudioStreamPlayer3D" parent="rainsound"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, 45.07992, 4.3914957, -38.144753)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 5.0
+
+[node name="AudioStreamPlayer3D8" type="AudioStreamPlayer3D" parent="rainsound"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, 41.663338, 4.3914957, -32.8286)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 5.0
+
+[node name="AudioStreamPlayer3D9" type="AudioStreamPlayer3D" parent="rainsound"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, 38.345932, 4.3914957, -27.1022)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 5.0
+
+[node name="AudioStreamPlayer3D10" type="AudioStreamPlayer3D" parent="rainsound"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, 35.889465, 4.3914957, -22.0805)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 5.0
+
+[node name="AudioStreamPlayer3D11" type="AudioStreamPlayer3D" parent="rainsound"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, 32.3875, 4.3914957, -16.636284)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 5.0
+
+[node name="AudioStreamPlayer3D12" type="AudioStreamPlayer3D" parent="rainsound"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, 31.360249, 4.3914957, -14.375123)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 5.0
+
+[node name="AudioStreamPlayer3D13" type="AudioStreamPlayer3D" parent="rainsound"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -22.149326, 23.20375, 41.05575)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 15.0
+
+[node name="AudioStreamPlayer3D14" type="AudioStreamPlayer3D" parent="rainsound"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -60.1621, 27.402454, -12.397072)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 15.0
+
+[node name="AudioStreamPlayer3D15" type="AudioStreamPlayer3D" parent="rainsound"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -103.012764, -2.386795, -12.397072)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 54.77
+
+[node name="AudioStreamPlayer3D16" type="AudioStreamPlayer3D" parent="rainsound"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -81.69295, -40.24855, -12.397072)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 54.77
+
+[node name="AudioStreamPlayer3D17" type="AudioStreamPlayer3D" parent="rainsound"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -81.69295, -40.24855, -63.264103)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 54.77
+
+[node name="AudioStreamPlayer3D18" type="AudioStreamPlayer3D" parent="rainsound"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -81.69295, -40.24855, 28.703274)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 54.77
+
+[node name="AudioStreamPlayer3D19" type="AudioStreamPlayer3D" parent="rainsound"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -123.60518, -40.24855, -12.397072)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 54.77
+
+[node name="AudioStreamPlayer3D20" type="AudioStreamPlayer3D" parent="rainsound"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -1.5137348, -6.333, -75.022385)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 30.0
+
+[node name="AudioStreamPlayer3D21" type="AudioStreamPlayer3D" parent="rainsound"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, 21.92157, -6.333, -75.022385)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 30.0
+
+[node name="AudioStreamPlayer3D22" type="AudioStreamPlayer3D" parent="rainsound"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -21.80176, -6.333, -75.022385)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 30.0
+
+[node name="AudioStreamPlayer3D23" type="AudioStreamPlayer3D" parent="rainsound"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -1.5137348, -41.35376, -75.022385)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 30.0
+
+[node name="AudioStreamPlayer3D24" type="AudioStreamPlayer3D" parent="rainsound"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -1.5137348, -40.99396, -50.47282)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 30.0
+
+[node name="AudioStreamPlayer3D25" type="AudioStreamPlayer3D" parent="rainsound"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, 73.786354, -6.333, -21.21656)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 30.0
+
+[node name="AudioStreamPlayer3D26" type="AudioStreamPlayer3D" parent="rainsound"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, 72.97618, -6.333, 0.03643036)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 30.0
+
+[node name="AudioStreamPlayer3D27" type="AudioStreamPlayer3D" parent="rainsound"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, 73.786354, -6.333, -40.04515)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 30.0
+
+[node name="AudioStreamPlayer3D28" type="AudioStreamPlayer3D" parent="rainsound"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, 97.352936, -6.333, -21.21656)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 30.0
+
+[node name="AudioStreamPlayer3D29" type="AudioStreamPlayer3D" parent="rainsound"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, 73.786354, -34.419807, -21.21656)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 30.0
+
+[node name="AudioStreamPlayer3D30" type="AudioStreamPlayer3D" parent="rainsound"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, 54.75698, -35.029613, -21.21656)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 30.0
+
+[node name="Node2" type="Node" parent="rainsound"]
+
+[node name="Node" type="Node" parent="rainsound/Node2"]
+
+[node name="AudioStreamPlayer3D36" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -31.393509, 4.3914957, -30.292938)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D31" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -34.222855, 4.3914957, -30.292938)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D32" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -37.024246, 4.3914957, -30.292938)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D33" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -39.177364, 4.3914957, -30.292938)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D34" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -41.521725, 4.3914957, -30.292938)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D35" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -44.18525, 4.3914957, -30.292938)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D37" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -47.0208, 4.3914957, -30.292938)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D38" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -31.393509, 4.3914957, -32.63176)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D39" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -31.393509, 4.3914957, -35.121483)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D40" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -31.393509, 4.3914957, -37.590977)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D41" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -31.393509, 4.3914957, -40.180115)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D42" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -31.393509, 4.3914957, -43.793903)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D43" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -31.393509, 4.3914957, -46.79898)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D44" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -33.399174, 4.3914957, -47.59344)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D45" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -36.057865, 4.3914957, -47.59344)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D46" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -38.46022, 4.3914957, -47.59344)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D47" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -40.735985, 4.3914957, -47.59344)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D48" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -43.41429, 4.3914957, -47.59344)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D49" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -45.597122, 4.3914957, -47.59344)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D50" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -47.385365, 4.3914957, -46.779747)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D51" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -47.385365, 4.3914957, -44.514446)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D52" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -47.385365, 4.3914957, -42.310455)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D53" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -47.385365, 4.3914957, -40.23877)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D54" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -47.385365, 4.3914957, -37.732243)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D55" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -47.385365, 4.3914957, -35.382538)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D56" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -47.385365, 4.3914957, -33.033752)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="Node2" type="Node3D" parent="rainsound/Node2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.714099, 0)
+
+[node name="AudioStreamPlayer3D36" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node2"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -31.393509, 4.3914957, -30.292938)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D31" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node2"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -34.222855, 4.3914957, -30.292938)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D32" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node2"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -37.024246, 4.3914957, -30.292938)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D33" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node2"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -39.177364, 4.3914957, -30.292938)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D34" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node2"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -41.521725, 4.3914957, -30.292938)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D35" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node2"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -44.18525, 4.3914957, -30.292938)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D37" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node2"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -47.0208, 4.3914957, -30.292938)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D38" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node2"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -31.393509, 4.3914957, -32.63176)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D39" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node2"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -31.393509, 4.3914957, -35.121483)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D40" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node2"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -31.393509, 4.3914957, -37.590977)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D41" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node2"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -31.393509, 4.3914957, -40.180115)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D42" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node2"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -31.393509, 4.3914957, -43.793903)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D43" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node2"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -31.393509, 4.3914957, -46.79898)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D44" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node2"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -33.399174, 4.3914957, -47.59344)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D45" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node2"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -36.057865, 4.3914957, -47.59344)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D46" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node2"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -38.46022, 4.3914957, -47.59344)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D47" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node2"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -40.735985, 4.3914957, -47.59344)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D48" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node2"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -43.41429, 4.3914957, -47.59344)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D49" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node2"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -45.597122, 4.3914957, -47.59344)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D50" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node2"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -47.385365, 4.3914957, -46.779747)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D51" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node2"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -47.385365, 4.3914957, -44.514446)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D52" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node2"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -47.385365, 4.3914957, -42.310455)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D53" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node2"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -47.385365, 4.3914957, -40.23877)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D54" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node2"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -47.385365, 4.3914957, -37.732243)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D55" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node2"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -47.385365, 4.3914957, -35.382538)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D56" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node2"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -47.385365, 4.3914957, -33.033752)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="Node3" type="Node3D" parent="rainsound/Node2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.664327, 0)
+
+[node name="AudioStreamPlayer3D36" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node3"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -31.393509, 4.3914957, -30.292938)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D31" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node3"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -34.222855, 4.3914957, -30.292938)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D32" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node3"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -37.024246, 4.3914957, -30.292938)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D33" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node3"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -39.177364, 4.3914957, -30.292938)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D34" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node3"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -41.521725, 4.3914957, -30.292938)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D35" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node3"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -44.18525, 4.3914957, -30.292938)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D37" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node3"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -47.0208, 4.3914957, -30.292938)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D38" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node3"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -31.393509, 4.3914957, -32.63176)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D39" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node3"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -31.393509, 4.3914957, -35.121483)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D40" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node3"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -31.393509, 4.3914957, -37.590977)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D41" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node3"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -31.393509, 4.3914957, -40.180115)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D42" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node3"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -31.393509, 4.3914957, -43.793903)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D43" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node3"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -31.393509, 4.3914957, -46.79898)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D44" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node3"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -33.399174, 4.3914957, -47.59344)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D45" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node3"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -36.057865, 4.3914957, -47.59344)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D46" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node3"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -38.46022, 4.3914957, -47.59344)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D47" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node3"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -40.735985, 4.3914957, -47.59344)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D48" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node3"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -43.41429, 4.3914957, -47.59344)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D49" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node3"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -45.597122, 4.3914957, -47.59344)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D50" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node3"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -47.385365, 4.3914957, -46.779747)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D51" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node3"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -47.385365, 4.3914957, -44.514446)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D52" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node3"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -47.385365, 4.3914957, -42.310455)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D53" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node3"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -47.385365, 4.3914957, -40.23877)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D54" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node3"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -47.385365, 4.3914957, -37.732243)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D55" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node3"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -47.385365, 4.3914957, -35.382538)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D56" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node3"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -47.385365, 4.3914957, -33.033752)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="Node4" type="Node3D" parent="rainsound/Node2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.902123, 0)
+
+[node name="AudioStreamPlayer3D36" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node4"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -31.393509, 4.3914957, -30.292938)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D31" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node4"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -34.222855, 4.3914957, -30.292938)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D32" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node4"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -37.024246, 4.3914957, -30.292938)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D33" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node4"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -39.177364, 4.3914957, -30.292938)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D34" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node4"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -41.521725, 4.3914957, -30.292938)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D35" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node4"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -44.18525, 4.3914957, -30.292938)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D37" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node4"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -47.0208, 4.3914957, -30.292938)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D38" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node4"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -31.393509, 4.3914957, -32.63176)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D39" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node4"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -31.393509, 4.3914957, -35.121483)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D40" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node4"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -31.393509, 4.3914957, -37.590977)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D41" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node4"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -31.393509, 4.3914957, -40.180115)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D42" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node4"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -31.393509, 4.3914957, -43.793903)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D43" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node4"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -31.393509, 4.3914957, -46.79898)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D44" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node4"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -33.399174, 4.3914957, -47.59344)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D45" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node4"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -36.057865, 4.3914957, -47.59344)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D46" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node4"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -38.46022, 4.3914957, -47.59344)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D47" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node4"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -40.735985, 4.3914957, -47.59344)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D48" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node4"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -43.41429, 4.3914957, -47.59344)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D49" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node4"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -45.597122, 4.3914957, -47.59344)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D50" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node4"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -47.385365, 4.3914957, -46.779747)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D51" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node4"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -47.385365, 4.3914957, -44.514446)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D52" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node4"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -47.385365, 4.3914957, -42.310455)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D53" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node4"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -47.385365, 4.3914957, -40.23877)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D54" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node4"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -47.385365, 4.3914957, -37.732243)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D55" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node4"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -47.385365, 4.3914957, -35.382538)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D56" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node4"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -47.385365, 4.3914957, -33.033752)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="Node5" type="Node3D" parent="rainsound/Node2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15.254865, 0)
+
+[node name="AudioStreamPlayer3D36" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node5"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -31.393509, 4.3914957, -30.292938)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D31" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node5"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -34.222855, 4.3914957, -30.292938)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D32" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node5"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -37.024246, 4.3914957, -30.292938)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D33" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node5"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -39.177364, 4.3914957, -30.292938)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D34" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node5"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -41.521725, 4.3914957, -30.292938)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D35" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node5"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -44.18525, 4.3914957, -30.292938)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D37" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node5"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -47.0208, 4.3914957, -30.292938)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D38" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node5"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -31.393509, 4.3914957, -32.63176)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D39" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node5"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -31.393509, 4.3914957, -35.121483)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D40" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node5"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -31.393509, 4.3914957, -37.590977)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D41" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node5"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -31.393509, 4.3914957, -40.180115)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D42" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node5"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -31.393509, 4.3914957, -43.793903)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D43" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node5"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -31.393509, 4.3914957, -46.79898)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D44" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node5"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -33.399174, 4.3914957, -47.59344)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D45" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node5"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -36.057865, 4.3914957, -47.59344)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D46" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node5"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -38.46022, 4.3914957, -47.59344)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D47" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node5"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -40.735985, 4.3914957, -47.59344)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D48" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node5"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -43.41429, 4.3914957, -47.59344)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D49" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node5"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -45.597122, 4.3914957, -47.59344)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D50" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node5"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -47.385365, 4.3914957, -46.779747)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D51" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node5"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -47.385365, 4.3914957, -44.514446)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D52" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node5"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -47.385365, 4.3914957, -42.310455)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D53" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node5"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -47.385365, 4.3914957, -40.23877)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D54" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node5"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -47.385365, 4.3914957, -37.732243)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D55" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node5"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -47.385365, 4.3914957, -35.382538)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D56" type="AudioStreamPlayer3D" parent="rainsound/Node2/Node5"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -47.385365, 4.3914957, -33.033752)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D36" type="AudioStreamPlayer3D" parent="rainsound/Node2"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -40.275204, 31.41006, -38.845333)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 7.0
+
+[node name="AudioStreamPlayer3D37" type="AudioStreamPlayer3D" parent="rainsound/Node2"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -43.548702, 29.268072, -42.867237)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D38" type="AudioStreamPlayer3D" parent="rainsound/Node2"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -35.6788, 29.268072, -42.867237)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D39" type="AudioStreamPlayer3D" parent="rainsound/Node2"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -35.6788, 29.268072, -35.310486)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D40" type="AudioStreamPlayer3D" parent="rainsound/Node2"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -43.166046, 29.268072, -35.310486)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D41" type="AudioStreamPlayer3D" parent="rainsound/Node2"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -35.6788, 27.683788, -43.819714)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 2.0
+
+[node name="AudioStreamPlayer3D42" type="AudioStreamPlayer3D" parent="rainsound/Node2"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -37.45047, 26.72849, -43.819714)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 2.0
+
+[node name="AudioStreamPlayer3D43" type="AudioStreamPlayer3D" parent="rainsound/Node2"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -39.564934, 24.799854, -43.819714)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 2.0
+
+[node name="AudioStreamPlayer3D44" type="AudioStreamPlayer3D" parent="rainsound/Node2"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -44.22371, 22.425085, -43.819714)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 2.0
+
+[node name="AudioStreamPlayer3D45" type="AudioStreamPlayer3D" parent="rainsound/Node2"]
+transform = Transform3D(-0.5440598, -0.46625036, 0.6975741, 0.7812159, 0.021821253, 0.6238797, -0.30610603, 0.8843837, 0.35237, -42.433357, 22.425085, -43.819714)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 2.0
+
+[node name="AudioStreamPlayer3D33" type="AudioStreamPlayer3D" parent="rainsound/Node2"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -15.236625, 3.5022044, -29.95098)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D34" type="AudioStreamPlayer3D" parent="rainsound/Node2"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -17.071053, 3.5022044, -32.513435)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D35" type="AudioStreamPlayer3D" parent="rainsound/Node2"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -17.071053, 7.7566433, -32.85466)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D46" type="AudioStreamPlayer3D" parent="rainsound/Node2"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -21.782274, 3.5022044, -39.7124)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D47" type="AudioStreamPlayer3D" parent="rainsound/Node2"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -20.850035, 3.5022044, -37.966194)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D48" type="AudioStreamPlayer3D" parent="rainsound/Node2"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -19.418732, 3.5022044, -35.718285)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D31" type="AudioStreamPlayer3D" parent="rainsound"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -9.379819, 5.4455504, -19.14874)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 5.0
+
+[node name="AudioStreamPlayer3D32" type="AudioStreamPlayer3D" parent="rainsound"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -11.307368, 5.4455504, -22.144836)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 5.0
+
+[node name="AudioStreamPlayer3D33" type="AudioStreamPlayer3D" parent="rainsound"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -13.74922, 3.5700197, -25.883612)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
 
 [connection signal="body_entered" from="base/worldtrigger/Area3D" to="base/worldtrigger" method="_on_area_3d_body_entered"]
