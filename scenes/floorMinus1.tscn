@@ -17,8 +17,8 @@
 [ext_resource type="Animation" uid="uid://b4fhx6ggmvn7y" path="res://ch/uncharted_defualt.res" id="12_b0nub"]
 [ext_resource type="Animation" uid="uid://blei1y5ogg7v4" path="res://ch/uncharted_talk1.res" id="13_3csqn"]
 [ext_resource type="Animation" uid="uid://b4qs6dh3f3s5x" path="res://ch/uncharted_talk2.res" id="14_5ntoq"]
-[ext_resource type="Animation" uid="uid://b6rpg0eorownq" path="res://ch/uncharted_talk.res" id="15_355x1"]
-[ext_resource type="Animation" uid="uid://dvc866ytvafph" path="res://ch/uncharted_up.res" id="16_xoreq"]
+[ext_resource type="Animation" uid="uid://sfonbmpocqqr" path="res://ch/uncharted_talk.res" id="15_355x1"]
+[ext_resource type="Animation" uid="uid://dv18mqmchrs1e" path="res://ch/uncharted_up.res" id="16_xoreq"]
 [ext_resource type="AudioStream" uid="uid://dqpdkbvh5jvft" path="res://sounds/calming-rain-257596.mp3" id="21_355x1"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_1isue"]
