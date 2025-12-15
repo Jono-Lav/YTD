@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://dsrlc6ahj5y64"]
+[gd_scene load_steps=57 format=3 uid="uid://dsrlc6ahj5y64"]
 
 [ext_resource type="Script" uid="uid://kwls3tm2km6y" path="res://scripts/floor_minus_1.gd" id="1_4ksma"]
 [ext_resource type="PackedScene" uid="uid://52yhuvw6pq3x" path="res://scenes/player.tscn" id="1_kd1f8"]
@@ -20,6 +20,15 @@
 [ext_resource type="Animation" uid="uid://sfonbmpocqqr" path="res://ch/uncharted_talk.res" id="15_355x1"]
 [ext_resource type="Animation" uid="uid://dv18mqmchrs1e" path="res://ch/uncharted_up.res" id="16_xoreq"]
 [ext_resource type="AudioStream" uid="uid://dqpdkbvh5jvft" path="res://sounds/calming-rain-257596.mp3" id="21_355x1"]
+[ext_resource type="AudioStream" uid="uid://dnukliy4fq3cy" path="res://sounds/YTD OST 10 - falling in grey.mp3" id="21_xoreq"]
+[ext_resource type="PackedScene" uid="uid://c7jpb7j6qoajd" path="res://ch/door.gltf" id="22_xoreq"]
+[ext_resource type="Script" uid="uid://dnria2eb5hms4" path="res://scenes/door_2.gd" id="23_ok0nq"]
+[ext_resource type="Animation" uid="uid://tvtkg5lhcy5r" path="res://ch/close.res" id="23_ufqce"]
+[ext_resource type="Animation" uid="uid://chbnrh2b4rwia" path="res://ch/open.res" id="24_q0ac8"]
+[ext_resource type="AudioStream" uid="uid://bcd35vyjh8j5n" path="res://sounds/opening-door-450444.mp3" id="25_q0ac8"]
+[ext_resource type="AudioStream" uid="uid://dfuxfdynimb4b" path="res://sounds/close-door-382723.mp3" id="26_yhvct"]
+[ext_resource type="Script" uid="uid://cy8y06edjetrx" path="res://scripts/boxanimationtestforytonayancoliide.gd" id="28_e2iij"]
+[ext_resource type="Script" uid="uid://7qorx0e366ax" path="res://scenes/boxgoesup.gd" id="28_fxn7s"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_1isue"]
 material = ExtResource("3_2i47q")
@@ -28,6 +37,15 @@ material = ExtResource("3_2i47q")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_a4sek"]
 size = Vector3(429.699, 0.027832, 420.253)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yhvct"]
+_data = {
+&"close": ExtResource("23_ufqce"),
+&"open": ExtResource("24_q0ac8")
+}
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ok0nq"]
+size = Vector3(1.0110474, 1.6550293, 0.27565002)
 
 [sub_resource type="Sky" id="Sky_aya1g"]
 
@@ -454,6 +472,146 @@ _data = {
 &"uncharted_up": ExtResource("16_xoreq")
 }
 
+[sub_resource type="BoxMesh" id="BoxMesh_d5m8q"]
+material = ExtResource("2_b0nub")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fxn7s"]
+
+[sub_resource type="Animation" id="Animation_fxn7s"]
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(3.826145, 0.60478055, 3.9113467), Vector3(3.826145, 38.079666, 3.9113467)]
+}
+
+[sub_resource type="Animation" id="Animation_d5m8q"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(3.826145, 0.60365605, 3.9113467)]
+}
+
+[sub_resource type="Animation" id="Animation_e2iij"]
+resource_name = "expendUp"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(3.826145, 38.079666, 3.9113467), Vector3(3.826145, 0.6070729, 3.9113467)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jtm42"]
+_data = {
+&"RESET": SubResource("Animation_d5m8q"),
+&"return": SubResource("Animation_e2iij"),
+&"up": SubResource("Animation_fxn7s")
+}
+
+[sub_resource type="BoxMesh" id="BoxMesh_fxn7s"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_d5m8q"]
+
+[sub_resource type="Animation" id="Animation_cr4eu"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 2.24258, 11.1198)]
+}
+
+[sub_resource type="Animation" id="Animation_0y7t5"]
+resource_name = "expand"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 2.24258, 11.1198), Vector3(0, 2.24258, 2.01202)]
+}
+
+[sub_resource type="Animation" id="Animation_nhbky"]
+resource_name = "returnback"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 2.24258, 2.01202), Vector3(0, 2.243, 11.12)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jtoug"]
+_data = {
+&"RESET": SubResource("Animation_cr4eu"),
+&"expand": SubResource("Animation_0y7t5"),
+&"returnback": SubResource("Animation_nhbky")
+}
+
 [node name="floorMinus1" type="Node3D"]
 script = ExtResource("1_4ksma")
 
@@ -488,9 +646,15 @@ size = Vector3(55.239136, 15.399841, 22.687927)
 material = ExtResource("2_b0nub")
 
 [node name="CSGHouse5" type="CSGBox3D" parent="base/walls/CSGBox3D3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.092583, 0.28878403, 16.534185)
+transform = Transform3D(0.8754331, 0, 0, 0, 1, 0, 0, 0, 1, 28.280228, 0.28878403, 16.81742)
 operation = 2
-size = Vector3(7.10791, 24.89746, 6.246338)
+size = Vector3(5.523, 24.897, 5.523)
+material = ExtResource("2_b0nub")
+
+[node name="CSGHouse6" type="CSGBox3D" parent="base/walls/CSGBox3D3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.400814, -10.921441, 13.151765)
+operation = 2
+size = Vector3(1.4906533, 2.4173129, 3)
 material = ExtResource("2_b0nub")
 
 [node name="CSGHouse2" type="CSGBox3D" parent="base/walls/CSGBox3D3"]
@@ -589,9 +753,9 @@ size = Vector3(39.769108, 5.751404, 4.415039)
 material = ExtResource("2_b0nub")
 
 [node name="CSGBox3D17" type="CSGBox3D" parent="base/walls/CSGBox3D3"]
-transform = Transform3D(0.99998844, -0.004799634, -3.0793565e-08, 0.004799634, 0.99998844, -3.5760195e-10, 3.0794922e-08, 2.0980045e-10, 1, 28.428463, -9.469407, -16.02171)
+transform = Transform3D(0.99998844, -0.004799634, -3.0793565e-08, 0.004799634, 0.99998844, -3.5760195e-10, 3.0794922e-08, 2.0980045e-10, 1, 28.428463, -9.469407, -16.542627)
 operation = 2
-size = Vector3(4.9372883, 5.751404, 59.04184)
+size = Vector3(4.9372883, 5.751404, 58)
 material = ExtResource("2_b0nub")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="base/walls/CSGBox3D3"]
@@ -778,6 +942,41 @@ size = Vector3(2.1245756, 6.6723127, 7.8731594)
 step_count = 8
 material = ExtResource("3_2i47q")
 metadata/_custom_type_script = "uid://m2fvd5j6jd46"
+
+[node name="door2" type="StaticBody3D" parent="base"]
+transform = Transform3D(-6.556708e-08, 0, 1.5, 0, 1.5, 0, -1.5, 0, -6.556708e-08, -15.229261, 9.56316, 28.76665)
+script = ExtResource("23_ok0nq")
+
+[node name="Close" type="AudioStreamPlayer3D" parent="base/door2"]
+transform = Transform3D(0.6666667, 0, 0, 0, 0.6666667, 0, 0, 0, 0.6666667, 0.18214989, 0.93745166, 1.7410374)
+stream = ExtResource("26_yhvct")
+volume_db = 80.0
+unit_size = 0.1
+max_distance = 3.0
+parameters/looping = false
+
+[node name="Open" type="AudioStreamPlayer3D" parent="base/door2"]
+transform = Transform3D(0.6666667, 0, 0, 0, 0.6666667, 0, 0, 0, 0.6666667, 0.18214989, 0.93745166, 1.7410374)
+stream = ExtResource("25_q0ac8")
+volume_db = 80.0
+unit_size = 0.1
+max_distance = 3.0
+parameters/looping = false
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="base/door2"]
+root_node = NodePath("../door")
+libraries = {
+&"": SubResource("AnimationLibrary_yhvct")
+}
+
+[node name="door" parent="base/door2" instance=ExtResource("22_xoreq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.21843147, 1.4901161e-07, 1.2714443)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="base/door2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.21798182, 0.8027945, 1.6527667)
+shape = SubResource("BoxShape3D_ok0nq")
+
+[node name="staircase" type="Node" parent="base"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_bxtjx")
@@ -2224,5 +2423,72 @@ stream = ExtResource("21_355x1")
 max_db = 0.2
 autoplay = true
 max_distance = 3.0
+
+[node name="ambiance" type="Node3D" parent="."]
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="ambiance"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 90, 30, 0)
+stream = ExtResource("21_xoreq")
+volume_db = 80.0
+autoplay = true
+max_distance = 503.08
+parameters/looping = true
+
+[node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="ambiance"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -90, 30, 0)
+stream = ExtResource("21_xoreq")
+volume_db = 80.0
+autoplay = true
+max_distance = 503.08
+parameters/looping = true
+
+[node name="AudioStreamPlayer3D3" type="AudioStreamPlayer3D" parent="ambiance"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 30, 90)
+stream = ExtResource("21_xoreq")
+volume_db = 80.0
+autoplay = true
+max_distance = 503.08
+parameters/looping = true
+
+[node name="AudioStreamPlayer3D4" type="AudioStreamPlayer3D" parent="ambiance"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 30, -90)
+stream = ExtResource("21_xoreq")
+volume_db = 80.0
+autoplay = true
+max_distance = 503.08
+parameters/looping = true
+
+[node name="boxgoesup" type="StaticBody3D" parent="."]
+transform = Transform3D(3.826145, 0, 0, 0, 0.60365605, 0, 0, 0, 3.9113467, -17.704872, 9.279563, 28.269257)
+script = ExtResource("28_fxn7s")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="boxgoesup"]
+mesh = SubResource("BoxMesh_d5m8q")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="boxgoesup"]
+shape = SubResource("BoxShape3D_fxn7s")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="boxgoesup"]
+libraries = {
+&"": SubResource("AnimationLibrary_jtm42")
+}
+
+[node name="boxanimationtestforytonayancoliide" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.24258, 11.1198)
+script = ExtResource("28_e2iij")
+id = "wdadw"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="boxanimationtestforytonayancoliide"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.12792, 0)
+mesh = SubResource("BoxMesh_fxn7s")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="boxanimationtestforytonayancoliide"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.128, 0)
+shape = SubResource("BoxShape3D_d5m8q")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="boxanimationtestforytonayancoliide"]
+libraries = {
+&"": SubResource("AnimationLibrary_jtoug")
+}
 
 [connection signal="body_entered" from="base/worldtrigger/Area3D" to="base/worldtrigger" method="_on_area_3d_body_entered"]

@@ -977,7 +977,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.12792, 0)
 mesh = SubResource("BoxMesh_k5blj")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="boxanimationtestforytonayancoliide"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 63.2374, -1.14625, -140.33296)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.128, 0)
 shape = SubResource("BoxShape3D_xs7gn")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="boxanimationtestforytonayancoliide"]

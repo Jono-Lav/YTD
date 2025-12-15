@@ -502,7 +502,7 @@ shape = SubResource("BoxShape3D_o4jy3")
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="ambiance"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 90, 30, 0)
 stream = ExtResource("5_cfbsb")
-volume_db = -20.0
+volume_db = -10.0
 autoplay = true
 max_distance = 503.08
 parameters/looping = true
@@ -510,7 +510,7 @@ parameters/looping = true
 [node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="ambiance"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -90, 30, 0)
 stream = ExtResource("5_cfbsb")
-volume_db = -20.0
+volume_db = -10.0
 autoplay = true
 max_distance = 503.08
 parameters/looping = true
@@ -518,7 +518,7 @@ parameters/looping = true
 [node name="AudioStreamPlayer3D3" type="AudioStreamPlayer3D" parent="ambiance"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 30, 90)
 stream = ExtResource("5_cfbsb")
-volume_db = -20.0
+volume_db = -10.0
 autoplay = true
 max_distance = 503.08
 parameters/looping = true
@@ -526,7 +526,7 @@ parameters/looping = true
 [node name="AudioStreamPlayer3D4" type="AudioStreamPlayer3D" parent="ambiance"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 30, -90)
 stream = ExtResource("5_cfbsb")
-volume_db = -20.0
+volume_db = -10.0
 autoplay = true
 max_distance = 503.08
 parameters/looping = true
