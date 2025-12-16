@@ -23,8 +23,8 @@
 [ext_resource type="AudioStream" uid="uid://dnukliy4fq3cy" path="res://sounds/YTD OST 10 - falling in grey.mp3" id="21_xoreq"]
 [ext_resource type="PackedScene" uid="uid://c7jpb7j6qoajd" path="res://ch/door.gltf" id="22_xoreq"]
 [ext_resource type="Script" uid="uid://dnria2eb5hms4" path="res://scenes/door_2.gd" id="23_ok0nq"]
-[ext_resource type="Animation" uid="uid://id1tchlw3ypy" path="res://ch/close.res" id="23_ufqce"]
-[ext_resource type="Animation" uid="uid://djax6ns2h5ned" path="res://ch/open.res" id="24_q0ac8"]
+[ext_resource type="Animation" uid="uid://tvtkg5lhcy5r" path="res://ch/close.res" id="23_ufqce"]
+[ext_resource type="Animation" uid="uid://chbnrh2b4rwia" path="res://ch/open.res" id="24_q0ac8"]
 [ext_resource type="AudioStream" uid="uid://bcd35vyjh8j5n" path="res://sounds/opening-door-450444.mp3" id="25_q0ac8"]
 [ext_resource type="AudioStream" uid="uid://dfuxfdynimb4b" path="res://sounds/close-door-382723.mp3" id="26_yhvct"]
 [ext_resource type="Script" uid="uid://cy8y06edjetrx" path="res://scripts/boxanimationtestforytonayancoliide.gd" id="28_e2iij"]
@@ -477,6 +477,21 @@ material = ExtResource("2_b0nub")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fxn7s"]
 
+[sub_resource type="Animation" id="Animation_fxn7s"]
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(3.826145, 0.60478055, 3.9113467), Vector3(3.826145, 38.079666, 3.9113467)]
+}
+
 [sub_resource type="Animation" id="Animation_d5m8q"]
 length = 0.001
 tracks/0/type = "value"
@@ -506,21 +521,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(3.826145, 38.079666, 3.9113467), Vector3(3.826145, 0.6070729, 3.9113467)]
-}
-
-[sub_resource type="Animation" id="Animation_fxn7s"]
-length = 3.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(3.826145, 0.60478055, 3.9113467), Vector3(3.826145, 38.079666, 3.9113467)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jtm42"]
