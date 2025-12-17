@@ -1,0 +1,193 @@
+[gd_scene load_steps=18 format=3 uid="uid://3mtq4t2aqihn"]
+
+[ext_resource type="Script" uid="uid://cpg1brqwwsa1w" path="res://scripts/world_of_the_red_reaper.gd" id="1_r05e7"]
+[ext_resource type="Material" uid="uid://4je282kb6mc0" path="res://mateirals/new_standard_material_3d.tres" id="3_3lylj"]
+[ext_resource type="AudioStream" uid="uid://c1fd6p8ue7c5l" path="res://sounds/dreamcore1.mp3" id="6_h5wgc"]
+[ext_resource type="Material" uid="uid://hr56nmjvnygi" path="res://mateirals/sky.tres" id="7_e4pu7"]
+[ext_resource type="Material" uid="uid://c4b126vb32am0" path="res://mateirals/purple_blue2.tres" id="7_g7j7w"]
+[ext_resource type="Material" uid="uid://ddklpnmrxnfwb" path="res://mateirals/wall_floorm1.tres" id="7_h5dq3"]
+[ext_resource type="PackedScene" uid="uid://dri3kr5mx0q0h" path="res://scenes/tree2.tscn" id="8_g7j7w"]
+[ext_resource type="PackedScene" uid="uid://52yhuvw6pq3x" path="res://scenes/player.tscn" id="16_786nx"]
+[ext_resource type="PackedScene" uid="uid://c01y3etcpyc1q" path="res://scenes/vhs_shader.tscn" id="17_1rpe8"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_e4pu7"]
+sky_top_color = Color(0.32394, 0.386921, 0.474528, 1)
+sky_horizon_color = Color(0.62354, 0.632419, 0.646347, 1)
+sky_energy_multiplier = 0.75
+ground_bottom_color = Color(0.170219, 0.142756, 0.11086, 1)
+ground_horizon_color = Color(0.62354, 0.632419, 0.646347, 1)
+
+[sub_resource type="Sky" id="Sky_ob8np"]
+sky_material = SubResource("ProceduralSkyMaterial_e4pu7")
+
+[sub_resource type="Environment" id="Environment_g7j7w"]
+background_mode = 1
+background_color = Color(0.191837, 0.21434, 0.316836, 1)
+background_canvas_max_layer = 2
+sky = SubResource("Sky_ob8np")
+tonemap_mode = 2
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.167
+volumetric_fog_albedo = Color(0.26605102, 0.24480894, 0.45250967, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_xyyk7"]
+material = ExtResource("3_3lylj")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ialsg"]
+
+[sub_resource type="Animation" id="Animation_nsl1i"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Transition/ColorRect:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_72yv4"]
+resource_name = "fade_in"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Transition/ColorRect:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_w5nik"]
+_data = {
+&"RESET": SubResource("Animation_nsl1i"),
+&"fade_in": SubResource("Animation_72yv4")
+}
+
+[node name="uncharted_orb" type="Node3D"]
+script = ExtResource("1_r05e7")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_g7j7w")
+
+[node name="Baseplate" type="StaticBody3D" parent="."]
+transform = Transform3D(2.178, 0, 0, 0, 1, 0, 0, 0, 2.2, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Baseplate"]
+transform = Transform3D(100, 0, 0, 0, 1, 0, 0, 0, 100, 0.0149255, -0.0892792, 0.0705733)
+material_override = ExtResource("7_g7j7w")
+mesh = SubResource("BoxMesh_xyyk7")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Baseplate"]
+transform = Transform3D(100, 0, 0, 0, 1, 0, 0, 0, 100, 0, 0, 0)
+shape = SubResource("BoxShape3D_ialsg")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.6957, 0.718333, 0, -0.718333, 0.6957, 0, 33.5931, 54.0653)
+
+[node name="player" parent="." instance=ExtResource("16_786nx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.73989, 0)
+
+[node name="vhs_shader" parent="." instance=ExtResource("17_1rpe8")]
+
+[node name="Transition" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_w5nik")
+}
+
+[node name="ColorRect" type="ColorRect" parent="Transition"]
+offset_left = -620.0
+offset_top = -498.0
+offset_right = 1773.0
+offset_bottom = 1067.0
+color = Color(0, 0, 0, 1)
+
+[node name="ambiance" type="Node3D" parent="."]
+transform = Transform3D(-4.371142e-08, 0, 1.0000005, 0, 1.0000005, 0, -1.0000005, 0, -4.371142e-08, 3.336605, 13.422363, 8.965355)
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="ambiance"]
+transform = Transform3D(0.9999995, 0, 0, 0, 0.9999995, 0, 0, 0, 0.9999995, 134.55556, 12.999999, 4.053116e-06)
+stream = ExtResource("6_h5wgc")
+max_db = 6.0
+autoplay = true
+max_distance = 503.08
+parameters/looping = true
+
+[node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="ambiance"]
+transform = Transform3D(0.9999995, 0, 0, 0, 0.9999995, 0, 0, 0, 0.9999995, -117.11937, 12.000001, -2.861023e-06)
+stream = ExtResource("6_h5wgc")
+autoplay = true
+max_distance = 503.08
+parameters/looping = true
+
+[node name="AudioStreamPlayer3D3" type="AudioStreamPlayer3D" parent="ambiance"]
+transform = Transform3D(0.9999995, 0, 0, 0, 0.9999995, 0, 0, 0, 0.9999995, -3.8146973e-06, 14.000001, 118.650566)
+stream = ExtResource("6_h5wgc")
+autoplay = true
+max_distance = 503.08
+parameters/looping = true
+
+[node name="AudioStreamPlayer3D4" type="AudioStreamPlayer3D" parent="ambiance"]
+transform = Transform3D(0.9999995, 0, 0, 0, 0.9999995, 0, 0, 0, 0.9999995, 3.8146973e-06, 11.000003, -127.45086)
+stream = ExtResource("6_h5wgc")
+autoplay = true
+max_distance = 503.08
+parameters/looping = true
+
+[node name="world" type="Node" parent="."]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="world"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9462233, 2.3287818, -4.870766)
+use_collision = true
+size = Vector3(5.026367, 2.310669, 1)
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="world"]
+transform = Transform3D(205, 0, 0, 0, 205, 0, 0, 0, 205, 0, 0.48085785, 0)
+use_collision = true
+flip_faces = true
+material = ExtResource("7_e4pu7")
+
+[node name="tree" parent="world" instance=ExtResource("8_g7j7w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.262239, 0.5, -0.69997394)
+
+[node name="dirt" type="CSGPolygon3D" parent="world"]
+transform = Transform3D(0.9999991, 0.000558065, -0.0012116529, 0.001211137, 0.00089402933, 0.99999887, 0.00055918505, -0.99999934, 0.00089332886, 5.210639, 1.4818935, 3.3553526)
+use_collision = true
+material = ExtResource("7_h5dq3")
+
+[node name="dirt2" type="CSGPolygon3D" parent="world"]
+transform = Transform3D(1.0036054, 0.00055955024, -0.0074604587, 0.0012155047, 0.00089640875, 6.15725, 0.0005612016, -1.0026608, 0.0055004554, 21.139591, 6.564333, 3.3553526)
+use_collision = true
+polygon = PackedVector2Array(-7.2115316, -8.920963, -4.405451, 1.8283062, 1, 0)
+material = ExtResource("7_g7j7w")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="world"]
+transform = Transform3D(2.1779997, 0, 0, 0, 1, 0, 0, 0, 2.1999893, 3.3558102, 14.789795, -2.3234844)
+use_collision = true
+radius = 13.0
+height = 31.57959
+material = ExtResource("7_g7j7w")
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="world/CSGCylinder3D"]
+transform = Transform3D(0.9999994, 0, 0, 0, 0.9, 0, 0, 0, 0.89999986, 0, 0, 0)
+operation = 2
+use_collision = true
+radius = 12.0
+height = 33.15918
+material = ExtResource("7_g7j7w")
+
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="world/CSGCylinder3D"]
+transform = Transform3D(3.1006846, 0, 0, 0, 0.9, 0, 0, 0, 0.9999999, 0, 0, 0)
+operation = 2
+use_collision = true
+radius = 12.0
+height = 31.57959
+material = ExtResource("7_g7j7w")
