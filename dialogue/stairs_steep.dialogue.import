@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_14"
+type="Resource"
+uid="uid://062f74du11o7"
+path="res://.godot/imported/stairs_steep.dialogue-8b406563ed8143f80c980aff5b131adf.tres"
+
+[deps]
+
+source_file="res://dialogue/stairs_steep.dialogue"
+dest_files=["res://.godot/imported/stairs_steep.dialogue-8b406563ed8143f80c980aff5b131adf.tres"]
+
+[params]
+
+defaults=true

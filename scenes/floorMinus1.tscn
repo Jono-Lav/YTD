@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://dsrlc6ahj5y64"]
+[gd_scene load_steps=62 format=3 uid="uid://dsrlc6ahj5y64"]
 
 [ext_resource type="Script" uid="uid://kwls3tm2km6y" path="res://scripts/floor_minus_1.gd" id="1_4ksma"]
 [ext_resource type="PackedScene" uid="uid://52yhuvw6pq3x" path="res://scenes/player.tscn" id="1_kd1f8"]
@@ -9,6 +9,9 @@
 [ext_resource type="Script" uid="uid://bi7dqcfvohnap" path="res://scripts/floor_1_trigger.gd" id="4_ca3hh"]
 [ext_resource type="PackedScene" uid="uid://dtvcgwlbhxehd" path="res://scenes/elevator.tscn" id="4_hkc4b"]
 [ext_resource type="PackedScene" uid="uid://c01y3etcpyc1q" path="res://scenes/vhs_shader.tscn" id="4_nm3ur"]
+[ext_resource type="Script" uid="uid://dhur5qc1vpl7s" path="res://scenes/stairs_body.gd" id="5_d5m8q"]
+[ext_resource type="Resource" uid="uid://062f74du11o7" path="res://dialogue/stairs_steep.dialogue" id="6_jtm42"]
+[ext_resource type="Material" uid="uid://canc1b5xpa0lp" path="res://mateirals/dirt.tres" id="7_bys2l"]
 [ext_resource type="PackedScene" uid="uid://c25mbm1tcg6et" path="res://ch/uncharted.gltf" id="7_m00pi"]
 [ext_resource type="Script" uid="uid://blf4emuy6d276" path="res://scripts/uncharted.gd" id="8_f8dqf"]
 [ext_resource type="Resource" uid="uid://bmwdh07hhxxt8" path="res://dialogue/uncharted1.dialogue" id="9_436mn"]
@@ -30,13 +33,7 @@
 [ext_resource type="Script" uid="uid://cy8y06edjetrx" path="res://scripts/boxanimationtestforytonayancoliide.gd" id="28_e2iij"]
 [ext_resource type="Script" uid="uid://7qorx0e366ax" path="res://scenes/boxgoesup.gd" id="28_fxn7s"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_1isue"]
-material = ExtResource("3_2i47q")
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_i5wwt"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_a4sek"]
-size = Vector3(429.699, 0.027832, 420.253)
+[sub_resource type="BoxShape3D" id="BoxShape3D_jtm42"]
 
 [sub_resource type="Animation" id="Animation_jtm42"]
 length = 0.001
@@ -74,6 +71,14 @@ _data = {
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ok0nq"]
 size = Vector3(1.0110474, 1.6550293, 0.27565002)
+
+[sub_resource type="BoxMesh" id="BoxMesh_1isue"]
+material = ExtResource("3_2i47q")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_i5wwt"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_a4sek"]
+size = Vector3(429.699, 0.027832, 420.253)
 
 [sub_resource type="Sky" id="Sky_aya1g"]
 
@@ -824,8 +829,14 @@ operation = 2
 size = Vector3(7.564209, 8.750427, 1.782608)
 material = ExtResource("3_2i47q")
 
+[node name="openery" type="CSGBox3D" parent="base/walls/house/CSGHouse3"]
+transform = Transform3D(0.9999627, 0, 3.5527137e-15, 0, 0.9999525, 0, 4.867218e-13, 0, 0.8049674, 3.1900134, 18.04599, 7.234371)
+operation = 2
+size = Vector3(8.382168, 4.8401546, 2.2464447)
+material = ExtResource("3_2i47q")
+
 [node name="CSGHouse4" type="CSGBox3D" parent="base/walls/house"]
-transform = Transform3D(-3.094736e-08, 0, -0.8337707, 0, 0.27804375, 0, 0.70799303, 0, -3.6445275e-08, -30.841558, 41.765743, -5.8406644)
+transform = Transform3D(-3.4042095e-08, 0, -0.8337707, 0, 0.27804372, 0, 0.77879226, 0, -3.6445275e-08, -30.841558, 41.765743, -5.8406644)
 use_collision = true
 size = Vector3(19.00061, 26.752563, 23)
 material = ExtResource("2_b0nub")
@@ -841,6 +852,138 @@ transform = Transform3D(0.9999818, -4.7120427e-08, -7.219916e-08, 4.712045e-08, 
 operation = 2
 size = Vector3(21.809906, 12.60331, 37.429688)
 material = ExtResource("2_b0nub")
+
+[node name="openery" type="CSGBox3D" parent="base/walls/house/CSGHouse4"]
+transform = Transform3D(0.9999568, 0, 0, 0, 0.999945, 0, 5.0803806e-13, 0, 0.8049674, 2.9664168, -13.181961, 7.3196526)
+operation = 2
+size = Vector3(8.382168, 7.5450134, 2.2464447)
+material = ExtResource("3_2i47q")
+
+[node name="CSGHouse8" type="CSGBox3D" parent="base/walls/house/CSGHouse4"]
+transform = Transform3D(0.7999982, 0, -1.563194e-13, 0, 0.7999894, 0, 1.8651747e-13, 0, 0.8, 0, -1.0901031, 0)
+operation = 2
+use_collision = true
+size = Vector3(19.00061, 26.752563, 23)
+material = ExtResource("2_b0nub")
+
+[node name="CSGHouse5" type="CSGBox3D" parent="base/walls/house/CSGHouse4/CSGHouse8"]
+transform = Transform3D(0.9999826, -4.797266e-08, -3.2810238e-08, 4.7972367e-08, 0.3626049, 0.9319242, -3.280994e-08, -0.9319316, 0.3626212, -0.32424068, 2.047699, -14.47875)
+operation = 2
+size = Vector3(20.616302, 15.996658, 37.429688)
+material = ExtResource("2_b0nub")
+
+[node name="CSGHouse6" type="CSGBox3D" parent="base/walls/house/CSGHouse4/CSGHouse8"]
+transform = Transform3D(0.9999818, -4.7120427e-08, -7.219916e-08, 4.712045e-08, -0.4025732, 0.9153802, -7.219877e-08, -0.91537607, -0.40255952, 0.27255106, 1.3646698, 12.324436)
+operation = 2
+size = Vector3(21.809906, 12.60331, 37.429688)
+material = ExtResource("2_b0nub")
+
+[node name="Stairs" type="Node3D" parent="base/walls/house"]
+transform = Transform3D(-0.7079931, 0, 1.3411045e-07, 0, 0.27804372, 0, -1.1920929e-07, 0, -0.83377063, -36.93454, 33.2867, -4.926226)
+script = ExtResource("3_5ntoq")
+size = Vector3(2.1245756, 33.370735, 10.0695095)
+step_count = 10
+material = ExtResource("3_2i47q")
+metadata/_custom_type_script = "uid://m2fvd5j6jd46"
+
+[node name="stairs_body" type="StaticBody3D" parent="base/walls/house/Stairs"]
+transform = Transform3D(1.6000001, 0, 2.842171e-14, 0, 1, 0, -5.684342e-14, 0, 1.2999998, 0, -3.5965576, 1.1993704)
+script = ExtResource("5_d5m8q")
+prompt_message = "interact"
+dialogue = ExtResource("6_jtm42")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="base/walls/house/Stairs/stairs_body"]
+shape = SubResource("BoxShape3D_jtm42")
+
+[node name="stuff" type="Node" parent="base/walls/house"]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="base/walls/house/stuff"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.43532, 29.227074, -4.5677166)
+use_collision = true
+size = Vector3(3, 1.0805664, 2)
+material = ExtResource("2_b0nub")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="base/walls/house/stuff/CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.04050064, 0)
+operation = 2
+size = Vector3(2.6, 1, 2)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="base/walls/house/stuff/CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.04050064, 0)
+operation = 2
+size = Vector3(3, 1, 1.6)
+
+[node name="shelf2" type="CSGPolygon3D" parent="base/walls/house/stuff"]
+transform = Transform3D(-4.371139e-08, 0, -2.5128489, 0, 1, 0, 1, 0, -1.0984011e-07, -33.373466, 28.990244, -10.806622)
+use_collision = true
+polygon = PackedVector2Array(0.00031661987, 0.70617676, 0, 1, 1.118042, 0.94628334, 0.20116234, 0.69099617)
+material = ExtResource("7_bys2l")
+
+[node name="Stairs2" type="Node3D" parent="base/walls/house"]
+transform = Transform3D(0.7079931, 0, -6.121991e-08, 0, 0.027804362, 0, 5.7314566e-08, 0, 0.83377063, -31.204084, 28.466578, 0.59616673)
+script = ExtResource("3_5ntoq")
+size = Vector3(2.0996675, 14.270479, 1.107036)
+step_count = 2
+material = ExtResource("3_2i47q")
+metadata/_custom_type_script = "uid://m2fvd5j6jd46"
+
+[node name="door3" type="StaticBody3D" parent="base/walls/house"]
+transform = Transform3D(-6.556708e-08, 0, 1.5, 0, 1.5, 0, -1.5, 0, -6.556708e-08, -33.108162, 28.663637, 0.84825444)
+script = ExtResource("23_ok0nq")
+prompt = "Open"
+
+[node name="Close" type="AudioStreamPlayer3D" parent="base/walls/house/door3"]
+transform = Transform3D(0.6666667, 0, 0, 0, 0.6666667, 0, 0, 0, 0.6666667, 0.18214989, 0.93745166, 1.7410374)
+stream = ExtResource("26_yhvct")
+volume_db = 80.0
+unit_size = 0.1
+max_distance = 3.0
+parameters/looping = false
+
+[node name="Open" type="AudioStreamPlayer3D" parent="base/walls/house/door3"]
+transform = Transform3D(0.6666667, 0, 0, 0, 0.6666667, 0, 0, 0, 0.6666667, 0.18214989, 0.93745166, 1.7410374)
+stream = ExtResource("25_q0ac8")
+volume_db = 80.0
+unit_size = 0.1
+max_distance = 3.0
+parameters/looping = false
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="base/walls/house/door3"]
+root_node = NodePath("../door")
+libraries = {
+&"": SubResource("AnimationLibrary_yhvct")
+}
+
+[node name="door" parent="base/walls/house/door3" instance=ExtResource("22_xoreq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.21843147, 1.4901161e-07, 1.2714443)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="base/walls/house/door3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.21798182, 0.8027945, 1.6527667)
+shape = SubResource("BoxShape3D_ok0nq")
+
+[node name="wall" type="CSGBox3D" parent="base/walls/house"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.168585, 33.11383, -3.8809566)
+use_collision = true
+size = Vector3(0.56433105, 8.902222, 6.2158203)
+material = ExtResource("3_2i47q")
+
+[node name="wall3" type="CSGBox3D" parent="base/walls/house"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.168585, 33.11383, -8.91729)
+use_collision = true
+size = Vector3(0.56433105, 8.902222, 3.8674316)
+material = ExtResource("3_2i47q")
+
+[node name="wall4" type="CSGBox3D" parent="base/walls/house/wall3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.196289, -1.0640497)
+operation = 2
+size = Vector3(0.56433105, 2.5096436, 1.6541748)
+material = ExtResource("3_2i47q")
+
+[node name="wall2" type="CSGBox3D" parent="base/walls/house"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -26.30446, 33.11383, -6.698323)
+use_collision = true
+size = Vector3(0.56433105, 8.902222, 5.190918)
+material = ExtResource("3_2i47q")
 
 [node name="basefloor" type="StaticBody3D" parent="base"]
 
@@ -1043,40 +1186,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.21843147, 1.4901161e-07, 1.
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.21798182, 0.8027945, 1.6527667)
 shape = SubResource("BoxShape3D_ok0nq")
 
-[node name="door3" type="StaticBody3D" parent="base"]
-transform = Transform3D(-6.556708e-08, 0, 1.5, 0, 1.5, 0, -1.5, 0, -6.556708e-08, -33.108162, 28.663637, 0.84825444)
-script = ExtResource("23_ok0nq")
-prompt = "Open"
-
-[node name="Close" type="AudioStreamPlayer3D" parent="base/door3"]
-transform = Transform3D(0.6666667, 0, 0, 0, 0.6666667, 0, 0, 0, 0.6666667, 0.18214989, 0.93745166, 1.7410374)
-stream = ExtResource("26_yhvct")
-volume_db = 80.0
-unit_size = 0.1
-max_distance = 3.0
-parameters/looping = false
-
-[node name="Open" type="AudioStreamPlayer3D" parent="base/door3"]
-transform = Transform3D(0.6666667, 0, 0, 0, 0.6666667, 0, 0, 0, 0.6666667, 0.18214989, 0.93745166, 1.7410374)
-stream = ExtResource("25_q0ac8")
-volume_db = 80.0
-unit_size = 0.1
-max_distance = 3.0
-parameters/looping = false
-
-[node name="AnimationPlayer2" type="AnimationPlayer" parent="base/door3"]
-root_node = NodePath("../door")
-libraries = {
-&"": SubResource("AnimationLibrary_yhvct")
-}
-
-[node name="door" parent="base/door3" instance=ExtResource("22_xoreq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.21843147, 1.4901161e-07, 1.2714443)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="base/door3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.21798182, 0.8027945, 1.6527667)
-shape = SubResource("BoxShape3D_ok0nq")
-
 [node name="staircase" type="Node" parent="base"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -1103,7 +1212,7 @@ process_material = SubResource("ShaderMaterial_355x1")
 draw_pass_1 = SubResource("QuadMesh_u1r2e")
 
 [node name="uncharted" parent="." instance=ExtResource("7_m00pi")]
-transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -34.53902, 28.281784, 2.0761194)
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -34.53902, 28.281784, 0.9370618)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="uncharted"]
 script = ExtResource("8_f8dqf")
