@@ -13,16 +13,18 @@ var o3 : bool  = true
 var o4 : bool  = true
 var o5 : bool  = true
 var o6 : bool  = true
+var o7 : bool  = true
 
-var previousScene : Node # stores the previous scenes for the orbs
-var dialugefinishedo6 : bool  = false
-
+var o7permission : bool  = false
 var o6permission : bool  = false #decideds if you have permissions to enter orb 6
 var o5permission : bool  = true
 var o4permission : bool  = true
 var o3permission : bool  = true
 var o2permission : bool  = true
 var o1permission : bool  = true
+
+var previousScene : Node # stores the previous scenes for the orbs
+var dialugefinishedo6 : bool  = false
 
 var playerStop  : bool = false #when true player stops, when false player doesnt stop
 var canSprint : bool = true #decides if the player can sprint or not

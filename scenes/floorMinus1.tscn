@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=3 uid="uid://dsrlc6ahj5y64"]
+[gd_scene load_steps=72 format=3 uid="uid://dsrlc6ahj5y64"]
 
 [ext_resource type="Script" uid="uid://kwls3tm2km6y" path="res://scripts/floor_minus_1.gd" id="1_4ksma"]
 [ext_resource type="PackedScene" uid="uid://52yhuvw6pq3x" path="res://scenes/player.tscn" id="1_kd1f8"]
@@ -20,8 +20,10 @@
 [ext_resource type="Animation" uid="uid://b4fhx6ggmvn7y" path="res://ch/uncharted_defualt.res" id="12_b0nub"]
 [ext_resource type="Animation" uid="uid://blei1y5ogg7v4" path="res://ch/uncharted_talk1.res" id="13_3csqn"]
 [ext_resource type="Animation" uid="uid://b4qs6dh3f3s5x" path="res://ch/uncharted_talk2.res" id="14_5ntoq"]
-[ext_resource type="Animation" uid="uid://sfonbmpocqqr" path="res://ch/uncharted_talk.res" id="15_355x1"]
-[ext_resource type="Animation" uid="uid://dv18mqmchrs1e" path="res://ch/uncharted_up.res" id="16_xoreq"]
+[ext_resource type="Animation" uid="uid://b6rpg0eorownq" path="res://ch/uncharted_talk.res" id="15_355x1"]
+[ext_resource type="Animation" uid="uid://dvc866ytvafph" path="res://ch/uncharted_up.res" id="16_xoreq"]
+[ext_resource type="PackedScene" uid="uid://m5lag2qjguk5" path="res://scenes/orb.tscn" id="17_n3t32"]
+[ext_resource type="PackedScene" uid="uid://3mtq4t2aqihn" path="res://scenes/uncharted_orb.tscn" id="18_55g52"]
 [ext_resource type="AudioStream" uid="uid://dqpdkbvh5jvft" path="res://sounds/calming-rain-257596.mp3" id="21_355x1"]
 [ext_resource type="AudioStream" uid="uid://dnukliy4fq3cy" path="res://sounds/YTD OST 10 - falling in grey.mp3" id="21_xoreq"]
 [ext_resource type="PackedScene" uid="uid://c7jpb7j6qoajd" path="res://ch/door.gltf" id="22_xoreq"]
@@ -70,7 +72,97 @@ _data = {
 }
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ok0nq"]
-size = Vector3(1.0110474, 1.6550293, 0.27565002)
+size = Vector3(1.0514221, 1.6550293, 0.27565002)
+
+[sub_resource type="Animation" id="Animation_55g52"]
+resource_name = "open"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollisionShape3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.21798182, 0.8027945, 1.6527667), Vector3(0.6039234, 0.8027935, 1.2631035)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape3D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, -1.5639023, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_vnhm3"]
+resource_name = "close"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollisionShape3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.6039234, 0.8027935, 1.2631035), Vector3(0.218, 0.803, 1.653)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape3D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, -1.5639023, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_3o4ij"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollisionShape3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.21798182, 0.8027945, 1.6527667)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape3D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3o4ij"]
+_data = {
+&"RESET": SubResource("Animation_3o4ij"),
+&"close": SubResource("Animation_vnhm3"),
+&"open": SubResource("Animation_55g52")
+}
 
 [sub_resource type="BoxMesh" id="BoxMesh_1isue"]
 material = ExtResource("3_2i47q")
@@ -79,6 +171,96 @@ material = ExtResource("3_2i47q")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_a4sek"]
 size = Vector3(429.699, 0.027832, 420.253)
+
+[sub_resource type="Animation" id="Animation_bys2l"]
+resource_name = "open"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollisionShape3D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 1.575212, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape3D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.21798182, 0.8027945, 1.6527667), Vector3(0.59044266, 0.80279493, 1.2800369)]
+}
+
+[sub_resource type="Animation" id="Animation_bmy1c"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollisionShape3D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape3D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.21798182, 0.8027945, 1.6527667)]
+}
+
+[sub_resource type="Animation" id="Animation_n3t32"]
+resource_name = "close"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollisionShape3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.59, 0.803, 1.28), Vector3(0.21798182, 0.8027945, 1.6527667)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape3D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 1.5760323, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_55g52"]
+_data = {
+&"RESET": SubResource("Animation_bmy1c"),
+&"close": SubResource("Animation_n3t32"),
+&"open": SubResource("Animation_bys2l")
+}
 
 [sub_resource type="Sky" id="Sky_aya1g"]
 
@@ -928,7 +1110,7 @@ material = ExtResource("3_2i47q")
 metadata/_custom_type_script = "uid://m2fvd5j6jd46"
 
 [node name="door3" type="StaticBody3D" parent="base/walls/house"]
-transform = Transform3D(-6.556708e-08, 0, 1.5, 0, 1.5, 0, -1.5, 0, -6.556708e-08, -33.108162, 28.663637, 0.84825444)
+transform = Transform3D(-6.556708e-08, 0, 1.5, 0, 1.5, 0, -1.5, 0, -6.556708e-08, -33.11401, 28.663637, 0.84825444)
 script = ExtResource("23_ok0nq")
 prompt = "Open"
 
@@ -958,8 +1140,13 @@ libraries = {
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.21843147, 1.4901161e-07, 1.2714443)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="base/walls/house/door3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.21798182, 0.8027945, 1.6527667)
+transform = Transform3D(1.0000001, 0, 0, 0, 1, 0, 0, 0, 1.0000001, 0.21798182, 0.8027945, 1.6527667)
 shape = SubResource("BoxShape3D_ok0nq")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="base/walls/house/door3"]
+libraries = {
+&"": SubResource("AnimationLibrary_3o4ij")
+}
 
 [node name="wall" type="CSGBox3D" parent="base/walls/house"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.168585, 33.11383, -3.8809566)
@@ -1183,8 +1370,18 @@ libraries = {
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.21843147, 1.4901161e-07, 1.2714443)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="base/door2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.21798182, 0.8027945, 1.6527667)
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0.21798182, 0.8027945, 1.6527667)
 shape = SubResource("BoxShape3D_ok0nq")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="base/door2"]
+libraries = {
+&"": SubResource("AnimationLibrary_55g52")
+}
+
+[node name="orb" parent="base/door2" instance=ExtResource("17_n3t32")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.252207, 13.453045, -14.587291)
+orb = 7
+scene = ExtResource("18_55g52")
 
 [node name="staircase" type="Node" parent="base"]
 
@@ -1251,8 +1448,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.241081, 28.96474, 32.2420
 size = Vector3(13.693909, 14.3515625, 16.813263)
 
 [node name="GPUParticlesCollisionBox3D5" type="GPUParticlesCollisionBox3D" parent="rain collision"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.894114, 22.687214, 30.930916)
-size = Vector3(69.51965, 14.3515625, 19.43544)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.894114, 22.023151, 30.930916)
+size = Vector3(69.51965, 15.6796875, 19.43544)
 
 [node name="GPUParticlesCollisionBox3D6" type="GPUParticlesCollisionBox3D" parent="rain collision"]
 transform = Transform3D(-4.2658677e-08, -9.535344e-09, 1, -0.21814324, 0.97591674, 0, -0.97591674, -0.21814324, -4.371139e-08, 42.142143, 13.665686, 10.579707)
@@ -1363,6 +1560,10 @@ size = Vector3(7.201277, 11.8425455, 9.386725)
 [node name="GPUParticlesCollisionBox3D19" type="GPUParticlesCollisionBox3D" parent="rain collision/Node"]
 transform = Transform3D(0.6323135, 0, -0.77471256, 0, 1, 0, 0.77471256, 0, 0.6323135, -21.038795, 10.228509, -24.124414)
 size = Vector3(4.8514667, 11.8425455, 13.280031)
+
+[node name="GPUParticlesCollisionBox3D22" type="GPUParticlesCollisionBox3D" parent="rain collision"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.927874, 36.29418, -6.459323)
+size = Vector3(18.034676, 11.577515, 14.358591)
 
 [node name="rainsound" type="Node" parent="."]
 
@@ -2608,6 +2809,146 @@ max_distance = 3.0
 
 [node name="AudioStreamPlayer3D48" type="AudioStreamPlayer3D" parent="rainsound/Node2"]
 transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -19.418732, 3.5022044, -35.718285)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D31" type="AudioStreamPlayer3D" parent="rainsound/Node2"]
+transform = Transform3D(-0.5440598, -0.46625033, 0.6975741, 0.7812158, 0.021821264, 0.6238796, -0.30610603, 0.8843837, 0.35237002, -30.405664, 30.89395, 18.623955)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 13.0
+
+[node name="AudioStreamPlayer3D31" type="AudioStreamPlayer3D" parent="rainsound/Node2/AudioStreamPlayer3D31"]
+transform = Transform3D(-0.54406, -0.46625036, 0.69757396, 0.7812158, 0.02182123, 0.6238798, -0.3061061, 0.8843837, 0.35237008, -4.2237225, 11.854668, 4.507401)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 13.0
+
+[node name="AudioStreamPlayer3D32" type="AudioStreamPlayer3D" parent="rainsound/Node2/AudioStreamPlayer3D31"]
+transform = Transform3D(-0.54406, -0.46625036, 0.69757396, 0.7812158, 0.02182123, 0.6238798, -0.3061061, 0.8843837, 0.35237008, 2.3997955, -7.281616, -3.1171784)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 13.0
+
+[node name="1" type="AudioStreamPlayer3D" parent="rainsound/Node2/AudioStreamPlayer3D31"]
+transform = Transform3D(-0.54406, -0.46625036, 0.69757396, 0.7812158, 0.02182123, 0.6238798, -0.3061061, 0.8843837, 0.35237008, 10.852512, -12.52182, -14.08522)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D34" type="AudioStreamPlayer3D" parent="rainsound/Node2/AudioStreamPlayer3D31"]
+transform = Transform3D(-0.54406, -0.46625036, 0.69757396, 0.7812158, 0.02182123, 0.6238798, -0.3061061, 0.8843837, 0.35237008, 11.691181, -14.944843, -15.050642)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D35" type="AudioStreamPlayer3D" parent="rainsound/Node2/AudioStreamPlayer3D31"]
+transform = Transform3D(-0.54406, -0.46625036, 0.69757396, 0.7812158, 0.02182123, 0.6238798, -0.3061061, 0.8843837, 0.35237008, 12.364021, -16.888771, -15.825172)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D36" type="AudioStreamPlayer3D" parent="rainsound/Node2/AudioStreamPlayer3D31"]
+transform = Transform3D(-0.54406, -0.46625036, 0.69757396, 0.7812158, 0.02182123, 0.6238798, -0.3061061, 0.8843837, 0.35237008, 13.118954, -19.069883, -16.694204)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="2" type="AudioStreamPlayer3D" parent="rainsound/Node2/AudioStreamPlayer3D31"]
+transform = Transform3D(-0.54406, -0.46625036, 0.69757396, 0.7812158, 0.02182123, 0.6238798, -0.3061061, 0.8843837, 0.35237008, 13.90387, -21.337612, -17.59775)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D38" type="AudioStreamPlayer3D" parent="rainsound/Node2/AudioStreamPlayer3D31"]
+transform = Transform3D(-0.54406, -0.46625036, 0.69757396, 0.7812158, 0.02182123, 0.6238798, -0.3061061, 0.8843837, 0.35237008, 14.732128, -26.142223, -18.46684)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 4.0
+
+[node name="AudioStreamPlayer3D39" type="AudioStreamPlayer3D" parent="rainsound/Node2/AudioStreamPlayer3D31"]
+transform = Transform3D(-0.54406, -0.46625036, 0.69757396, 0.7812158, 0.02182123, 0.6238798, -0.3061061, 0.8843837, 0.35237008, 13.052765, -27.581413, -16.31362)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 4.0
+
+[node name="AudioStreamPlayer3D40" type="AudioStreamPlayer3D" parent="rainsound/Node2/AudioStreamPlayer3D31"]
+transform = Transform3D(-0.54406, -0.46625036, 0.69757396, 0.7812158, 0.02182123, 0.6238798, -0.3061061, 0.8843837, 0.35237008, 11.665821, -28.77, -14.53533)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 4.0
+
+[node name="AudioStreamPlayer3D41" type="AudioStreamPlayer3D" parent="rainsound/Node2/AudioStreamPlayer3D31"]
+transform = Transform3D(-0.54406, -0.46625036, 0.69757396, 0.7812158, 0.02182123, 0.6238798, -0.3061061, 0.8843837, 0.35237008, 9.89315, -30.28915, -12.262474)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 4.0
+
+[node name="AudioStreamPlayer3D42" type="AudioStreamPlayer3D" parent="rainsound/Node2/AudioStreamPlayer3D31"]
+transform = Transform3D(-0.54406, -0.46625036, 0.69757396, 0.7812158, 0.02182123, 0.6238798, -0.3061061, 0.8843837, 0.35237008, 8.287334, -31.66531, -10.203552)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 4.0
+
+[node name="AudioStreamPlayer3D43" type="AudioStreamPlayer3D" parent="rainsound/Node2/AudioStreamPlayer3D31"]
+transform = Transform3D(-0.54406, -0.46625036, 0.69757396, 0.7812158, 0.02182123, 0.6238798, -0.3061061, 0.8843837, 0.35237008, 6.67474, -33.047276, -8.135942)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 4.0
+
+[node name="AudioStreamPlayer3D44" type="AudioStreamPlayer3D" parent="rainsound/Node2/AudioStreamPlayer3D31"]
+transform = Transform3D(-0.54406, -0.46625036, 0.69757396, 0.7812158, 0.02182123, 0.6238798, -0.3061061, 0.8843837, 0.35237008, 5.0505066, -34.439224, -6.0534)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 4.0
+
+[node name="3" type="AudioStreamPlayer3D" parent="rainsound/Node2/AudioStreamPlayer3D31"]
+transform = Transform3D(-0.54406, -0.46625036, 0.69757396, 0.7812158, 0.02182123, 0.6238798, -0.3061061, 0.8843837, 0.35237008, 0.47319412, -21.416735, -0.77722263)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D37" type="AudioStreamPlayer3D" parent="rainsound/Node2/AudioStreamPlayer3D31"]
+transform = Transform3D(-0.54406, -0.46625036, 0.69757396, 0.7812158, 0.02182123, 0.6238798, -0.3061061, 0.8843837, 0.35237008, 1.311863, -23.839756, -1.7426376)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D45" type="AudioStreamPlayer3D" parent="rainsound/Node2/AudioStreamPlayer3D31"]
+transform = Transform3D(-0.54406, -0.46625036, 0.69757396, 0.7812158, 0.02182123, 0.6238798, -0.3061061, 0.8843837, 0.35237008, 1.9847069, -25.783688, -2.5171726)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="AudioStreamPlayer3D46" type="AudioStreamPlayer3D" parent="rainsound/Node2/AudioStreamPlayer3D31"]
+transform = Transform3D(-0.54406, -0.46625036, 0.69757396, 0.7812158, 0.02182123, 0.6238798, -0.3061061, 0.8843837, 0.35237008, 2.7396355, -27.964802, -3.386203)
+stream = ExtResource("21_355x1")
+max_db = 0.2
+autoplay = true
+max_distance = 3.0
+
+[node name="4" type="AudioStreamPlayer3D" parent="rainsound/Node2/AudioStreamPlayer3D31"]
+transform = Transform3D(-0.54406, -0.46625036, 0.69757396, 0.7812158, 0.02182123, 0.6238798, -0.3061061, 0.8843837, 0.35237008, 3.5245476, -30.232525, -4.289747)
 stream = ExtResource("21_355x1")
 max_db = 0.2
 autoplay = true
