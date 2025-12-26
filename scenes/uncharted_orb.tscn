@@ -1,12 +1,15 @@
-[gd_scene load_steps=18 format=3 uid="uid://3mtq4t2aqihn"]
+[gd_scene load_steps=21 format=3 uid="uid://3mtq4t2aqihn"]
 
 [ext_resource type="Script" uid="uid://cpg1brqwwsa1w" path="res://scripts/world_of_the_red_reaper.gd" id="1_r05e7"]
 [ext_resource type="Material" uid="uid://4je282kb6mc0" path="res://mateirals/new_standard_material_3d.tres" id="3_3lylj"]
 [ext_resource type="AudioStream" uid="uid://c1fd6p8ue7c5l" path="res://sounds/dreamcore1.mp3" id="6_h5wgc"]
 [ext_resource type="Material" uid="uid://hr56nmjvnygi" path="res://mateirals/sky.tres" id="7_e4pu7"]
 [ext_resource type="Material" uid="uid://c4b126vb32am0" path="res://mateirals/purple_blue2.tres" id="7_g7j7w"]
+[ext_resource type="Material" uid="uid://c0dk42pu8udjg" path="res://mateirals/red.tres" id="7_gbjgm"]
 [ext_resource type="Material" uid="uid://ddklpnmrxnfwb" path="res://mateirals/wall_floorm1.tres" id="7_h5dq3"]
+[ext_resource type="Material" uid="uid://0so5k7llmpdb" path="res://mateirals/floor_floorm1.tres" id="8_56q2d"]
 [ext_resource type="PackedScene" uid="uid://dri3kr5mx0q0h" path="res://scenes/tree2.tscn" id="8_g7j7w"]
+[ext_resource type="PackedScene" uid="uid://buxuioe3b2to4" path="res://ch/Hollow dance.gltf" id="10_h5dq3"]
 [ext_resource type="PackedScene" uid="uid://52yhuvw6pq3x" path="res://scenes/player.tscn" id="16_786nx"]
 [ext_resource type="PackedScene" uid="uid://c01y3etcpyc1q" path="res://scenes/vhs_shader.tscn" id="17_1rpe8"]
 
@@ -145,9 +148,21 @@ parameters/looping = true
 [node name="world" type="Node" parent="."]
 
 [node name="CSGBox3D" type="CSGBox3D" parent="world"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9462233, 2.3287818, -4.870766)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3306592, 1.581404, -7.305076)
 use_collision = true
 size = Vector3(5.026367, 2.310669, 1)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="world"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3334303, 0.453905, 3.415419)
+use_collision = true
+size = Vector3(6.251953, 0.049591064, 0.23535156)
+material = ExtResource("7_gbjgm")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="world"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3787947, 0.4314692, -1.5200057)
+use_collision = true
+size = Vector3(6.692169, 0.0135650635, 12.841553)
+material = ExtResource("8_56q2d")
 
 [node name="CSGSphere3D" type="CSGSphere3D" parent="world"]
 transform = Transform3D(205, 0, 0, 0, 205, 0, 0, 0, 205, 0, 0.48085785, 0)
@@ -191,3 +206,6 @@ use_collision = true
 radius = 12.0
 height = 31.57959
 material = ExtResource("7_g7j7w")
+
+[node name="blockbench_export" parent="." instance=ExtResource("10_h5dq3")]
+transform = Transform3D(-1.5, 0, -2.2649371e-07, 0, 1.5, 0, 2.2649371e-07, 0, -1.5, 2.1047356, 0.49813628, -6.0136423)

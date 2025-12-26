@@ -1,4 +1,4 @@
-[gd_scene load_steps=72 format=3 uid="uid://dsrlc6ahj5y64"]
+[gd_scene load_steps=74 format=3 uid="uid://dsrlc6ahj5y64"]
 
 [ext_resource type="Script" uid="uid://kwls3tm2km6y" path="res://scripts/floor_minus_1.gd" id="1_4ksma"]
 [ext_resource type="PackedScene" uid="uid://52yhuvw6pq3x" path="res://scenes/player.tscn" id="1_kd1f8"]
@@ -34,6 +34,8 @@
 [ext_resource type="AudioStream" uid="uid://dfuxfdynimb4b" path="res://sounds/close-door-382723.mp3" id="26_yhvct"]
 [ext_resource type="Script" uid="uid://cy8y06edjetrx" path="res://scripts/boxanimationtestforytonayancoliide.gd" id="28_e2iij"]
 [ext_resource type="Script" uid="uid://7qorx0e366ax" path="res://scenes/boxgoesup.gd" id="28_fxn7s"]
+[ext_resource type="PackedScene" uid="uid://b7oha5aqdyodb" path="res://ch/foreign.gltf" id="35_55g52"]
+[ext_resource type="PackedScene" uid="uid://b6c845uupjppw" path="res://ch/remote.gltf" id="36_vnhm3"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_jtm42"]
 
@@ -74,9 +76,8 @@ _data = {
 [sub_resource type="BoxShape3D" id="BoxShape3D_ok0nq"]
 size = Vector3(1.0514221, 1.6550293, 0.27565002)
 
-[sub_resource type="Animation" id="Animation_55g52"]
-resource_name = "open"
-length = 0.5
+[sub_resource type="Animation" id="Animation_3o4ij"]
+length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -84,10 +85,10 @@ tracks/0/path = NodePath("CollisionShape3D:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0.21798182, 0.8027945, 1.6527667), Vector3(0.6039234, 0.8027935, 1.2631035)]
+"values": [Vector3(0.21798182, 0.8027945, 1.6527667)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -96,10 +97,10 @@ tracks/1/path = NodePath("CollisionShape3D:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, -1.5639023, 0)]
+"values": [Vector3(0, 0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_vnhm3"]
@@ -130,8 +131,9 @@ tracks/1/keys = {
 "values": [Vector3(0, -1.5639023, 0), Vector3(0, 0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_3o4ij"]
-length = 0.001
+[sub_resource type="Animation" id="Animation_55g52"]
+resource_name = "open"
+length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -139,10 +141,10 @@ tracks/0/path = NodePath("CollisionShape3D:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector3(0.21798182, 0.8027945, 1.6527667)]
+"values": [Vector3(0.21798182, 0.8027945, 1.6527667), Vector3(0.6039234, 0.8027935, 1.2631035)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -151,10 +153,10 @@ tracks/1/path = NodePath("CollisionShape3D:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector3(0, 0, 0)]
+"values": [Vector3(0, 0, 0), Vector3(0, -1.5639023, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3o4ij"]
@@ -171,34 +173,6 @@ material = ExtResource("3_2i47q")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_a4sek"]
 size = Vector3(429.699, 0.027832, 420.253)
-
-[sub_resource type="Animation" id="Animation_bys2l"]
-resource_name = "open"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("CollisionShape3D:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, 1.575212, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("CollisionShape3D:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(0.21798182, 0.8027945, 1.6527667), Vector3(0.59044266, 0.80279493, 1.2800369)]
-}
 
 [sub_resource type="Animation" id="Animation_bmy1c"]
 length = 0.001
@@ -253,6 +227,34 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(0, 1.5760323, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_bys2l"]
+resource_name = "open"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollisionShape3D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 1.575212, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape3D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.21798182, 0.8027945, 1.6527667), Vector3(0.59044266, 0.80279493, 1.2800369)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_55g52"]
@@ -3041,5 +3043,11 @@ shape = SubResource("BoxShape3D_d5m8q")
 libraries = {
 &"": SubResource("AnimationLibrary_jtoug")
 }
+
+[node name="blockbench_export" parent="." instance=ExtResource("35_55g52")]
+transform = Transform3D(-1.5, 0, 1.3113416e-07, 0, 1.5, 0, -1.3113416e-07, 0, -1.5, -30.928265, 28.680477, -3.7210236)
+
+[node name="blockbench_export2" parent="." instance=ExtResource("36_vnhm3")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -33.171757, 28.66204, -3.1143541)
 
 [connection signal="body_entered" from="base/worldtrigger/Area3D" to="base/worldtrigger" method="_on_area_3d_body_entered"]
