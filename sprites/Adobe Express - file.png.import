@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dtucj844whinm"
-path="res://.godot/imported/Adobe Express - file.png-0585501aeca412ad60c45601ea5a8ea7.ctex"
+path="res://.godot/imported/Adobe Express - file.png-26cb751212b67922d7f718579435acef.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Adobe Express - file.png"
-dest_files=["res://.godot/imported/Adobe Express - file.png-0585501aeca412ad60c45601ea5a8ea7.ctex"]
+source_file="res://sprites/Adobe Express - file.png"
+dest_files=["res://.godot/imported/Adobe Express - file.png-26cb751212b67922d7f718579435acef.ctex"]
 
 [params]
 

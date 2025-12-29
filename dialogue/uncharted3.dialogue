@@ -1,0 +1,8 @@
+~ start
+if numbersCollected != 3:
+	Uncharted: placeholder
+	do tree.down()
+	=> END
+Uncharted: thank you
+do get_tree().change_scene_to_file("res://scenes/floorMinus1.tscn")
+=> END

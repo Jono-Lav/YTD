@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://buj8c7xhm0rr8"
-path.s3tc="res://.godot/imported/green-grass-mat-background.jpg-8dd5516568fc2ddc1830aad70e71aa8e.s3tc.ctex"
+path.s3tc="res://.godot/imported/green-grass-mat-background.jpg-f524c0f5aaed76adc5bbde78ee604f59.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://green-grass-mat-background.jpg"
-dest_files=["res://.godot/imported/green-grass-mat-background.jpg-8dd5516568fc2ddc1830aad70e71aa8e.s3tc.ctex"]
+source_file="res://sprites/green-grass-mat-background.jpg"
+dest_files=["res://.godot/imported/green-grass-mat-background.jpg-f524c0f5aaed76adc5bbde78ee604f59.s3tc.ctex"]
 
 [params]
 

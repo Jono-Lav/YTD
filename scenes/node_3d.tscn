@@ -1012,68 +1012,69 @@ stream = ExtResource("12_uc870")
 [node name="byeee" type="AudioStreamPlayer3D" parent="door"]
 stream = ExtResource("13_vmgyu")
 
-[node name="npc3" parent="." instance=ExtResource("18_i8ocb")]
+[node name="Npc3" parent="." instance=ExtResource("18_i8ocb")]
 transform = Transform3D(-1.39502, 0, 0.551286, 0, 1.5, 0, -0.551286, 0, -1.39502, 14.3266, 0.499999, -17.9694)
 
-[node name="body" type="StaticBody3D" parent="npc3"]
+[node name="body" type="StaticBody3D" parent="Npc3"]
 script = ExtResource("20_yrd5f")
 prompt_message = "[name]"
 dialogue = ExtResource("18_b4r0c")
+show_nametag = true
 
-[node name="anim" type="AnimationPlayer" parent="npc3/body"]
+[node name="anim" type="AnimationPlayer" parent="Npc3/body"]
 root_node = NodePath("../..")
 libraries = {
 &"Test": SubResource("AnimationLibrary_r2f4a")
 }
 
-[node name="collision" type="CollisionShape3D" parent="npc3/body"]
+[node name="collision" type="CollisionShape3D" parent="Npc3/body"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0080862, 0.898084, -0.143048)
 shape = SubResource("BoxShape3D_ranjr")
 
-[node name="unkown" parent="." instance=ExtResource("23_6phdj")]
+[node name="Unknown" parent="." instance=ExtResource("23_6phdj")]
 transform = Transform3D(-0.152886, 0, -1.49219, 0, 1.5, 0, 1.49219, 0, -0.152886, -10.4432, 0.42382, -3.02268)
 
-[node name="body" type="StaticBody3D" parent="unkown"]
+[node name="body" type="StaticBody3D" parent="Unknown"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.063481, 0)
 script = ExtResource("24_0ygyt")
 dialogue = ExtResource("22_fcu8v")
 show_nametag = true
 
-[node name="anim" type="AnimationPlayer" parent="unkown/body"]
+[node name="anim" type="AnimationPlayer" parent="Unknown/body"]
 root_node = NodePath("../..")
 libraries = {
 &"test": SubResource("AnimationLibrary_ef1lc")
 }
 autoplay = "test/un_lean"
 
-[node name="collision" type="CollisionShape3D" parent="unkown/body"]
+[node name="collision" type="CollisionShape3D" parent="Unknown/body"]
 transform = Transform3D(1, 0, -1.49012e-08, 0, 1, 0, 1.49012e-08, 0, 1, 0.0176696, 0.658554, 0.11353)
 shape = SubResource("BoxShape3D_t78rr")
 
-[node name="npc4" parent="." instance=ExtResource("28_2gc0r")]
+[node name="Npc4" parent="." instance=ExtResource("28_2gc0r")]
 transform = Transform3D(0.410788, 0, 1.44266, 0, 1.5, 0, -1.44266, 0, 0.410788, -16.9934, 0.5, 3.50136)
 
-[node name="npc4body" type="StaticBody3D" parent="npc4"]
+[node name="npc4body" type="StaticBody3D" parent="Npc4"]
 script = ExtResource("29_78m05")
 dialogue = ExtResource("28_eqyvw")
 turn_talk = true
 turn_opposite = true
-play_once = true
+show_nametag = true
 
-[node name="trigger" type="Area3D" parent="npc4/npc4body"]
+[node name="trigger" type="Area3D" parent="Npc4/npc4body"]
 transform = Transform3D(0.182571, 0, -0.641178, 0, 0.666667, 0, 0.641178, 0, 0.182571, 3.29429, 0.356237, 3.04581)
 
-[node name="area" type="CollisionShape3D" parent="npc4/npc4body/trigger"]
+[node name="area" type="CollisionShape3D" parent="Npc4/npc4body/trigger"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.682953, 0.178711, 0.0402832)
 shape = SubResource("BoxShape3D_hww8o")
 
-[node name="anim" type="AnimationPlayer" parent="npc4/npc4body"]
+[node name="anim" type="AnimationPlayer" parent="Npc4/npc4body"]
 root_node = NodePath("../..")
 libraries = {
 &"n4": SubResource("AnimationLibrary_mis3f")
 }
 
-[node name="dialoguecollision" type="CollisionShape3D" parent="npc4/npc4body"]
+[node name="dialoguecollision" type="CollisionShape3D" parent="Npc4/npc4body"]
 transform = Transform3D(1, 0, 0, 0, 1.00004, 0, 0, 0, 1, -0.00561476, 0.890399, 0.16924)
 shape = SubResource("BoxShape3D_yp5gd")
 
@@ -1106,7 +1107,7 @@ transform = Transform3D(0.154604, 0, 2.99601, 0, 3, 0, -2.99601, 0, 0.154604, -1
 transform = Transform3D(2.1766224, -0.8273152, -3.9867778, 8.41247, 0.4136619, -0.21620399, 2.3436475, -0.7164754, 4.4787116, -16.102, 11.8279, -17.8575)
 
 [node name="walls20" parent="Walls/Node" instance=ExtResource("20_mgc6r")]
-transform = Transform3D(0.2833908, -4.81621, -3.1484826, 0.9506051, 1.8443171, 0.25902134, 0.12664731, -3.0663722, 5.1009684, -13.1848, 16.0928, -15.0764)
+transform = Transform3D(0.2833908, -4.81621, -3.1484823, 0.9506051, 1.8443171, 0.25902134, 0.1266473, -3.066372, 5.1009684, -13.1848, 16.0928, -15.0764)
 
 [node name="walls23" parent="Walls/Node" instance=ExtResource("20_mgc6r")]
 transform = Transform3D(-0.6644652, -4.24263, -2.1765983, -0.036033392, 2.1213236, -8.412477, 0.74644995, -3.6742475, -2.343632, -12.7329, 11.0644, -18.2445)
@@ -1213,5 +1214,5 @@ debug = true
 shooting = true
 metadata/_custom_type_script = "uid://stospr3d4w00"
 
-[connection signal="body_entered" from="npc4/npc4body/trigger" to="npc4/npc4body" method="_on_trigger_body_entered"]
+[connection signal="body_entered" from="Npc4/npc4body/trigger" to="Npc4/npc4body" method="_on_trigger_body_entered"]
 [connection signal="body_entered" from="floor1trigger/Area3D" to="floor1trigger" method="_on_area_3d_body_entered"]

@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dum8g68k8qho7"
-path.s3tc="res://.godot/imported/Graveyard Overlooking Sea_chain.png-ba0a63b9716d413b55c9d130dc285abb.s3tc.ctex"
+path.s3tc="res://.godot/imported/Graveyard Overlooking Sea_chain.png-8848e11480f9810fc615cbb6a9b7c575.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Graveyard Overlooking Sea_chain.png"
-dest_files=["res://.godot/imported/Graveyard Overlooking Sea_chain.png-ba0a63b9716d413b55c9d130dc285abb.s3tc.ctex"]
+source_file="res://sprites/Graveyard Overlooking Sea_chain.png"
+dest_files=["res://.godot/imported/Graveyard Overlooking Sea_chain.png-8848e11480f9810fc615cbb6a9b7c575.s3tc.ctex"]
 
 [params]
 

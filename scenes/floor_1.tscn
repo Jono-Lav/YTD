@@ -16,7 +16,7 @@
 [ext_resource type="Animation" uid="uid://6mobxgxe255s" path="res://ch/idle.res" id="14_7akwa"]
 [ext_resource type="Script" uid="uid://thoj77jv40k2" path="res://scripts/redReaper.gd" id="14_81uen"]
 [ext_resource type="PackedScene" uid="uid://m5lag2qjguk5" path="res://scenes/orb.tscn" id="15_rm71e"]
-[ext_resource type="PackedScene" uid="uid://w7ngx3e7w7x7" path="res://scenes/world_of_the_red_reaper.tscn" id="16_ds76m"]
+[ext_resource type="PackedScene" uid="uid://w7ngx3e7w7x7" path="res://scenes/orbs_worlds/world_of_the_red_reaper.tscn" id="16_ds76m"]
 [ext_resource type="PackedScene" uid="uid://dtvcgwlbhxehd" path="res://scenes/elevator.tscn" id="18_e0yw1"]
 [ext_resource type="Script" uid="uid://m2fvd5j6jd46" path="res://addons/stairs/stairs.gd" id="19_0dlj7"]
 
@@ -50,7 +50,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0, -1.53812, 0)]
+"values": [Vector3(0.99, -1.713, -1.083)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -565,7 +565,7 @@ transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0.598836, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.899, 2.1828, 0)
 
 [node name="cutscene_cam" type="Camera3D" parent="wakeUpCutScene"]
-transform = Transform3D(-1, 0, -2.5351817e-06, 0, 1, 0, 2.5351817e-06, 0, -1, 0, -1.53812, 0)
+transform = Transform3D(-1, 0, -2.5351817e-06, 0, 1, 0, 2.5351817e-06, 0, -1, 0.99, -1.713, -1.083)
 far = 60.45
 
 [node name="cutscene_anim" type="AnimationPlayer" parent="wakeUpCutScene"]
@@ -574,7 +574,8 @@ libraries = {
 }
 
 [node name="player" parent="wakeUpCutScene" instance=ExtResource("3_1yox4")]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0.960196, -0.813726, -0.951495)
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0.99, -0.814, -1.083)
+visible = false
 
 [node name="Transition" type="AnimationPlayer" parent="wakeUpCutScene"]
 libraries = {

@@ -55,3 +55,4 @@ var canStep : bool = false
 var canDrawn : bool = false
 
 var unchartedAfter : bool = false #to check if the player already talked to him so to know if to do the whole animation again or not
+var treesDown : int = 0 #to count how many trees went down in the dream place

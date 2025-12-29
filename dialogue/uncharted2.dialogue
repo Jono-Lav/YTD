@@ -1,0 +1,10 @@
+~ start
+do unchartedCollision.disabled = true
+Uncharted: Thank you so much for helping!
+Uncharted: Come dance with us!
+- ok
+	Uncharted: Hell yeah! 
+- nah
+	Uncharted: Youre no fun!
+do unchartedCollision.disabled = false
+=> END

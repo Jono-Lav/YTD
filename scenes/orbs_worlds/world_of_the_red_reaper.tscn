@@ -19,7 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://c01y3etcpyc1q" path="res://scenes/vhs_shader.tscn" id="8_tfig4"]
 [ext_resource type="Script" uid="uid://0osxymmll7vd" path="res://scripts/moveonenter.gd" id="16_v8n1w"]
 [ext_resource type="Script" uid="uid://c0gmttydcuynh" path="res://scripts/moveonente1r.gd" id="17_vtst6"]
-[ext_resource type="Texture2D" uid="uid://buj8c7xhm0rr8" path="res://green-grass-mat-background.jpg" id="18_s3hxr"]
+[ext_resource type="Texture2D" uid="uid://buj8c7xhm0rr8" path="res://sprites/green-grass-mat-background.jpg" id="18_s3hxr"]
 [ext_resource type="AudioStream" uid="uid://br07kbm2x1q54" path="res://sounds/collapsing-in-grass-101312.mp3" id="19_xm7jm"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ns5vc"]

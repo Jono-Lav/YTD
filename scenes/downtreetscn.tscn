@@ -1,0 +1,91 @@
+[gd_scene load_steps=10 format=3 uid="uid://br85mqs3atwq2"]
+
+[ext_resource type="Script" uid="uid://cbmevdsivxdms" path="res://scripts/tree.gd" id="1_u45ar"]
+[ext_resource type="PackedScene" uid="uid://dri3kr5mx0q0h" path="res://scenes/tree2.tscn" id="2_yqrog"]
+[ext_resource type="AudioStream" uid="uid://fomu2f34bqe1" path="res://sounds/earth-rumble-6953.mp3" id="3_yqrog"]
+[ext_resource type="AudioStream" uid="uid://0txuqtkwp2cv" path="res://sounds/leaves-rustling-2-329002.mp3" id="4_vvdim"]
+
+[sub_resource type="Animation" id="Animation_2ninj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("body:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_vvdim"]
+resource_name = "shake"
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("body:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.13, 0.26, 0.35, 0.46666667, 0.56666666, 0.73333335, 0.8333333, 0.91, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, -0.11093313), Vector3(0.114458695, 9.316942e-10, -0.11093313), Vector3(-0.02483603, 1.1521609e-09, -0.11093313), Vector3(-0.024045873, -0.0062154457, 0.14203982), Vector3(-0.16224007, 0.019716604, -0.017278587), Vector3(-0.16331184, -0.0060616178, 0.14146377), Vector3(0.037633475, 0.018445604, -0.043901153), Vector3(0.023598844, 0.008685307, -0.12942484), Vector3(-0.049562592, 0.008693565, -0.13006052)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_s5fvv"]
+_data = {
+&"RESET": SubResource("Animation_2ninj"),
+&"shake": SubResource("Animation_vvdim")
+}
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jk58k"]
+size = Vector3(1.0778809, 1.7889404, 1.0605469)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_2knol"]
+radius = 1.8824255
+
+[node name="treemain" type="Node3D"]
+
+[node name="tree" type="StaticBody3D" parent="."]
+script = ExtResource("1_u45ar")
+prompt = "Restore"
+
+[node name="body" parent="tree" instance=ExtResource("2_yqrog")]
+transform = Transform3D(0.99999976, 0, 0, 0, 1.0000001, 0, 0, 0, 0.99999994, 0, 0, 0)
+
+[node name="anim" type="AnimationPlayer" parent="tree"]
+libraries = {
+&"": SubResource("AnimationLibrary_s5fvv")
+}
+
+[node name="shakeSound" type="AudioStreamPlayer3D" parent="tree"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4782952, 0)
+stream = ExtResource("3_yqrog")
+max_distance = 7.0
+
+[node name="restoreSound" type="AudioStreamPlayer3D" parent="tree"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.9136395, 0)
+stream = ExtResource("4_vvdim")
+max_distance = 4.5
+
+[node name="collision1" type="CollisionShape3D" parent="tree"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.026733398, 1.5053079, 0.0078125)
+shape = SubResource("BoxShape3D_jk58k")
+disabled = true
+
+[node name="collision2" type="CollisionShape3D" parent="tree"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.0500054, 0)
+shape = SubResource("SphereShape3D_2knol")
+disabled = true
+
+[node name="col1" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.026733398, 1.5053079, 0.0078125)
+shape = SubResource("BoxShape3D_jk58k")
+
+[node name="col2" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.0500054, 0)
+shape = SubResource("SphereShape3D_2knol")

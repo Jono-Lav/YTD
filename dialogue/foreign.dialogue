@@ -1,0 +1,6 @@
+~ start
+do foreignCollision.disabled = true
+Foreign: I might not have hands
+Foreign: ...
+do foreignCollision.disabled = false
+=> END

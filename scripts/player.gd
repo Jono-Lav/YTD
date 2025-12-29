@@ -252,6 +252,7 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 func _handle_sprinting(delta: float) -> void:
 	if not enable_sprint or not Global.canSprint:
+		sprinting = false
 		return
 	if Input.is_action_just_pressed(key_sprint):
 		sprinting = true

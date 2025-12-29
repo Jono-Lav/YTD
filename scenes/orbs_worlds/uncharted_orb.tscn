@@ -1,6 +1,6 @@
-[gd_scene load_steps=21 format=3 uid="uid://3mtq4t2aqihn"]
+[gd_scene load_steps=44 format=3 uid="uid://3mtq4t2aqihn"]
 
-[ext_resource type="Script" uid="uid://cpg1brqwwsa1w" path="res://scripts/world_of_the_red_reaper.gd" id="1_r05e7"]
+[ext_resource type="Script" uid="uid://c2o1m48d7wifh" path="res://scripts/uncharted_orb.gd" id="1_2j33v"]
 [ext_resource type="Material" uid="uid://4je282kb6mc0" path="res://mateirals/new_standard_material_3d.tres" id="3_3lylj"]
 [ext_resource type="AudioStream" uid="uid://c1fd6p8ue7c5l" path="res://sounds/dreamcore1.mp3" id="6_h5wgc"]
 [ext_resource type="Material" uid="uid://hr56nmjvnygi" path="res://mateirals/sky.tres" id="7_e4pu7"]
@@ -10,8 +10,26 @@
 [ext_resource type="Material" uid="uid://0so5k7llmpdb" path="res://mateirals/floor_floorm1.tres" id="8_56q2d"]
 [ext_resource type="PackedScene" uid="uid://dri3kr5mx0q0h" path="res://scenes/tree2.tscn" id="8_g7j7w"]
 [ext_resource type="PackedScene" uid="uid://buxuioe3b2to4" path="res://ch/Hollow dance.gltf" id="10_h5dq3"]
+[ext_resource type="Script" uid="uid://dldl40w451cvr" path="res://scripts/classes/RichTextEffect.gd" id="13_cqwxo"]
+[ext_resource type="Script" uid="uid://b18t175c31f3j" path="res://scripts/collectablePaper.gd" id="15_y47xf"]
 [ext_resource type="PackedScene" uid="uid://52yhuvw6pq3x" path="res://scenes/player.tscn" id="16_786nx"]
+[ext_resource type="AudioStream" uid="uid://blwox5m8bck8s" path="res://sounds/paper-245786 (mp3cut.net).mp3" id="16_p334l"]
 [ext_resource type="PackedScene" uid="uid://c01y3etcpyc1q" path="res://scenes/vhs_shader.tscn" id="17_1rpe8"]
+[ext_resource type="PackedScene" uid="uid://c25mbm1tcg6et" path="res://ch/uncharted.gltf" id="17_3mkaj"]
+[ext_resource type="Script" uid="uid://cb2fniu0sl61b" path="res://scripts/scripts.gd" id="18_pyxcm"]
+[ext_resource type="Animation" uid="uid://b4fhx6ggmvn7y" path="res://ch/uncharted_defualt.res" id="19_2t18s"]
+[ext_resource type="Animation" uid="uid://susq82ekmqmm" path="res://ch/uncharted_defualt1.res" id="20_i5iva"]
+[ext_resource type="Animation" uid="uid://3m62ahkkmx28" path="res://ch/uncharted_defualt2.res" id="21_8slrx"]
+[ext_resource type="Animation" uid="uid://b6rpg0eorownq" path="res://ch/uncharted_talk.res" id="22_yeh7s"]
+[ext_resource type="Animation" uid="uid://blei1y5ogg7v4" path="res://ch/uncharted_talk1.res" id="23_c1q5s"]
+[ext_resource type="Animation" uid="uid://b4qs6dh3f3s5x" path="res://ch/uncharted_talk2.res" id="24_fil5t"]
+[ext_resource type="Animation" uid="uid://dvc866ytvafph" path="res://ch/uncharted_up.res" id="25_2j33v"]
+[ext_resource type="Script" uid="uid://jgrbj1b8ylog" path="res://scripts/hollowDancer.gd" id="26_2j33v"]
+[ext_resource type="Script" uid="uid://stospr3d4w00" path="res://addons/Enemy/enemy.gd" id="26_8slrx"]
+[ext_resource type="Resource" uid="uid://dhhwyemc0pe1t" path="res://dialogue/uncharted3.dialogue" id="26_i5iva"]
+[ext_resource type="Script" uid="uid://bhxruk72iwjka" path="res://scripts/trees.gd" id="28_c1q5s"]
+[ext_resource type="Animation" uid="uid://bsqbf1au0g70f" path="res://ch/hoverHollowDance.res" id="28_fil5t"]
+[ext_resource type="PackedScene" uid="uid://br85mqs3atwq2" path="res://scenes/downtreetscn.tscn" id="28_yeh7s"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_e4pu7"]
 sky_top_color = Color(0.32394, 0.386921, 0.474528, 1)
@@ -74,8 +92,32 @@ _data = {
 &"fade_in": SubResource("Animation_72yv4")
 }
 
+[sub_resource type="BoxMesh" id="BoxMesh_y47xf"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_p334l"]
+size = Vector3(1, 1, 0.94348145)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5bqvi"]
+_data = {
+&"uncharted_defualt": ExtResource("19_2t18s"),
+&"uncharted_defualt1": ExtResource("20_i5iva"),
+&"uncharted_defualt2": ExtResource("21_8slrx"),
+&"uncharted_talk": ExtResource("22_yeh7s"),
+&"uncharted_talk1": ExtResource("23_c1q5s"),
+&"uncharted_talk2": ExtResource("24_fil5t"),
+&"uncharted_up": ExtResource("25_2j33v")
+}
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2t18s"]
+size = Vector3(0.68759155, 1.3394165, 0.7770996)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2j33v"]
+_data = {
+&"hoverHollowDance": ExtResource("28_fil5t")
+}
+
 [node name="uncharted_orb" type="Node3D"]
-script = ExtResource("1_r05e7")
+script = ExtResource("1_2j33v")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_g7j7w")
@@ -97,7 +139,7 @@ shape = SubResource("BoxShape3D_ialsg")
 transform = Transform3D(1, 0, 0, 0, 0.6957, 0.718333, 0, -0.718333, 0.6957, 0, 33.5931, 54.0653)
 
 [node name="player" parent="." instance=ExtResource("16_786nx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.73989, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.9577236, 1.73989, 0)
 
 [node name="vhs_shader" parent="." instance=ExtResource("17_1rpe8")]
 
@@ -107,10 +149,10 @@ libraries = {
 }
 
 [node name="ColorRect" type="ColorRect" parent="Transition"]
-offset_left = -620.0
-offset_top = -498.0
-offset_right = 1773.0
-offset_bottom = 1067.0
+offset_left = -588.0
+offset_top = -489.0
+offset_right = 1805.0
+offset_bottom = 1076.0
 color = Color(0, 0, 0, 1)
 
 [node name="ambiance" type="Node3D" parent="."]
@@ -171,7 +213,7 @@ flip_faces = true
 material = ExtResource("7_e4pu7")
 
 [node name="tree" parent="world" instance=ExtResource("8_g7j7w")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.262239, 0.5, -0.69997394)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.930126, 0.5, -5.4427695)
 
 [node name="dirt" type="CSGPolygon3D" parent="world"]
 transform = Transform3D(0.9999991, 0.000558065, -0.0012116529, 0.001211137, 0.00089402933, 0.99999887, 0.00055918505, -0.99999934, 0.00089332886, 5.210639, 1.4818935, 3.3553526)
@@ -200,12 +242,118 @@ height = 33.15918
 material = ExtResource("7_g7j7w")
 
 [node name="CSGCylinder3D3" type="CSGCylinder3D" parent="world/CSGCylinder3D"]
-transform = Transform3D(3.1006846, 0, 0, 0, 0.9, 0, 0, 0, 0.9999999, 0, 0, 0)
+transform = Transform3D(3.1006608, 0, 0, 0, 0.9, 0, 0, 0, 0.9999999, 0, 0, 0)
 operation = 2
 use_collision = true
 radius = 12.0
 height = 31.57959
 material = ExtResource("7_g7j7w")
 
-[node name="blockbench_export" parent="." instance=ExtResource("10_h5dq3")]
-transform = Transform3D(-1.5, 0, -2.2649371e-07, 0, 1.5, 0, 2.2649371e-07, 0, -1.5, 2.1047356, 0.49813628, -6.0136423)
+[node name="phoneCollected" type="RichTextLabel" parent="."]
+offset_left = 749.0
+offset_top = 4.0
+offset_right = 1223.0
+offset_bottom = 158.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 7
+theme_override_font_sizes/normal_font_size = 33
+theme_override_font_sizes/bold_font_size = 33
+bbcode_enabled = true
+custom_effects = [ExtResource("13_cqwxo")]
+
+[node name="paper1" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.738409, 1.4840969, 0)
+script = ExtResource("15_y47xf")
+
+[node name="REPLACE WITH BLOCKBENCH" type="MeshInstance3D" parent="paper1"]
+transform = Transform3D(1, 0, 0, 0, 0.108044624, 0, 0, 0, 0.5430469, 0, 0, 0)
+mesh = SubResource("BoxMesh_y47xf")
+
+[node name="collision" type="CollisionShape3D" parent="paper1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.02166748)
+shape = SubResource("BoxShape3D_p334l")
+
+[node name="paperSound" type="AudioStreamPlayer3D" parent="paper1"]
+stream = ExtResource("16_p334l")
+
+[node name="paper2" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.738409, 1.4840969, -1.251944)
+script = ExtResource("15_y47xf")
+
+[node name="REPLACE WITH BLOCKBENCH" type="MeshInstance3D" parent="paper2"]
+transform = Transform3D(1, 0, 0, 0, 0.108044624, 0, 0, 0, 0.5430469, 0, 0, 0)
+mesh = SubResource("BoxMesh_y47xf")
+
+[node name="collision" type="CollisionShape3D" parent="paper2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.02166748)
+shape = SubResource("BoxShape3D_p334l")
+
+[node name="paperSound" type="AudioStreamPlayer3D" parent="paper2"]
+stream = ExtResource("16_p334l")
+
+[node name="paper3" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.738409, 1.4840969, 1.3003054)
+script = ExtResource("15_y47xf")
+
+[node name="REPLACE WITH BLOCKBENCH" type="MeshInstance3D" parent="paper3"]
+transform = Transform3D(1, 0, 0, 0, 0.108044624, 0, 0, 0, 0.5430469, 0, 0, 0)
+mesh = SubResource("BoxMesh_y47xf")
+
+[node name="collision" type="CollisionShape3D" parent="paper3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.02166748)
+shape = SubResource("BoxShape3D_p334l")
+
+[node name="paperSound" type="AudioStreamPlayer3D" parent="paper3"]
+stream = ExtResource("16_p334l")
+
+[node name="Uncharted" parent="." instance=ExtResource("17_3mkaj")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -6.008279, 0.5, -4.5360975)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Uncharted"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.01581335, 0, -0.0644021)
+script = ExtResource("18_pyxcm")
+dialogue = ExtResource("26_i5iva")
+
+[node name="anim" type="AnimationPlayer" parent="Uncharted/StaticBody3D"]
+root_node = NodePath("../..")
+libraries = {
+&"Uncharted": SubResource("AnimationLibrary_5bqvi")
+}
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Uncharted/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0032806396, 0.7679138, 0.015014648)
+shape = SubResource("BoxShape3D_2t18s")
+
+[node name="hollowDancer" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.73007715, 0, -0.23925567)
+script = ExtResource("26_2j33v")
+
+[node name="Enemy" type="Node3D" parent="hollowDancer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1265216, 1.7773726, -6.1012177)
+script = ExtResource("26_8slrx")
+state = 0
+metadata/_custom_type_script = "uid://stospr3d4w00"
+
+[node name="hollowDance" parent="hollowDancer/Enemy" instance=ExtResource("10_h5dq3")]
+transform = Transform3D(-1.5, 0, -2.2649371e-07, 0, 1.5, 0, 2.2649371e-07, 0, -1.5, -0.021785975, -1.0517437, 0.087575436)
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="hollowDancer/Enemy/hollowDance"]
+libraries = {
+&"hollow_Dancer": SubResource("AnimationLibrary_2j33v")
+}
+autoplay = "hollow_Dancer/hoverHollowDance"
+
+[node name="trees" type="Node" parent="."]
+script = ExtResource("28_c1q5s")
+
+[node name="treemain2" parent="trees" instance=ExtResource("28_yeh7s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.055315, 0, 32.474545)
+
+[node name="treemain" parent="trees" instance=ExtResource("28_yeh7s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.124094, 0, 32.272415)
+
+[node name="treemain3" parent="trees" instance=ExtResource("28_yeh7s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.6917343, 0, 31.34097)
+
+[node name="treemain4" parent="trees" instance=ExtResource("28_yeh7s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 31.29794)

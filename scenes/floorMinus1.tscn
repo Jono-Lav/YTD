@@ -1,4 +1,4 @@
-[gd_scene load_steps=74 format=3 uid="uid://dsrlc6ahj5y64"]
+[gd_scene load_steps=96 format=3 uid="uid://dsrlc6ahj5y64"]
 
 [ext_resource type="Script" uid="uid://kwls3tm2km6y" path="res://scripts/floor_minus_1.gd" id="1_4ksma"]
 [ext_resource type="PackedScene" uid="uid://52yhuvw6pq3x" path="res://scenes/player.tscn" id="1_kd1f8"]
@@ -9,7 +9,7 @@
 [ext_resource type="Script" uid="uid://bi7dqcfvohnap" path="res://scripts/floor_1_trigger.gd" id="4_ca3hh"]
 [ext_resource type="PackedScene" uid="uid://dtvcgwlbhxehd" path="res://scenes/elevator.tscn" id="4_hkc4b"]
 [ext_resource type="PackedScene" uid="uid://c01y3etcpyc1q" path="res://scenes/vhs_shader.tscn" id="4_nm3ur"]
-[ext_resource type="Script" uid="uid://dhur5qc1vpl7s" path="res://scenes/stairs_body.gd" id="5_d5m8q"]
+[ext_resource type="Script" uid="uid://dhur5qc1vpl7s" path="res://scripts/stairs_body.gd" id="5_d5m8q"]
 [ext_resource type="Resource" uid="uid://062f74du11o7" path="res://dialogue/stairs_steep.dialogue" id="6_jtm42"]
 [ext_resource type="Material" uid="uid://canc1b5xpa0lp" path="res://mateirals/dirt.tres" id="7_bys2l"]
 [ext_resource type="PackedScene" uid="uid://c25mbm1tcg6et" path="res://ch/uncharted.gltf" id="7_m00pi"]
@@ -23,21 +23,35 @@
 [ext_resource type="Animation" uid="uid://b6rpg0eorownq" path="res://ch/uncharted_talk.res" id="15_355x1"]
 [ext_resource type="Animation" uid="uid://dvc866ytvafph" path="res://ch/uncharted_up.res" id="16_xoreq"]
 [ext_resource type="PackedScene" uid="uid://m5lag2qjguk5" path="res://scenes/orb.tscn" id="17_n3t32"]
-[ext_resource type="PackedScene" uid="uid://3mtq4t2aqihn" path="res://scenes/uncharted_orb.tscn" id="18_55g52"]
+[ext_resource type="PackedScene" uid="uid://3mtq4t2aqihn" path="res://scenes/orbs_worlds/uncharted_orb.tscn" id="18_55g52"]
 [ext_resource type="AudioStream" uid="uid://dqpdkbvh5jvft" path="res://sounds/calming-rain-257596.mp3" id="21_355x1"]
 [ext_resource type="AudioStream" uid="uid://dnukliy4fq3cy" path="res://sounds/YTD OST 10 - falling in grey.mp3" id="21_xoreq"]
 [ext_resource type="PackedScene" uid="uid://c7jpb7j6qoajd" path="res://ch/door.gltf" id="22_xoreq"]
-[ext_resource type="Script" uid="uid://dnria2eb5hms4" path="res://scenes/door_2.gd" id="23_ok0nq"]
+[ext_resource type="Script" uid="uid://dnria2eb5hms4" path="res://scripts/door_2.gd" id="23_ok0nq"]
 [ext_resource type="Animation" uid="uid://id1tchlw3ypy" path="res://ch/close.res" id="23_ufqce"]
 [ext_resource type="Animation" uid="uid://djax6ns2h5ned" path="res://ch/open.res" id="24_q0ac8"]
 [ext_resource type="AudioStream" uid="uid://bcd35vyjh8j5n" path="res://sounds/opening-door-450444.mp3" id="25_q0ac8"]
 [ext_resource type="AudioStream" uid="uid://dfuxfdynimb4b" path="res://sounds/close-door-382723.mp3" id="26_yhvct"]
 [ext_resource type="Script" uid="uid://cy8y06edjetrx" path="res://scripts/boxanimationtestforytonayancoliide.gd" id="28_e2iij"]
-[ext_resource type="Script" uid="uid://7qorx0e366ax" path="res://scenes/boxgoesup.gd" id="28_fxn7s"]
+[ext_resource type="Script" uid="uid://7qorx0e366ax" path="res://scripts/boxgoesup.gd" id="28_fxn7s"]
+[ext_resource type="PackedScene" uid="uid://bfen23s0tvbsi" path="res://ch/YTD_unknown.gltf" id="35_8gswk"]
 [ext_resource type="PackedScene" uid="uid://b7oha5aqdyodb" path="res://ch/foreign.gltf" id="35_55g52"]
+[ext_resource type="Script" uid="uid://douguvtxab865" path="res://scripts/uncharted2.gd" id="35_brjou"]
+[ext_resource type="Resource" uid="uid://c6i0b5gbqh6n3" path="res://dialogue/uncharted2.dialogue" id="36_eqfhd"]
+[ext_resource type="Script" uid="uid://d18maixdlmlr8" path="res://scripts/foreign.gd" id="36_sq2sc"]
+[ext_resource type="Script" uid="uid://v76k0l3vrfi0" path="res://scripts/unknown2.gd" id="36_tbjbe"]
 [ext_resource type="PackedScene" uid="uid://b6c845uupjppw" path="res://ch/remote.gltf" id="36_vnhm3"]
+[ext_resource type="Animation" uid="uid://bfm1f0wsyfm13" path="res://ch/remote_dance.res" id="37_3o4ij"]
+[ext_resource type="Resource" uid="uid://bmk6duv47qqrp" path="res://dialogue/foreign.dialogue" id="37_6ao76"]
+[ext_resource type="Animation" uid="uid://d0xje61sjmpbm" path="res://ch/un_lean.res" id="37_kr7ep"]
+[ext_resource type="Animation" uid="uid://dsdg1f75fe8ix" path="res://ch/foreign_dance.res" id="37_ofpxa"]
+[ext_resource type="Resource" uid="uid://b5ws06a0ommu7" path="res://dialogue/unkown2.dialogue" id="37_tky4h"]
+[ext_resource type="Script" uid="uid://wjkicgmlerek" path="res://scripts/remote.gd" id="39_ofpxa"]
+[ext_resource type="Resource" uid="uid://cptdxbmoil3ea" path="res://dialogue/remote.dialogue" id="40_udkhn"]
+[ext_resource type="Script" uid="uid://dno60qovofu4y" path="res://scripts/party_pitch_trigger.gd" id="49_waa3n"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_jtm42"]
+size = Vector3(1, 4.1379395, 1.2421875)
 
 [sub_resource type="Animation" id="Animation_jtm42"]
 length = 0.001
@@ -673,9 +687,6 @@ shader_parameter/gravity = Vector3(0, -9.8, 0)
 [sub_resource type="QuadMesh" id="QuadMesh_u1r2e"]
 size = Vector2(0.05, 0.5)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_436mn"]
-size = Vector3(1, 1.85632, 0.477539)
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_8x3ef"]
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_u1r2e"]
@@ -688,6 +699,9 @@ _data = {
 &"uncharted_talk2": ExtResource("14_5ntoq"),
 &"uncharted_up": ExtResource("16_xoreq")
 }
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_436mn"]
+size = Vector3(1, 1.85632, 0.477539)
 
 [sub_resource type="BoxMesh" id="BoxMesh_d5m8q"]
 material = ExtResource("2_b0nub")
@@ -828,6 +842,41 @@ _data = {
 &"expand": SubResource("Animation_0y7t5"),
 &"returnback": SubResource("Animation_nhbky")
 }
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_eqfhd"]
+_data = {
+&"uncharted_talk": ExtResource("15_355x1")
+}
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tky4h"]
+size = Vector3(0.62316895, 1.3356934, 0.30596924)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tky4h"]
+_data = {
+&"idle": ExtResource("37_kr7ep")
+}
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8gswk"]
+size = Vector3(0.6421509, 1.2328796, 0.24649048)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_udkhn"]
+_data = {
+&"foreign_dance": ExtResource("37_ofpxa")
+}
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vnhm3"]
+size = Vector3(0.50579834, 1.3800049, 0.37771606)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_u2oyo"]
+_data = {
+&"remote_dance": ExtResource("37_3o4ij")
+}
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3o4ij"]
+size = Vector3(1, 1.3831177, 0.40808105)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_eqfhd"]
+size = Vector3(14.368053, 7.2193336, 10.185242)
 
 [node name="floorMinus1" type="Node3D"]
 script = ExtResource("1_4ksma")
@@ -1077,6 +1126,7 @@ prompt_message = "interact"
 dialogue = ExtResource("6_jtm42")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="base/walls/house/Stairs/stairs_body"]
+transform = Transform3D(1.0000001, 0, 0, 0, 1, 0, -1.4210855e-14, 0, 1, 0, -0.37218475, 0.12109375)
 shape = SubResource("BoxShape3D_jtm42")
 
 [node name="stuff" type="Node" parent="base/walls/house"]
@@ -1394,7 +1444,7 @@ environment = SubResource("Environment_bxtjx")
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0.39999998, 0)
 
 [node name="player" parent="." instance=ExtResource("1_kd1f8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.9302, 1.60835, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38.47897, 29.567339, 26.836082)
 
 [node name="rain" type="GPUParticles3D" parent="player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.9302, 15.00549, 0.8509722)
@@ -1420,16 +1470,17 @@ turn_opposite = true
 free_talk = true
 show_nametag = true
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="uncharted/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.42816198, -0.0056477785)
-shape = SubResource("BoxShape3D_436mn")
-
-[node name="anim_uncharted" type="AnimationPlayer" parent="uncharted"]
+[node name="anim_uncharted" type="AnimationPlayer" parent="uncharted/StaticBody3D"]
+root_node = NodePath("../..")
 libraries = {
 &"": SubResource("AnimationLibrary_8x3ef"),
 &"uncharted": SubResource("AnimationLibrary_u1r2e")
 }
 autoplay = "uncharted/uncharted_defualt2"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="uncharted/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.42816198, -0.0056477785)
+shape = SubResource("BoxShape3D_436mn")
 
 [node name="rain collision" type="Node" parent="."]
 
@@ -3029,7 +3080,6 @@ libraries = {
 [node name="boxanimationtestforytonayancoliide" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.24258, 11.1198)
 script = ExtResource("28_e2iij")
-id = "wdadw"
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="boxanimationtestforytonayancoliide"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.12792, 0)
@@ -3044,10 +3094,93 @@ libraries = {
 &"": SubResource("AnimationLibrary_jtoug")
 }
 
-[node name="blockbench_export" parent="." instance=ExtResource("35_55g52")]
-transform = Transform3D(-1.5, 0, 1.3113416e-07, 0, 1.5, 0, -1.3113416e-07, 0, -1.5, -30.928265, 28.680477, -3.7210236)
+[node name="Uncharted" parent="." instance=ExtResource("7_m00pi")]
+transform = Transform3D(-1.2510164, 0, 0.8276218, 0, 1.5, 0, -0.8276218, 0, -1.2510164, -34.757942, 28.689335, -2.2590208)
 
-[node name="blockbench_export2" parent="." instance=ExtResource("36_vnhm3")]
-transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -33.171757, 28.66204, -3.1143541)
+[node name="StaticBody3D" type="StaticBody3D" parent="Uncharted"]
+script = ExtResource("35_brjou")
+dialogue = ExtResource("36_eqfhd")
+show_nametag = true
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="Uncharted/StaticBody3D"]
+root_node = NodePath("../..")
+libraries = {
+&"uncharted": SubResource("AnimationLibrary_eqfhd")
+}
+autoplay = "uncharted/uncharted_talk"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Uncharted/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1.0000405, 0, 0, 0, 1, -0.006772995, 0.8765907, 0.0041208267)
+shape = SubResource("BoxShape3D_tky4h")
+
+[node name="Unknown" parent="." instance=ExtResource("35_8gswk")]
+transform = Transform3D(-0.04897396, 0, -1.4992003, 0, 1.5, 0, 1.4992003, 0, -0.04897396, -29.745209, 28.66204, -7.548899)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Unknown"]
+script = ExtResource("36_tbjbe")
+dialogue = ExtResource("37_tky4h")
+show_nametag = true
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="Unknown/StaticBody3D"]
+root_node = NodePath("../..")
+libraries = {
+&"unknown": SubResource("AnimationLibrary_tky4h")
+}
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Unknown/StaticBody3D"]
+transform = Transform3D(0.9999999, 0, -3.7252903e-09, 0, 1, 0, 3.7252903e-09, 0, 0.9999999, -0.023101807, 0.78486633, 0.057149887)
+shape = SubResource("BoxShape3D_8gswk")
+
+[node name="Foreign" parent="." instance=ExtResource("35_55g52")]
+transform = Transform3D(-1.5, 0, 1.3113416e-07, 0, 1.5, 0, -1.3113416e-07, 0, -1.5, -34.090343, 28.680477, -6.1348658)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Foreign"]
+script = ExtResource("36_sq2sc")
+dialogue = ExtResource("37_6ao76")
+show_nametag = true
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="Foreign/StaticBody3D"]
+root_node = NodePath("../..")
+libraries = {
+&"Foreign": SubResource("AnimationLibrary_udkhn")
+}
+autoplay = "Foreign/foreign_dance"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Foreign/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0043640137, 0.8121948, 0.019699097)
+shape = SubResource("BoxShape3D_vnhm3")
+
+[node name="Remote" parent="." instance=ExtResource("36_vnhm3")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -32.717514, 28.66204, -6.1533685)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Remote"]
+script = ExtResource("39_ofpxa")
+dialogue = ExtResource("40_udkhn")
+show_nametag = true
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="Remote/StaticBody3D"]
+root_node = NodePath("../..")
+libraries = {
+&"Remote": SubResource("AnimationLibrary_u2oyo")
+}
+autoplay = "Remote/remote_dance"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Remote/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8061218, -0.014708757)
+shape = SubResource("BoxShape3D_3o4ij")
+
+[node name="pitchTrigger" type="Node3D" parent="."]
+script = ExtResource("49_waa3n")
+
+[node name="Area3D" type="Area3D" parent="pitchTrigger"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="pitchTrigger/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.785, 32.04696, -5.7966022)
+shape = SubResource("BoxShape3D_eqfhd")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.928, 32.715813, -4.522719)
 
 [connection signal="body_entered" from="base/worldtrigger/Area3D" to="base/worldtrigger" method="_on_area_3d_body_entered"]
+[connection signal="body_entered" from="pitchTrigger/Area3D" to="pitchTrigger" method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="pitchTrigger/Area3D" to="pitchTrigger" method="_on_area_3d_body_exited"]

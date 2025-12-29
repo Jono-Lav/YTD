@@ -1,13 +1,18 @@
 extends Interactable
 
-@onready var anim = $AnimationPlayer
+@onready var anim: AnimationPlayer = $AnimationPlayer
+var back: bool = false
 
-var back = false
+func _ready() -> void:
+	interact_ray.visible = false
 
-func interact(body):
-	if !back and anim.animation_finished:
+func interact(body) -> void:
+	if anim.is_playing():
+		return
+	if not back:
 		anim.play("expand")
 		back = true
-	elif back and anim.animation_finished:
-		back = false
+	else:
 		anim.play("returnback")
+		back = false
+	await anim.animation_finished

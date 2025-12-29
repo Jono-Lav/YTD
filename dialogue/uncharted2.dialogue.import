@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_14"
+type="Resource"
+uid="uid://c6i0b5gbqh6n3"
+path="res://.godot/imported/uncharted2.dialogue-0a353cd73acb52cecc78fedc9a2c916b.tres"
+
+[deps]
+
+source_file="res://dialogue/uncharted2.dialogue"
+dest_files=["res://.godot/imported/uncharted2.dialogue-0a353cd73acb52cecc78fedc9a2c916b.tres"]
+
+[params]
+
+defaults=true

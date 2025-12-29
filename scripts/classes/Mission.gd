@@ -1,3 +1,10 @@
+##Base class for any root node of a orb world
+##
+##Handles:
+##- Completing missions
+##- Failing missions
+##- Auto returning to previous scene before orb world
+##
 extends Node
 class_name Mission
 
@@ -13,6 +20,7 @@ func _init() -> void:
 		previous_scene_path = previous_scene.scene_file_path
 		previous_scene_packed = load(previous_scene_path)
 
+##function to complete the mission and return to previous scene  it calls the on_mission_complete in orb class
 func complete_mission():
 	Global.missionCompleted = true
 	if previous_scene_packed != null:
@@ -20,6 +28,7 @@ func complete_mission():
 	else:
 		print("Warning: Previous scene not set or found for mission completion")
 
+##function to complete the mission and return to previous scene, it calls the on_mission_failed in orb class
 func fail_mission():
 	Global.missionCompleted = true
 	if previous_scene_packed != null :

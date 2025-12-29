@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_14"
+type="Resource"
+uid="uid://cptdxbmoil3ea"
+path="res://.godot/imported/remote.dialogue-91710bdfd04cf38a006eeb4e6d1b4af4.tres"
+
+[deps]
+
+source_file="res://dialogue/remote.dialogue"
+dest_files=["res://.godot/imported/remote.dialogue-91710bdfd04cf38a006eeb4e6d1b4af4.tres"]
+
+[params]
+
+defaults=true

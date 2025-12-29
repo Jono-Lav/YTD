@@ -6,9 +6,10 @@ extends Interactable
 @onready var s2: AudioStreamPlayer3D = $PitchTrigger/ambiance/AudioStreamPlayer3D2
 @onready var s3: AudioStreamPlayer3D = $PitchTrigger/ambiance/AudioStreamPlayer3D3
 @onready var s4: AudioStreamPlayer3D = $PitchTrigger/ambiance/AudioStreamPlayer3D4
+@onready var collision : CollisionShape3D = $CollisionShape3D
 
 func interact(body):
-	$CollisionShape3D.disabled = true
+	collision.disabled = true
 	DialogueManager.show_example_dialogue_balloon(load("res://dialogue/shaver.dialogue"))
 	await get_tree().create_timer(3.5).timeout
 	DialogueManager.show_example_dialogue_balloon(load("res://dialogue/shaver2.dialogue"))
